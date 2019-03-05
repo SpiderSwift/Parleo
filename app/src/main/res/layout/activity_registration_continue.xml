@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity"
+    android:background="#FFFFFF">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="Sign up to start"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Sign up now and search for people to meet, wherever you are."
+        android:textAlignment="center"
+        android:textColor="#80000000"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/btn_drawable_blue"
+        android:fontFamily="@font/montserrat"
+        android:text="Next step"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/te_interests" />
+
+
+    <EditText
+        android:id="@+id/te_name"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/tv_drawable_registration"
+        android:hint="Your name"
+        android:paddingStart="15dp"
+        android:textAlignment="viewStart"
+        android:textColor="#80000000"
+        android:textColorHint="#80000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_step" />
+
+
+    <EditText
+        android:id="@+id/te_city"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/tv_drawable_registration"
+        android:hint="Your city"
+        android:paddingStart="15dp"
+        android:inputType="textPassword"
+        android:textAlignment="viewStart"
+        android:textColor="#80000000"
+        android:textColorHint="#80000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/te_name" />
+
+    <EditText
+        android:id="@+id/te_languages"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/tv_drawable_registration"
+        android:hint="Choose languages"
+        android:paddingStart="15dp"
+        android:inputType="textPassword"
+        android:textAlignment="viewStart"
+        android:textColor="#80000000"
+        android:textColorHint="#80000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/te_city" />
+
+
+    <EditText
+        android:id="@+id/te_interests"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/tv_drawable_registration"
+        android:hint="Your interests"
+        android:inputType="textPassword"
+        android:paddingStart="15dp"
+        android:textAlignment="viewStart"
+        android:textColor="#80000000"
+        android:textColorHint="#80000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/te_languages" />
+
+
+    <TextView
+        android:id="@+id/tv_step"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Step 2 of 3: Details"
+        android:textAlignment="center"
+        android:textColor="#80000000"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+
+
+</android.support.constraint.ConstraintLayout>

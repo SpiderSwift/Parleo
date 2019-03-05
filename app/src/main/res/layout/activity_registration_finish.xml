@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity"
+    android:background="#FFFFFF">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="Sign up to start"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Sign up now and search for people to meet, wherever you are."
+        android:textAlignment="center"
+        android:textColor="#80000000"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/btn_drawable_blue"
+        android:fontFamily="@font/montserrat"
+        android:text="Sign up"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
+
+
+    <TextView
+        android:id="@+id/tv_step"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Step 3 of 3: Choose photo \n You can skip and add your photo later."
+        android:textAlignment="center"
+        android:textColor="#80000000"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+
+    <TextView
+        android:id="@+id/tv_photo_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="+ Add image"
+        android:fontFamily="@font/montserrat"
+        android:textSize="22sp"
+        android:textAlignment="center"
+        android:textColor="#80000000"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_photo"
+        app:layout_constraintEnd_toEndOf="@+id/iv_photo"
+        app:layout_constraintStart_toStartOf="@+id/iv_photo"
+        app:layout_constraintTop_toTopOf="@+id/iv_photo" />
+
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/iv_drawable_registration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_step"
+        app:srcCompat="@drawable/photo_stroke" />
+
+
+</android.support.constraint.ConstraintLayout>
