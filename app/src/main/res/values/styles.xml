@@ -8,13 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="generalnotitle" parent="Theme.AppCompat">
+    <style name="generalnotitle" parent="Theme.AppCompat.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 
 
+    <!--Create event styles-->
     <style name="create_event_button_text_style">
         <item name="android:textSize">
             14sp
@@ -22,5 +23,55 @@
         <item name="android:textColor">
             #212121
         </item>
+    </style>
+
+
+    <!--Event details Style-->
+    <style name="place_title_text_style">
+
+        <item name="android:textSize">
+            28sp
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+    </style>
+
+    <style name="place_description_text_style">
+
+        <item name="android:textSize">
+            11sp
+        </item>
+
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+
+    </style>
+
+    <style name="event_headline_style">
+
+        <item name="android:textSize">
+            18sp
+        </item>
+
+        <item name="android:textColor">
+            #80000000
+        </item>
+
+    </style>
+
+    <style name="event_data_text_style">
+
+        <item name="android:textSize">
+            18sp
+        </item>
+
+        <item name="android:textColor">
+            #212121
+        </item>
+
     </style>
 </resources>

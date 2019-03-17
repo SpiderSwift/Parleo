@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Parleo</string>
 
-
+    <string name="placeholder">Placeholder</string>
 
     <!--event create fragment-->
 
@@ -13,5 +13,18 @@
     <string name="event_invite_friends">Invite friends</string>
     <string name="event_set_time_date">Set time and date</string>
     <string name="event_add_languages">Add languages</string>
+
+
+    <!--Event details fragment-->
+    <string name="event_place_title">Kate\'s Cafe</string>
+    <string name="event_place_description">Some description, lorem and stuff, coffee is good etc etc</string>
+
+    <string name="event_headline_members">Members</string>
+    <string name="event_headline_date_time">Date and Time:</string>
+    <string name="event_headline_languages">Languages:</string>
+    <string name="event_headline_place">Place:</string>
+
+    <string name="event_button_join">Join</string>
+
 
 </resources>
