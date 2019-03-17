@@ -2,7 +2,6 @@
     <string name="app_name">Parleo</string>
 
 
-
     <!--event create fragment-->
 
     <string name="event_add_image">+ Add image</string>
@@ -13,5 +12,8 @@
     <string name="event_invite_friends">Invite friends</string>
     <string name="event_set_time_date">Set time and date</string>
     <string name="event_add_languages">Add languages</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
