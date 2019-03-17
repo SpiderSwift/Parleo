@@ -14,4 +14,13 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+
+    <style name="create_event_button_text_style">
+        <item name="android:textSize">
+            14sp
+        </item>
+        <item name="android:textColor">
+            #212121
+        </item>
+    </style>
 </resources>
