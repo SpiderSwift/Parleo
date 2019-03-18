@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -30,7 +31,7 @@ public class MainFragmentsAdapter extends FragmentStatePagerAdapter {
             case 3:
                 return new EventFragment();
             case 4:
-                return new DialogFragment();
+                return new EventScreenFragment();
         }
         return new EventFragment();
     }
@@ -39,4 +40,6 @@ public class MainFragmentsAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return NUM_OF_FRAGMENTS;
     }
+
+    public int getItemPosition(@NonNull Object object) { return POSITION_NONE; }
 }

@@ -31,29 +31,29 @@
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
-            android:icon="@drawable/ic_clock"
-            android:layout_height="wrap_content"
-            />
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
             android:icon="@drawable/tab_drawable_events"
             android:layout_height="wrap_content"
             />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
-            android:icon="@drawable/ic_clock"
+            android:icon="@drawable/tab_drawable_users"
+            android:layout_height="wrap_content"
+            />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:icon="@drawable/tab_drawable_dialogs"
             android:layout_height="wrap_content"
             />
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
-            android:icon="@drawable/ic_clock"
+            android:icon="@drawable/tab_drawable_notifications"
             android:layout_height="wrap_content"
             />
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
-            android:icon="@drawable/ic_clock"
+            android:icon="@drawable/tab_drawable_profile"
             android:layout_height="wrap_content"
             />
     </android.support.design.widget.TabLayout>

@@ -31,16 +31,31 @@ public class DialogFragment extends Fragment {
 
     }
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dialog, container, false);
         ButterKnife.bind(this, v);
-        DialogsListAdapter adapter = new DialogsListAdapter<DialogImpl>(new ImageLoader() {
+        DialogsListAdapter adapter = new DialogsListAdapter<DialogImpl>(R.layout.item_dialog, new ImageLoader() {
             @Override
             public void loadImage(ImageView imageView, @Nullable String url, @Nullable Object payload) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_events));
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.billy));
             }
         });
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
+        adapter.addItem(new DialogImpl());
         adapter.addItem(new DialogImpl());
         dialogsList.setAdapter(adapter);
         adapter.setOnDialogClickListener(new DialogsListAdapter.OnDialogClickListener() {

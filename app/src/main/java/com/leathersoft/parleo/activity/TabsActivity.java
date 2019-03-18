@@ -10,6 +10,7 @@ import com.leathersoft.parleo.adapter.MainFragmentsAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnTouch;
 
 public class TabsActivity extends AppCompatActivity {
 
@@ -27,7 +28,7 @@ public class TabsActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                pager.setCurrentItem(tab.getPosition());
+                pager.setCurrentItem(tab.getPosition(), false);
             }
 
             @Override
@@ -42,5 +43,10 @@ public class TabsActivity extends AppCompatActivity {
         });
     }
 
+
+    @OnTouch(R.id.pager_main)
+    public boolean onTouch() {
+        return true;
+    }
 
 }
