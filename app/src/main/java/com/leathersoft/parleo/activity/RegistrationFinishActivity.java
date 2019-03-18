@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -24,7 +25,8 @@ public class RegistrationFinishActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_finish)
     public void onFinish() {
-        finish();
+        startActivity(new Intent(getApplicationContext(), TabsActivity.class));
+        //finish();
     }
 
     @OnClick(R.id.iv_photo)
