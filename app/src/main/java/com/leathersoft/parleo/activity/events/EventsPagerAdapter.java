@@ -21,6 +21,15 @@ public class EventsPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
+    public CharSequence getPageTitle(int position) {
+        if(position == 0){
+            return "All events";
+        }else{
+            return "My events";
+        }
+    }
+
+    @Override
     public int getCount() {
         return mFragments.length;
     }

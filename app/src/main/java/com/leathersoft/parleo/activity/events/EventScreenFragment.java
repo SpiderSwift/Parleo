@@ -3,6 +3,7 @@ package com.leathersoft.parleo.activity.events;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -18,8 +19,7 @@ import butterknife.ButterKnife;
 
 public class EventScreenFragment extends Fragment {
 
-
-    @BindView(R.id.events_tablayout) TableLayout mTableLayout;
+    @BindView(R.id.events_tablayout) TabLayout mTabLayout;
     @BindView(R.id.events_viewpager) ViewPager mViewPager;
 
     @Override
@@ -34,7 +34,13 @@ public class EventScreenFragment extends Fragment {
         ButterKnife.bind(this,v);
 
         EventsPagerAdapter adapter = new EventsPagerAdapter(getFragmentManager());
+
         mViewPager.setAdapter(adapter);
+        mTabLayout.setupWithViewPager(mViewPager);
         return v;
+    }
+
+    public static EventScreenFragment newInstance(){
+        return new EventScreenFragment();
     }
 }
