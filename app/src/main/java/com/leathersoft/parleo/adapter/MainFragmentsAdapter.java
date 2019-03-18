@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.leathersoft.parleo.activity.events.EventListFragment;
+import com.leathersoft.parleo.activity.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.EventFragment;
 import com.leathersoft.parleo.fragment.DialogFragment;
 
@@ -22,7 +24,7 @@ public class MainFragmentsAdapter extends FragmentStatePagerAdapter {
             case EVENTS_INDEX:
                 return new EventFragment();
             case 1:
-                return new EventFragment();
+                return EventScreenFragment.newInstance();
             case 2:
                 return new DialogFragment();
             case 3:

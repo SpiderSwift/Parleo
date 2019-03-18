@@ -23,6 +23,7 @@ public class TabsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tabs);
         ButterKnife.bind(this);
         pager.setAdapter(new MainFragmentsAdapter(getSupportFragmentManager()));
+        pager.setOffscreenPageLimit(5);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
