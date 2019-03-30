@@ -4,6 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="Events"
+        android:textColor="#80000000"
+        android:textSize="25sp" />
+
     <android.support.design.widget.TabLayout
         android:id="@+id/events_tablayout"
         android:layout_width="match_parent"
@@ -12,7 +24,8 @@
         app:tabTextAppearance="@style/event_tab_layout_text_style"
         app:tabSelectedTextColor="@color/colorPrimary"
         app:tabTextColor="#88000000"
-        app:tabIndicatorColor="@color/colorPrimary"/>
+        app:tabIndicatorColor="@color/colorPrimary"
+        android:layout_below="@id/tv_title"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/events_viewpager"
