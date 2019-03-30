@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity"
@@ -59,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/te_interests" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_interests" />
 
 
     <EditText
@@ -102,8 +103,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/te_name" />
 
-    <EditText
-        android:id="@+id/te_languages"
+    <Button
+        android:id="@+id/btn_languages"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
@@ -112,7 +113,6 @@
         android:background="@drawable/tv_drawable_registration"
         android:hint="Choose languages"
         android:paddingStart="15dp"
-        android:inputType="textPassword"
         android:textAlignment="viewStart"
         android:textColor="#80000000"
         android:textColorHint="#80000000"
@@ -123,8 +123,8 @@
         app:layout_constraintTop_toBottomOf="@+id/te_city" />
 
 
-    <EditText
-        android:id="@+id/te_interests"
+    <Button
+        android:id="@+id/btn_interests"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
@@ -132,7 +132,6 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/tv_drawable_registration"
         android:hint="Your interests"
-        android:inputType="textPassword"
         android:paddingStart="15dp"
         android:textAlignment="viewStart"
         android:textColor="#80000000"
@@ -141,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/te_languages" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_languages" />
 
 
     <TextView
