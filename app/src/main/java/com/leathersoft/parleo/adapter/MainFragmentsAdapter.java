@@ -10,6 +10,7 @@ import com.leathersoft.parleo.activity.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.EventFragment;
 import com.leathersoft.parleo.fragment.DialogFragment;
 import com.leathersoft.parleo.fragment.NotificationFragment;
+import com.leathersoft.parleo.fragment.ProfileFragment;
 import com.leathersoft.parleo.fragment.users.UserFragment;
 
 public class MainFragmentsAdapter extends FragmentStatePagerAdapter {
@@ -35,7 +36,7 @@ public class MainFragmentsAdapter extends FragmentStatePagerAdapter {
             case NOTIFICATION_INDEX:
                 return new NotificationFragment();
             case 4:
-                return new EventFragment();
+                return ProfileFragment.newInstance();
         }
         return new EventFragment();
     }

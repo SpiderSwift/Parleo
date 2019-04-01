@@ -3,6 +3,7 @@ package com.leathersoft.parleo.fragment.users;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.leathersoft.parleo.activity.events.EventsPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class UserFragment extends Fragment {
 
@@ -38,7 +40,17 @@ public class UserFragment extends Fragment {
         return v;
     }
 
+
+
     public static UserFragment newInstance(){
         return new UserFragment();
     }
+
+//    @OnClick(R.id.user_card_profile_btn)
+//    public void openProfileFragment(){
+//
+//        Snackbar.make(mRecyclerView,
+//                "Profile button pressed",
+//                Snackbar.LENGTH_LONG).show();
+//    }
 }
