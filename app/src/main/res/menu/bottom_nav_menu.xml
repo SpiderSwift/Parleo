@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bottom_nav_events"
+        android:icon="@drawable/tab_drawable_events"
+        app:showAsAction="always"
+        android:title=""/>
+    <item
+        android:id="@+id/bottom_nav_users"
+        android:icon="@drawable/tab_drawable_users"
+        app:showAsAction="always"
+        android:title=""/>
+
+    <item
+        android:id="@+id/bottom_nav_chats"
+        android:icon="@drawable/tab_drawable_dialogs"
+        app:showAsAction="always"
+        android:title=""/>
+
+    <item
+        android:id="@+id/bottom_nav_notifications"
+        android:icon="@drawable/tab_drawable_notifications"
+        app:showAsAction="always"
+        android:title=""/>
+
+
+    <item
+        android:id="@+id/bottom_nav_profile"
+        android:icon="@drawable/tab_drawable_profile"
+        app:showAsAction="always"
+        android:title=""/>
+</menu>

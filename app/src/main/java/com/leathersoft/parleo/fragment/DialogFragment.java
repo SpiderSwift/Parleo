@@ -27,11 +27,6 @@ public class DialogFragment extends Fragment {
     @BindView(R.id.list_dialog)
     DialogsList dialogsList;
 
-    public DialogFragment() {
-
-    }
-
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dialog, container, false);
@@ -65,6 +60,10 @@ public class DialogFragment extends Fragment {
             }
         });
         return v;
+    }
+
+    public static DialogFragment newInstance(){
+        return new DialogFragment();
     }
 
 

@@ -23,10 +23,6 @@ public class NotificationFragment extends Fragment {
 
     @BindView(R.id.list_notifications) RecyclerView view;
 
-    public NotificationFragment() {
-
-    }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,5 +45,10 @@ public class NotificationFragment extends Fragment {
         view.setAdapter(adapter);
         return v;
     }
+
+    public static NotificationFragment newInstance(){
+        return new NotificationFragment();
+    }
+
 
 }

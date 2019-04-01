@@ -18,6 +18,8 @@ import butterknife.ButterKnife;
 
 public class EventListFragment extends Fragment {
 
+
+
     @BindView(R.id.recycler_view_events) RecyclerView mRecyclerView;
     @Nullable
     @Override
