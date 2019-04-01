@@ -1,34 +1,23 @@
 package com.leathersoft.parleo.activity;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.view.menu.MenuPopupHelper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.adapter.InterestsAdapter;
 import com.leathersoft.parleo.messaging.Interest;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +30,8 @@ public class RegistrationContinueActivity extends AppCompatActivity {
     @BindView(R.id.te_name) EditText editName;
     @BindView(R.id.te_city) EditText editCity;
     @BindView(R.id.layout) ConstraintLayout layout;
-    PopupWindow window;
-
+    PopupWindow windowLanguages;
+    PopupWindow windowInterests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,34 +41,85 @@ public class RegistrationContinueActivity extends AppCompatActivity {
         //MenuInflater inflater = getMenuInflater();
 
 
-        View v = getLayoutInflater().inflate(R.layout.window_list, null);
-        window = new PopupWindow(v, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        window.setElevation(1000);
-        RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
+        View viewLanguages = getLayoutInflater().inflate(R.layout.window_list, null);
+        windowLanguages = new PopupWindow(viewLanguages, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        //windowLanguages.setElevation(1000);
+        RecyclerView recyclerView = viewLanguages.findViewById(R.id.recyclerView);
+        View v = viewLanguages.findViewById(R.id.mainLayout);
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                windowLanguages.dismiss();
+            }
+        });
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         InterestsAdapter adapter = new InterestsAdapter();
         recyclerView.setAdapter(adapter);
-        List<Interest> interests = new ArrayList<>();
-        interests.add(new Interest("hello", getDrawable(R.drawable.billy)));
-        interests.add(new Interest("hello2", getDrawable(R.drawable.billy)));
-        interests.add(new Interest("hello3", getDrawable(R.drawable.billy)));
-        adapter.setInterests(interests);
-        Button b = v.findViewById(R.id.btn_done);
+        List<Interest> languages = new ArrayList<>();
+        languages.add(new Interest("English", getDrawable(R.drawable.ic_english)));
+        languages.add(new Interest("Russian", getDrawable(R.drawable.ic_russian)));
+        languages.add(new Interest("Spanish", getDrawable(R.drawable.ic_spanish)));
+        languages.add(new Interest("English", getDrawable(R.drawable.ic_english)));
+        languages.add(new Interest("Russian", getDrawable(R.drawable.ic_russian)));
+        languages.add(new Interest("Spanish", getDrawable(R.drawable.ic_spanish)));
+        adapter.setInterests(languages);
+        Button b = viewLanguages.findViewById(R.id.btn_done);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                window.dismiss();
+                windowLanguages.dismiss();
             }
         });
+
+
+        View viewInterests = getLayoutInflater().inflate(R.layout.window_list, null);
+        windowInterests = new PopupWindow(viewInterests, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        //windowLanguages.setElevation(1000);
+        RecyclerView recyclerViewInterests = viewInterests.findViewById(R.id.recyclerView);
+        View v2 = viewInterests.findViewById(R.id.mainLayout);
+        v2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                windowInterests.dismiss();
+            }
+        });
+        LinearLayoutManager layoutManagerInterests = new LinearLayoutManager(getApplicationContext());
+        recyclerViewInterests.setLayoutManager(layoutManagerInterests);
+        InterestsAdapter adapterInterests = new InterestsAdapter();
+        recyclerViewInterests.setAdapter(adapterInterests);
+        List<Interest> interests = new ArrayList<>();
+        interests.add(new Interest("Writing poems", getDrawable(R.drawable.ic_writing)));
+        interests.add(new Interest("Yoga", getDrawable(R.drawable.ic_yoga)));
+        interests.add(new Interest("Riding horses", getDrawable(R.drawable.ic_riding)));
+        interests.add(new Interest("Writing poems", getDrawable(R.drawable.ic_writing)));
+        interests.add(new Interest("Yoga", getDrawable(R.drawable.ic_yoga)));
+        interests.add(new Interest("Riding horses", getDrawable(R.drawable.ic_riding)));
+        adapterInterests.setInterests(interests);
+        Button button = viewInterests.findViewById(R.id.btn_done);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                windowInterests.dismiss();
+            }
+        });
+
+
+
         //v.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.popup_animation));
-//        window.setWidth(ConstraintLayout.LayoutParams.MATCH_PARENT);
-//        window.setHeight(ConstraintLayout.LayoutParams.WRAP_CONTENT);
-//        window.setContentView(v);
+//        windowLanguages.setWidth(ConstraintLayout.LayoutParams.MATCH_PARENT);
+//        windowLanguages.setHeight(ConstraintLayout.LayoutParams.WRAP_CONTENT);
+//        windowLanguages.setContentView(v);
 
 
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        windowLanguages = null;
+    }
 
     @OnClick(R.id.btn_continue)
     public void onContinue() {
@@ -87,18 +127,23 @@ public class RegistrationContinueActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_languages)
-    public void showMenu() {
-        //setForceShowIcon(menu);
-        //menu.setGravity(Gravity.END);
-        //menu.show();
-        window.setAnimationStyle(R.anim.popup_animation);
-        window.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
+    public void showLanguages() {
+        windowLanguages.setAnimationStyle(R.anim.popup_animation);
+        windowLanguages.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
     }
+
+    @OnClick(R.id.btn_interests)
+    public void showInterests() {
+        windowInterests.setAnimationStyle(R.anim.popup_animation);
+        windowInterests.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
+    }
+
 
     @OnClick(R.id.layout)
     public void close() {
-        window.setAnimationStyle(R.anim.popup_animation);
-        window.dismiss();
+        windowLanguages.setAnimationStyle(R.anim.popup_animation);
+        windowLanguages.dismiss();
+        windowInterests.dismiss();
     }
 
     @Override
