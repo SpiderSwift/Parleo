@@ -90,4 +90,100 @@
         </item>
 
     </style>
+
+    <!--User list-->
+    <style name="user_card_title">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:textColor">
+            #212121
+        </item>
+    </style>
+
+    <style name="user_card_description">
+        <item name="android:textSize">
+            9sp
+        </item>
+        <item name="android:textColor">
+            #80000000
+        </item>
+    </style>
+
+    <style name="user_card_distance">
+        <item name="android:textSize">
+            10sp
+        </item>
+
+        <item name="android:textColor">
+            #80000000
+        </item>
+
+    </style>
+
+    <style name="user_card_profile_btn">
+
+        <item name="android:textSize">
+            12sp
+        </item>
+
+        <item name="android:textColor">
+            #80000000
+        </item>
+
+    </style>
+
+
+    <!--Profile page-->
+    <style name="profile_page_name">
+
+        <item name="android:textSize">
+            18sp
+        </item>
+
+        <item name="android:textColor">
+            #212121
+        </item>
+
+    </style>
+
+    <style name="profile_page_languages">
+
+        <item name="android:textSize">
+            12sp
+        </item>
+
+        <item name="android:textColor">
+            #626262
+        </item>
+
+    </style>
+
+    <style name="profile_page_description">
+
+        <item name="android:textSize">
+            12sp
+        </item>
+
+        <item name="android:textColor">
+            #626262
+        </item>
+
+    </style>
+
+    <style name="profile_btn">
+
+        <item name="android:textSize">
+            14sp
+        </item>
+
+        <item name="android:textColor">
+            #80000000
+        </item>
+
+    </style>
+
+
 </resources>
