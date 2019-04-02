@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.adapter.InterestsAdapter;
+import com.leathersoft.parleo.fragment.users.UserFragment;
 import com.leathersoft.parleo.messaging.Interest;
 
 import java.util.ArrayList;
@@ -30,11 +31,6 @@ public class FilterUserFragment extends Fragment {
     @BindView(R.id.tv_min)
     TextView min;
     @BindView(R.id.tv_max) TextView max;
-
-    public FilterUserFragment() {
-
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,4 +65,7 @@ public class FilterUserFragment extends Fragment {
 
     }
 
+    public static FilterUserFragment newInstance(){
+        return new FilterUserFragment();
+    }
 }

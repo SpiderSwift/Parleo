@@ -9,11 +9,17 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.activity.events.EventCreateFragment;
 import com.leathersoft.parleo.activity.events.EventsPagerAdapter;
+import com.leathersoft.parleo.fragment.FilterEventFragment;
+import com.leathersoft.parleo.fragment.FilterUserFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +33,32 @@ public class UserFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_user_screen,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        Fragment fragment;
+        switch (item.getItemId()) {
+            case R.id.menu_filter_users:
+                fragment = FilterUserFragment.newInstance();
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                        .replace(R.id.fragment_container,fragment)
+                        .addToBackStack(null)
+                        .commit();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Nullable
