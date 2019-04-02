@@ -36,9 +36,15 @@
 
     <!--Profile fragment-->
     <string name="profile">Profile</string>
+    <string name="my_profile">My Profile</string>
+
     <string name="profile_top_text">Tedik\'s profile</string>
     <string name="profile_add_friend">Add friend</string>
     <string name="profile_send_message">Send message</string>
+
+    <string name="profile_my_meetings">My meetings</string>
+    <string name="profile_friends">Friends</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
