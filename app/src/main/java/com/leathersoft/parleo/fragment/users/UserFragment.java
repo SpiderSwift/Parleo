@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.fragment.users;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,6 +41,15 @@ public class UserFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Activity activity = getActivity();
+        if(activity != null){
+            getActivity().setTitle(getResources().getString(R.string.users));
+        }
+
+    }
 
 
     public static UserFragment newInstance(){

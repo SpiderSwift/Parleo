@@ -4,7 +4,7 @@
     <string name="placeholder">Placeholder</string>
 
     <!--event create fragment-->
-
+    <string name="events">Events</string>
     <string name="event_add_image">+ Add image</string>
     <string name="event_name">Event name</string>
     <string name="event_description">Event description</string>
@@ -28,18 +28,25 @@
 
 
     <!--Users fragment-->
-    <string name="users_page_title">Users</string>
+    <string name="users">Users</string>
     <string name="users_profile_button">Profile \></string>
     <string name="user_card_placeholder">
         I like PHP, hate React, drink sugarless tea, do nothing, watch anime, play tanks and whatnot. 😊😊
     </string>
 
     <!--Profile fragment-->
+    <string name="profile">Profile</string>
     <string name="profile_top_text">Tedik\'s profile</string>
     <string name="profile_add_friend">Add friend</string>
     <string name="profile_send_message">Send message</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Chats-->
+    <string name="chats">Chats</string>
+
+    <!--Notifications-->
+    <string name="notifiactions">Notifications</string>
 
 </resources>
