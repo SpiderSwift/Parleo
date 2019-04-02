@@ -18,8 +18,6 @@ import butterknife.ButterKnife;
 
 public class EventListFragment extends Fragment {
 
-
-
     @BindView(R.id.recycler_view_events) RecyclerView mRecyclerView;
     @Nullable
     @Override
@@ -28,7 +26,8 @@ public class EventListFragment extends Fragment {
         ButterKnife.bind(this,v);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        EventListAdapter mAdapter = new EventListAdapter();
+
+        EventListAdapter mAdapter = new EventListAdapter(getActivity().getSupportFragmentManager());
         DividerItemDecoration decoration = new DividerItemDecoration(mRecyclerView.getContext(),layoutManager.getOrientation());
 
         mRecyclerView.setLayoutManager(layoutManager);
