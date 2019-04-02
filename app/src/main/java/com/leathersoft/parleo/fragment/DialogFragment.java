@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,11 +27,6 @@ public class DialogFragment extends Fragment {
 
     @BindView(R.id.list_dialog)
     DialogsList dialogsList;
-
-    public DialogFragment() {
-
-    }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +61,20 @@ public class DialogFragment extends Fragment {
             }
         });
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Activity activity = getActivity();
+        if(activity != null){
+            getActivity().setTitle(getResources().getString(R.string.chats));
+        }
+
+    }
+
+    public static DialogFragment newInstance(){
+        return new DialogFragment();
     }
 
 

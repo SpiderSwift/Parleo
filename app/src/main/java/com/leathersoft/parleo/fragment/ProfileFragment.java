@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,17 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile_screen,container,false);
         return v;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Activity activity = getActivity();
+        if(activity != null){
+            getActivity().setTitle(getResources().getString(R.string.profile));
+        }
+
+    }
+
 
     public static ProfileFragment newInstance(){
         return new ProfileFragment();

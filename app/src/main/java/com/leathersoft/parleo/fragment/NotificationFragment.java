@@ -1,6 +1,7 @@
 package com.leathersoft.parleo.fragment;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -22,10 +23,6 @@ import butterknife.ButterKnife;
 public class NotificationFragment extends Fragment {
 
     @BindView(R.id.list_notifications) RecyclerView view;
-
-    public NotificationFragment() {
-
-    }
 
 
     @Override
@@ -49,5 +46,20 @@ public class NotificationFragment extends Fragment {
         view.setAdapter(adapter);
         return v;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Activity activity = getActivity();
+        if(activity != null){
+            getActivity().setTitle(getResources().getString(R.string.notifiactions));
+        }
+
+    }
+
+    public static NotificationFragment newInstance(){
+        return new NotificationFragment();
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.activity.events;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ public class EventScreenFragment extends Fragment {
     @BindView(R.id.events_tablayout) TabLayout mTabLayout;
     @BindView(R.id.events_viewpager) ViewPager mViewPager;
 
+    EventsPagerAdapter mEventsPagerAdapter;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +35,21 @@ public class EventScreenFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_event_screen,container,false);
         ButterKnife.bind(this,v);
 
-        EventsPagerAdapter adapter = new EventsPagerAdapter(getFragmentManager());
 
-        mViewPager.setAdapter(adapter);
+        mEventsPagerAdapter = new EventsPagerAdapter(getFragmentManager());
+
+        mViewPager.setAdapter(mEventsPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Activity activity = getActivity();
+        if(activity != null){
+            getActivity().setTitle(getResources().getString(R.string.events));
+        }
     }
 
     public static EventScreenFragment newInstance(){
