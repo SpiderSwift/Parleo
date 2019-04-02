@@ -35,7 +35,7 @@ public class UserFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_users,container,false);
         ButterKnife.bind(this,v);
 
-        UserAdapter adapter = new UserAdapter();
+        UserAdapter adapter = new UserAdapter(getActivity().getSupportFragmentManager());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(adapter);
         return v;
