@@ -1,9 +1,11 @@
-package com.leathersoft.parleo;
+package com.leathersoft.parleo.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
+
+import com.leathersoft.parleo.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,13 +22,13 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_sign)
     public void onSign() {
-        Log.d("TAG", "msg sign");
+        startActivityForResult(new Intent(getApplicationContext(), RegistrationStartActivity.class), 0);
     }
 
 
-    @OnClick(R.id.btn_log)
+    @OnClick(R.id.btn_login)
     public void onLogin() {
-        Log.d("TAG", "msg log");
+        startActivityForResult(new Intent(getApplicationContext(), LoginActivity.class), 0);
     }
 
 }

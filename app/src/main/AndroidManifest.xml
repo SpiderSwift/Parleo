@@ -9,17 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/generalnotitle">
-        <activity android:name=".MainActivity"
-            >
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.RegistrationFinishActivity" />
+        <activity android:name=".activity.RegistrationContinueActivity" />
+        <activity android:name=".activity.RegistrationStartActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.ProfileActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".activity.TabsActivity" />
+        <activity android:name=".activity.MessagesActivity"></activity>
     </application>
 
 </manifest>

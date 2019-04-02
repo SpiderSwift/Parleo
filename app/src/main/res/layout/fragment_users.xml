@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:fontFamily="@font/montserrat"-->
+        <!--android:gravity="center"-->
+        <!--android:text="@string/profile_top_text"-->
+        <!--android:textColor="#80000000"-->
+        <!--android:textSize="25sp" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_users"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_title"/>
+
+</RelativeLayout>
