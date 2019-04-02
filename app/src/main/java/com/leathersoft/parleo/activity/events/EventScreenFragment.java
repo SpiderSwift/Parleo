@@ -19,6 +19,7 @@ import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.fragment.FilterEventFragment;
 import com.leathersoft.parleo.fragment.users.UserAdapter;
 
 import butterknife.BindView;
@@ -59,16 +60,26 @@ public class EventScreenFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        Fragment fragment;
         switch (item.getItemId()) {
             case R.id.menu_add_event:
-                Fragment fragment = EventCreateFragment.newInstance();
+                fragment = EventCreateFragment.newInstance();
 
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                         .replace(R.id.fragment_container,fragment)
                         .addToBackStack(null)
                         .commit();
-                Toast.makeText(getActivity(), "Add event Click", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.menu_filter_event:
+                fragment = FilterEventFragment.newInstance();
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                        .replace(R.id.fragment_container,fragment)
+                        .addToBackStack(null)
+                        .commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

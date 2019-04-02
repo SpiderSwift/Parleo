@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.activity.events.EventScreenFragment;
 import com.leathersoft.parleo.adapter.InterestsAdapter;
 import com.leathersoft.parleo.messaging.Interest;
 
@@ -26,10 +27,6 @@ public class FilterEventFragment extends Fragment {
     @BindView(R.id.range_bar) CrystalRangeSeekbar seekbar;
     @BindView(R.id.tv_min) TextView min;
     @BindView(R.id.tv_max) TextView max;
-
-    public FilterEventFragment() {
-
-    }
 
 
     @Override
@@ -63,4 +60,8 @@ public class FilterEventFragment extends Fragment {
         return v;
     }
 
+
+    public static FilterEventFragment newInstance(){
+        return new FilterEventFragment();
+    }
 }

@@ -8,4 +8,9 @@
         app:showAsAction="always"
         android:title=""/>
 
+    <item
+        android:id="@+id/menu_filter_event"
+        android:icon="@drawable/ic_filter"
+        app:showAsAction="always"
+        android:title=""/>
 </menu>
