@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.activity.events.EventCreateFragment;
 import com.leathersoft.parleo.activity.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.DialogFragment;
 import com.leathersoft.parleo.fragment.MyProfilefragment;
@@ -148,6 +149,9 @@ public class TabsActivity extends AppCompatActivity {
             super.onBackPressed();
             Fragment currentFragment = manager.findFragmentById(R.id.fragment_container);
             if(currentFragment instanceof EventScreenFragment){
+                mNavigationView.getMenu().getItem(0).setChecked(true);
+            }
+            else if(currentFragment instanceof EventCreateFragment){
                 mNavigationView.getMenu().getItem(0).setChecked(true);
             }
             else if(currentFragment instanceof UserFragment){
