@@ -10,6 +10,7 @@ import com.leathersoft.parleo.activity.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.DialogFragment;
 import com.leathersoft.parleo.fragment.MyProfilefragment;
 import com.leathersoft.parleo.fragment.NotificationFragment;
+import com.leathersoft.parleo.fragment.PushFragmentInterface;
 import com.leathersoft.parleo.fragment.users.UserFragment;
 import com.ncapdevi.fragnav.FragNavController;
 
@@ -26,7 +27,7 @@ import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TabsActivity extends AppCompatActivity {
+public class TabsActivity extends AppCompatActivity implements PushFragmentInterface {
 
     private static final int INDEX_EVENTS = FragNavController.TAB1;
     private static final int INDEX_USERS = FragNavController.TAB2;
@@ -127,5 +128,19 @@ public class TabsActivity extends AppCompatActivity {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void push(Fragment fragment) {
+        mFragNavController.pushFragment(fragment);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(mFragNavController.isRootFragment() || !mFragNavController.popFragment()){
+
+            super.onBackPressed();
+        }
     }
 }

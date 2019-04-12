@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NotificationFragment extends Fragment {
+public class NotificationFragment extends BaseFragment {
 
     @BindView(R.id.list_notifications) RecyclerView view;
 

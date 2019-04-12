@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class DialogFragment extends Fragment {
+public class DialogFragment extends BaseFragment {
 
     @BindView(R.id.list_dialog)
     DialogsList dialogsList;

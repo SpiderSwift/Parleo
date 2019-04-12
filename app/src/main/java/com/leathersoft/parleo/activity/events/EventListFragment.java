@@ -12,11 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.fragment.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EventListFragment extends Fragment {
+public class EventListFragment extends BaseFragment {
 
     @BindView(R.id.recycler_view_events) RecyclerView mRecyclerView;
     @Nullable
@@ -27,7 +28,7 @@ public class EventListFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
-        EventListAdapter mAdapter = new EventListAdapter(getActivity().getSupportFragmentManager());
+        EventListAdapter mAdapter = new EventListAdapter(mPushFragmentInterface);
         DividerItemDecoration decoration = new DividerItemDecoration(mRecyclerView.getContext(),layoutManager.getOrientation());
 
         mRecyclerView.setLayoutManager(layoutManager);

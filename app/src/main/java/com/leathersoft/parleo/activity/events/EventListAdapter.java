@@ -8,13 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.fragment.PushFragmentInterface;
 
 public class EventListAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
-    private FragmentManager mFragmentManager;
+    private PushFragmentInterface mPushFragmentInterface;
 
-    public EventListAdapter(FragmentManager fragmentManager) {
-        mFragmentManager = fragmentManager;
+    public EventListAdapter(PushFragmentInterface pushFragmentInterface) {
+        mPushFragmentInterface = pushFragmentInterface;
     }
 
     @NonNull
@@ -25,15 +26,8 @@ public class EventListAdapter extends RecyclerView.Adapter<EventViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Fragment fragment = new EventDetailFragment();
-
-                mFragmentManager.beginTransaction()
-                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        .replace(R.id.fragment_container,fragment)
-                        .addToBackStack(null)
-                        .commit();
+                mPushFragmentInterface.push(fragment);
             }
         });
         return new EventViewHolder(view);

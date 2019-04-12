@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
 
-public class EventFragment extends Fragment {
+public class EventFragment extends BaseFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

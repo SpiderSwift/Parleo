@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class FilterUserFragment extends Fragment {
+public class FilterUserFragment extends BaseFragment {
 
 
     @BindView(R.id.range_bar)

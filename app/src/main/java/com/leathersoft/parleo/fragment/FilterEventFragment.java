@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FilterEventFragment extends Fragment {
+public class FilterEventFragment extends BaseFragment {
 
     @BindView(R.id.range_bar) CrystalRangeSeekbar seekbar;
     @BindView(R.id.tv_min) TextView min;

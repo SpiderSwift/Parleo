@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.ProfileFragment;
+import com.leathersoft.parleo.fragment.PushFragmentInterface;
 
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
-    private FragmentManager mFragmentManager;
+    private PushFragmentInterface mPushFragmentInterface;
 
-    public UserAdapter(FragmentManager fragmentManager) {
-        mFragmentManager = fragmentManager;
+    public UserAdapter(PushFragmentInterface pushFragmentInterface) {
+        mPushFragmentInterface = pushFragmentInterface;
     }
 
     @NonNull
@@ -26,21 +27,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Fragment fragment = new ProfileFragment();
-
-                mFragmentManager.beginTransaction()
-                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        .replace(R.id.fragment_container,fragment)
-                        .addToBackStack(null)
-                        .commit();
-
-//                v.getContext().startActivity(
-//                        new Intent(v.getContext(), ProfileActivity.class)
-//                );
-
-
+                mPushFragmentInterface.push(fragment);
             }
         });
         return new UserViewHolder(view);

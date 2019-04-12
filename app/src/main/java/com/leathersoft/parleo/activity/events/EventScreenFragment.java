@@ -1,6 +1,7 @@
 package com.leathersoft.parleo.activity.events;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,38 +17,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.fragment.FilterEventFragment;
-import com.ncapdevi.fragnav.FragNavController;
+import com.leathersoft.parleo.fragment.PushFragmentInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EventScreenFragment extends Fragment {
+public class EventScreenFragment extends BaseFragment {
 
     @BindView(R.id.events_tablayout) TabLayout mTabLayout;
     @BindView(R.id.events_viewpager) ViewPager mViewPager;
 
-    private FragNavController mFragNavController;
 
     EventsPagerAdapter mEventsPagerAdapter;
-
-
-//    public EventScreenFragment() {
-//    }
-//
-//    public EventScreenFragment(FragNavController fragNavController) {
-//        mFragNavController = fragNavController;
-//    }
-
-    //
-//    public EventScreenFragment(FragNavController fragNavController) {
-//        mFragNavController = fragNavController;
-//    }
-//
-//    public EventScreenFragment(int contentLayoutId, FragNavController fragNavController) {
-//        super(contentLayoutId);
-//        mFragNavController = fragNavController;
-//    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,7 +50,6 @@ public class EventScreenFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_event_screen,container,false);
         ButterKnife.bind(this,v);
 
-
         mEventsPagerAdapter = new EventsPagerAdapter(getFragmentManager());
 
         mViewPager.setAdapter(mEventsPagerAdapter);
@@ -82,25 +64,12 @@ public class EventScreenFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_add_event:
                 fragment = EventCreateFragment.newInstance();
-
-                mFragNavController.replaceFragment(fragment);
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-//                        .replace(R.id.fragment_container,fragment)
-//                        .addToBackStack(null)
-//                        .commit();
+                mPushFragmentInterface.push(fragment);
                 return true;
 
             case R.id.menu_filter_event:
                 fragment = FilterEventFragment.newInstance();
-
-                mFragNavController.replaceFragment(fragment);
-
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-//                        .replace(R.id.fragment_container,fragment)
-//                        .addToBackStack(null)
-//                        .commit();
+                mPushFragmentInterface.push(fragment);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

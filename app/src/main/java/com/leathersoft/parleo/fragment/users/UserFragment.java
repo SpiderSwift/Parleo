@@ -15,12 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.fragment.FilterUserFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UserFragment extends Fragment {
+public class UserFragment extends BaseFragment {
 
     @BindView(R.id.recycler_view_users)
     RecyclerView mRecyclerView;
@@ -44,12 +45,7 @@ public class UserFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_filter_users:
                 fragment = FilterUserFragment.newInstance();
-
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        .replace(R.id.fragment_container,fragment)
-                        .addToBackStack(null)
-                        .commit();
+                mPushFragmentInterface.push(fragment);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -62,7 +58,7 @@ public class UserFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_users,container,false);
         ButterKnife.bind(this,v);
 
-        UserAdapter adapter = new UserAdapter(getActivity().getSupportFragmentManager());
+        UserAdapter adapter = new UserAdapter(mPushFragmentInterface);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(adapter);
         return v;
@@ -78,18 +74,8 @@ public class UserFragment extends Fragment {
 
     }
 
-
-
-
     public static UserFragment newInstance(){
         return new UserFragment();
     }
 
-//    @OnClick(R.id.user_card_profile_btn)
-//    public void openProfileFragment(){
-//
-//        Snackbar.make(mRecyclerView,
-//                "Profile button pressed",
-//                Snackbar.LENGTH_LONG).show();
-//    }
 }

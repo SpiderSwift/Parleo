@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
 
-public class MyProfilefragment extends Fragment {
+public class MyProfilefragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
