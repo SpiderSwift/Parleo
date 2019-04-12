@@ -1,23 +1,28 @@
 package com.leathersoft.parleo.activity.events;
 
+import android.os.Bundle;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 public class EventsPagerAdapter extends FragmentStatePagerAdapter {
 
-    private Fragment[] mFragments = new Fragment[]{
-            EventListFragment.newInstance(),
-            EventListFragment.newInstance()
-    };
+    List<Fragment> mFragmentList;
 
     public EventsPagerAdapter(FragmentManager fm) {
         super(fm);
+        mFragmentList = new ArrayList<>();
+        mFragmentList.add(EventListFragment.newInstance());
+        mFragmentList.add(EventListFragment.newInstance());
     }
 
     @Override
     public Fragment getItem(int i) {
-        return mFragments[i];
+        return mFragmentList.get(i);
     }
 
     @Override
@@ -31,6 +36,6 @@ public class EventsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return mFragments.length;
+        return mFragmentList.size();
     }
 }

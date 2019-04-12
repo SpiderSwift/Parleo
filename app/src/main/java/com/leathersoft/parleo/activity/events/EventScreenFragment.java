@@ -50,7 +50,7 @@ public class EventScreenFragment extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_event_screen,container,false);
         ButterKnife.bind(this,v);
 
-        mEventsPagerAdapter = new EventsPagerAdapter(getFragmentManager());
+        mEventsPagerAdapter = new EventsPagerAdapter(getChildFragmentManager());
 
         mViewPager.setAdapter(mEventsPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

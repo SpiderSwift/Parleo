@@ -6,8 +6,10 @@ import android.view.View;
 
 public class EventViewHolder extends RecyclerView.ViewHolder {
 
+    View mView;
     public EventViewHolder(@NonNull View itemView) {
         super(itemView);
+        mView = itemView;
     }
 
 }
