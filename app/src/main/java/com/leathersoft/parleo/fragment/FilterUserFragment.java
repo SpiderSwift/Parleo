@@ -2,9 +2,9 @@ package com.leathersoft.parleo.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class FilterUserFragment extends Fragment {
+public class FilterUserFragment extends BaseFragment {
 
 
     @BindView(R.id.range_bar)
@@ -30,11 +30,6 @@ public class FilterUserFragment extends Fragment {
     @BindView(R.id.tv_min)
     TextView min;
     @BindView(R.id.tv_max) TextView max;
-
-    public FilterUserFragment() {
-
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,4 +64,7 @@ public class FilterUserFragment extends Fragment {
 
     }
 
+    public static FilterUserFragment newInstance(){
+        return new FilterUserFragment();
+    }
 }

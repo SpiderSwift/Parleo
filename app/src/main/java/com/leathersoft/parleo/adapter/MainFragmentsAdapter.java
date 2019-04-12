@@ -1,11 +1,10 @@
 package com.leathersoft.parleo.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.leathersoft.parleo.activity.events.EventListFragment;
 import com.leathersoft.parleo.activity.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.EventFragment;
 import com.leathersoft.parleo.fragment.DialogFragment;

@@ -1,35 +1,37 @@
 package com.leathersoft.parleo.activity.events;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TableLayout;
-import android.widget.Toast;
 
 import com.leathersoft.parleo.R;
-import com.leathersoft.parleo.fragment.users.UserAdapter;
+import com.leathersoft.parleo.fragment.BaseFragment;
+import com.leathersoft.parleo.fragment.FilterEventFragment;
+import com.leathersoft.parleo.fragment.PushFragmentInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class EventScreenFragment extends Fragment {
+public class EventScreenFragment extends BaseFragment {
 
     @BindView(R.id.events_tablayout) TabLayout mTabLayout;
     @BindView(R.id.events_viewpager) ViewPager mViewPager;
 
+
     EventsPagerAdapter mEventsPagerAdapter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,6 @@ public class EventScreenFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_event_screen,container,false);
         ButterKnife.bind(this,v);
 
-
         mEventsPagerAdapter = new EventsPagerAdapter(getFragmentManager());
 
         mViewPager.setAdapter(mEventsPagerAdapter);
@@ -59,16 +60,16 @@ public class EventScreenFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        Fragment fragment;
         switch (item.getItemId()) {
             case R.id.menu_add_event:
-                Fragment fragment = EventCreateFragment.newInstance();
+                fragment = EventCreateFragment.newInstance();
+                mPushFragmentInterface.push(fragment);
+                return true;
 
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        .replace(R.id.fragment_container,fragment)
-                        .addToBackStack(null)
-                        .commit();
-                Toast.makeText(getActivity(), "Add event Click", Toast.LENGTH_SHORT).show();
+            case R.id.menu_filter_event:
+                fragment = FilterEventFragment.newInstance();
+                mPushFragmentInterface.push(fragment);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

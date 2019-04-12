@@ -1,25 +1,22 @@
 package com.leathersoft.parleo.fragment.users;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
-import com.leathersoft.parleo.activity.ProfileActivity;
-import com.leathersoft.parleo.activity.events.EventViewHolder;
 import com.leathersoft.parleo.fragment.ProfileFragment;
+import com.leathersoft.parleo.fragment.PushFragmentInterface;
 
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
-    private FragmentManager mFragmentManager;
+    private PushFragmentInterface mPushFragmentInterface;
 
-    public UserAdapter(FragmentManager fragmentManager) {
-        mFragmentManager = fragmentManager;
+    public UserAdapter(PushFragmentInterface pushFragmentInterface) {
+        mPushFragmentInterface = pushFragmentInterface;
     }
 
     @NonNull
@@ -30,21 +27,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Fragment fragment = new ProfileFragment();
-
-                mFragmentManager.beginTransaction()
-                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        .replace(R.id.fragment_container,fragment)
-                        .addToBackStack(null)
-                        .commit();
-
-//                v.getContext().startActivity(
-//                        new Intent(v.getContext(), ProfileActivity.class)
-//                );
-
-
+                mPushFragmentInterface.push(fragment);
             }
         });
         return new UserViewHolder(view);

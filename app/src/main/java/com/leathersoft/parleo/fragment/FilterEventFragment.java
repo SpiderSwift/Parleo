@@ -2,9 +2,9 @@ package com.leathersoft.parleo.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,15 +21,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FilterEventFragment extends Fragment {
+public class FilterEventFragment extends BaseFragment {
 
     @BindView(R.id.range_bar) CrystalRangeSeekbar seekbar;
     @BindView(R.id.tv_min) TextView min;
     @BindView(R.id.tv_max) TextView max;
-
-    public FilterEventFragment() {
-
-    }
 
 
     @Override
@@ -63,4 +59,8 @@ public class FilterEventFragment extends Fragment {
         return v;
     }
 
+
+    public static FilterEventFragment newInstance(){
+        return new FilterEventFragment();
+    }
 }
