@@ -1,17 +1,13 @@
 package com.leathersoft.parleo.fragment.users;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
-import com.leathersoft.parleo.activity.ProfileActivity;
-import com.leathersoft.parleo.activity.events.EventViewHolder;
 import com.leathersoft.parleo.fragment.ProfileFragment;
 
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
