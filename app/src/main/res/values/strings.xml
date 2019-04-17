@@ -43,14 +43,20 @@
     <string name="profile_top_text">Tedik\'s profile</string>
     <string name="profile_add_friend">Add friend</string>
     <string name="profile_send_message">Send message</string>
-
     <string name="profile_my_meetings">My meetings</string>
     <string name="profile_friends">Friends</string>
+    <!--Profile edit -->
+
+    <string name="profile_edit_name_hint">Name</string>
+    <string name="profile_edit_age_hint">Age</string>
+    <string name="profile_edit_description_hint">Input description</string>
+    <string name="profile_edit_your_languages">Your languages</string>
+    <string name="profile_edit_your_interests">Your interests</string>
 
 
     <!--Event filter-->
     <string name="filter">Filter</string>
-    <string name="event_filter_save">Save</string>
+    <string name="save">Save</string>
     <string name="event_filter_number_of_members">Number of members</string>
     <string name="event_filter_1_1">1+1</string>
     <string name="event_filter_3_plus">3+</string>

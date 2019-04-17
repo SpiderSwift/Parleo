@@ -4,5 +4,5 @@
     <item
         android:id="@+id/event_filter_save"
         app:showAsAction="ifRoom"
-        android:title="@string/event_filter_save"/>
+        android:title="@string/save"/>
 </menu>
