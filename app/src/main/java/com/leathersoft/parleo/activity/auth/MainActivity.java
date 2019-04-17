@@ -1,12 +1,11 @@
-package com.leathersoft.parleo.activity;
+package com.leathersoft.parleo.activity.auth;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
 
 import com.leathersoft.parleo.R;
 
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

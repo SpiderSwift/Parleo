@@ -5,6 +5,7 @@
 
     <!--event create fragment-->
     <string name="events">Events</string>
+    <string name="event_create_title">New event</string>
     <string name="event_details">Event details</string>
 
     <string name="event_add_image">+ Add image</string>

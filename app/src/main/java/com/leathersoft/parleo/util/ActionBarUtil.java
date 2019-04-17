@@ -26,5 +26,12 @@ public class ActionBarUtil {
     }
 
 
+    public static void setFragmentTitle(Activity activity,int stringResId){
+        if(activity != null){
+            activity.setTitle(activity.getResources().getString(stringResId));
+        }
+    }
+
+
 
 }

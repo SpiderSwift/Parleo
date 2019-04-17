@@ -1,8 +1,9 @@
-package com.leathersoft.parleo.activity.events;
+package com.leathersoft.parleo.fragment.events;
+
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
 
 public class EventViewHolder extends RecyclerView.ViewHolder {
 

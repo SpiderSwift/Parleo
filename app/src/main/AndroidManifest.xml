@@ -9,26 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme">
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegistrationFinishActivity" />
-        <activity android:name=".activity.RegistrationContinueActivity" />
-        <activity android:name=".activity.RegistrationStartActivity" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.auth.LoginActivity" />
+        <activity android:name=".activity.auth.RegistrationFinishActivity" />
+        <activity android:name=".activity.auth.RegistrationContinueActivity" />
+        <activity android:name=".activity.auth.RegistrationStartActivity" />
+        <activity android:name=".activity.auth.MainActivity">
         </activity>
-        <activity android:name=".activity.ProfileActivity" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <activity android:name=".activity.TabsActivity" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".activity.MessagesActivity"></activity>
+        <activity android:name=".activity.ChatActivity"></activity>
     </application>
 
 </manifest>

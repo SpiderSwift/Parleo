@@ -2,12 +2,6 @@ package com.leathersoft.parleo.fragment;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,10 +15,15 @@ import com.google.android.material.snackbar.Snackbar;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.adapter.InterestsAdapter;
 import com.leathersoft.parleo.messaging.Interest;
+import com.leathersoft.parleo.util.ActionBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -88,6 +87,11 @@ public class FilterEventFragment extends BaseFragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ActionBarUtil.setFragmentTitle(getActivity(),R.string.filter);
+    }
 
     public static FilterEventFragment newInstance(){
         return new FilterEventFragment();

@@ -1,13 +1,13 @@
-package com.leathersoft.parleo.activity;
+package com.leathersoft.parleo.activity.auth;
 
 import android.content.Intent;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 
 import com.leathersoft.parleo.R;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

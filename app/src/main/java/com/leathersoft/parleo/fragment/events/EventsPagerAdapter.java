@@ -1,6 +1,4 @@
-package com.leathersoft.parleo.activity.events;
-
-import android.os.Bundle;
+package com.leathersoft.parleo.fragment.events;
 
 import java.util.ArrayList;
 import java.util.List;
