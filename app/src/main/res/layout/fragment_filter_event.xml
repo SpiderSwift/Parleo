@@ -13,37 +13,6 @@
 
         <!-- TODO: Update blank fragment layout -->
 
-
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center"
-            android:text="@string/filter"
-            android:textSize="20sp"
-            android:textColor="#80000000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/montserrat"
-            android:gravity="center"
-            android:text="@string/event_filter_save"
-            android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_description" />
-
         <TextView
             android:id="@+id/tv_number"
             android:layout_width="wrap_content"
@@ -56,7 +25,7 @@
             android:textColor="#80000000"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
             android:id="@+id/cb_two"
