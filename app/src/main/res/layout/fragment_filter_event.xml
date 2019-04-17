@@ -1,195 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.FilterEventFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="Filter"
-        android:textSize="20sp"
-        android:textColor="#80000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="Save"
-        android:textColor="@color/colorPrimary"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_description" />
-
-    <TextView
-        android:id="@+id/tv_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="Number of members"
-        android:textColor="#80000000"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
-
-    <CheckBox
-        android:id="@+id/cb_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:buttonTint="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="@+id/tv_number"
-        app:layout_constraintTop_toBottomOf="@+id/tv_number" />
-
-    <CheckBox
-        android:id="@+id/cb_many"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:buttonTint="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="@+id/cb_two"
-        app:layout_constraintTop_toBottomOf="@+id/cb_two" />
-
-
-    <TextView
-        android:id="@+id/tv_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="2dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="1+1"
-        android:textColor="#80000000"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cb_two"
-        app:layout_constraintStart_toEndOf="@+id/cb_two"
-        app:layout_constraintTop_toTopOf="@+id/cb_two" />
-
-
-    <TextView
-        android:id="@+id/tv_many"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="2dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="3+"
-        android:textColor="#80000000"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@+id/cb_many"
-        app:layout_constraintStart_toEndOf="@+id/cb_many"
-        app:layout_constraintTop_toTopOf="@+id/cb_many" />
-
-
-    <TextView
-        android:id="@+id/tv_distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="Distance from me (km)"
-        android:textColor="#80000000"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cb_many" />
-
-
-    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-        android:id="@+id/range_bar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="16dp"
-        app:bar_highlight_color="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_distance"
-        app:left_thumb_image="@drawable/ic_thumb"
-        app:max_value="100"
-        app:min_value="0"
-        app:right_thumb_image="@drawable/ic_thumb" />
+        android:layout_height="match_parent">
+
+        <!-- TODO: Update blank fragment layout -->
 
 
-    <TextView
-        android:id="@+id/tv_languages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="Languages"
-        android:textColor="#80000000"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/range_bar" />
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="@string/filter"
+            android:textSize="20sp"
+            android:textColor="#80000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="@string/event_filter_save"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_description" />
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="@string/event_filter_number_of_members"
+            android:textColor="#80000000"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+        <CheckBox
+            android:id="@+id/cb_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:buttonTint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="@+id/tv_number"
+            app:layout_constraintTop_toBottomOf="@+id/tv_number" />
+
+        <CheckBox
+            android:id="@+id/cb_many"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:buttonTint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="@+id/cb_two"
+            app:layout_constraintTop_toBottomOf="@+id/cb_two" />
 
 
-    <TextView
-        android:id="@+id/tv_min"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="2"
-        android:textColor="#80000000"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="@+id/range_bar"
-        app:layout_constraintTop_toBottomOf="@+id/range_bar" />
-
-    <TextView
-        android:id="@+id/tv_max"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/montserrat"
-        android:gravity="center"
-        android:text="100"
-        android:textColor="#80000000"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/range_bar"
-        app:layout_constraintTop_toBottomOf="@+id/range_bar" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_languages" />
+        <TextView
+            android:id="@+id/tv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="@string/event_filter_1_1"
+            android:textColor="#80000000"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/cb_two"
+            app:layout_constraintStart_toEndOf="@+id/cb_two"
+            app:layout_constraintTop_toTopOf="@+id/cb_two" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_many"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="@string/event_filter_3_plus"
+            android:textColor="#80000000"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/cb_many"
+            app:layout_constraintStart_toEndOf="@+id/cb_many"
+            app:layout_constraintTop_toTopOf="@+id/cb_many" />
+
+
+        <TextView
+            android:id="@+id/tv_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="@string/event_filter_distance_from_me"
+            android:textColor="#80000000"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_many" />
+
+
+        <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+            android:id="@+id/range_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            app:bar_highlight_color="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_distance"
+            app:left_thumb_image="@drawable/ic_thumb"
+            app:max_value="100"
+            app:min_value="0"
+            app:right_thumb_image="@drawable/ic_thumb" />
+
+
+        <TextView
+            android:id="@+id/tv_languages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="@string/event_filter_languages"
+            android:textColor="#80000000"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/range_bar" />
+
+
+        <TextView
+            android:id="@+id/tv_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#80000000"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@+id/range_bar"
+            app:layout_constraintTop_toBottomOf="@+id/range_bar" />
+
+        <TextView
+            android:id="@+id/tv_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="100"
+            android:textColor="#80000000"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="@+id/range_bar"
+            app:layout_constraintTop_toBottomOf="@+id/range_bar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_languages" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

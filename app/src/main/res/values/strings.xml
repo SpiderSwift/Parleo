@@ -48,6 +48,15 @@
     <string name="profile_friends">Friends</string>
 
 
+    <!--Event filter-->
+    <string name="filter">Filter</string>
+    <string name="event_filter_save">Save</string>
+    <string name="event_filter_number_of_members">Number of members</string>
+    <string name="event_filter_1_1">1+1</string>
+    <string name="event_filter_3_plus">3+</string>
+    <string name="event_filter_distance_from_me">Distance from me (km)</string>
+    <string name="event_filter_languages">Languages</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
