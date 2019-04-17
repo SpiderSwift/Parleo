@@ -8,20 +8,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/generalnotitle">
+        android:theme="@style/CustomAppTheme">
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.RegistrationFinishActivity" />
         <activity android:name=".activity.RegistrationContinueActivity" />
         <activity android:name=".activity.RegistrationStartActivity" />
         <activity android:name=".activity.MainActivity">
-
         </activity>
-
         <activity android:name=".activity.ProfileActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <activity android:name=".activity.TabsActivity" >
 
             <intent-filter>
