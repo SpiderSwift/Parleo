@@ -10,7 +10,8 @@
         android:layout_height="247dp"
 
         android:scaleType="centerCrop"
-        android:src="@drawable/cafe_placeholder"
+        android:src="@drawable/bg_gradient_drawable"
+        android:background="@drawable/cafe_placeholder"
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
