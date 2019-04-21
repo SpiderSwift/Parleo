@@ -1,15 +1,15 @@
 package com.leathersoft.parleo.fragment.users;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.ProfileFragment;
 import com.leathersoft.parleo.fragment.PushFragmentInterface;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 

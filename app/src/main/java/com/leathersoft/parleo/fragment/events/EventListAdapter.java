@@ -1,14 +1,14 @@
-package com.leathersoft.parleo.activity.events;
+package com.leathersoft.parleo.fragment.events;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.PushFragmentInterface;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class EventListAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
@@ -21,7 +21,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventViewHolder> {
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = View.inflate(viewGroup.getContext(),R.layout.event_item_view,null);
+        View view = View.inflate(viewGroup.getContext(),R.layout.include_event_item_view,null);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

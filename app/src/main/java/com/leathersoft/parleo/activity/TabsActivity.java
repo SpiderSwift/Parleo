@@ -6,11 +6,11 @@ import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.leathersoft.parleo.R;
-import com.leathersoft.parleo.activity.events.EventScreenFragment;
-import com.leathersoft.parleo.fragment.DialogFragment;
-import com.leathersoft.parleo.fragment.MyProfilefragment;
+import com.leathersoft.parleo.fragment.ChatFragment;
+import com.leathersoft.parleo.fragment.MyProfileFragment;
 import com.leathersoft.parleo.fragment.NotificationFragment;
 import com.leathersoft.parleo.fragment.PushFragmentInterface;
+import com.leathersoft.parleo.fragment.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.users.UserFragment;
 import com.ncapdevi.fragnav.FragNavController;
 
@@ -82,13 +82,13 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
                         fragment = UserFragment.newInstance();
                         break;
                     case INDEX_CHATS:
-                        fragment = DialogFragment.newInstance();
+                        fragment = ChatFragment.newInstance();
                         break;
                     case INDEX_NOTIFICATIONS:
                         fragment = NotificationFragment.newInstance();
                         break;
                     case INDEX_MY_PROFILE:
-                        fragment = MyProfilefragment.newInstance();
+                        fragment = MyProfileFragment.newInstance();
                         break;
                     default:
                         throw new IllegalStateException("Need to send an index that we know");

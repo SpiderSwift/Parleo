@@ -1,14 +1,6 @@
-package com.leathersoft.parleo.activity.events;
+package com.leathersoft.parleo.fragment.events;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,11 +8,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.fragment.FilterEventFragment;
-import com.leathersoft.parleo.fragment.PushFragmentInterface;
+import com.leathersoft.parleo.util.ActionBarUtil;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -80,10 +77,7 @@ public class EventScreenFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Activity activity = getActivity();
-        if(activity != null){
-            getActivity().setTitle(getResources().getString(R.string.events));
-        }
+        ActionBarUtil.setFragmentTitle(getActivity(),R.string.events);
     }
 
     public static EventScreenFragment newInstance(){

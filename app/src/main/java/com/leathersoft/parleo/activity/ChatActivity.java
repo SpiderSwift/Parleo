@@ -1,7 +1,5 @@
 package com.leathersoft.parleo.activity;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -12,10 +10,12 @@ import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MessagesActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
 
     @BindView(R.id.input_message) MessageInput messageInput;
     @BindView(R.id.list_message) MessagesList messagesList;
@@ -23,7 +23,7 @@ public class MessagesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages);
+        setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
         MessagesListAdapter adapter = new MessagesListAdapter("me", new ImageLoader() {
             @Override
