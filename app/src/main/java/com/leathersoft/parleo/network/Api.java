@@ -1,5 +1,7 @@
 package com.leathersoft.parleo.network;
 
+import com.leathersoft.parleo.network.model.AccountResponse;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

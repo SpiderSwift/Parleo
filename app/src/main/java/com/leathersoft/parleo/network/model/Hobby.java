@@ -1,4 +1,4 @@
-package com.leathersoft.parleo.network;
+package com.leathersoft.parleo.network.model;
 
 public class Hobby {
 

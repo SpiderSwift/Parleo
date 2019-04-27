@@ -1,9 +1,7 @@
 package com.leathersoft.parleo.network;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
@@ -11,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.users.UserViewHolder;
+import com.leathersoft.parleo.network.model.User;
 
 public class UserPageAdapter extends PagedListAdapter<User, UserViewHolder> {
 
@@ -27,7 +26,6 @@ public class UserPageAdapter extends PagedListAdapter<User, UserViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-
         User user = getItem(position);
 
         if(user != null){

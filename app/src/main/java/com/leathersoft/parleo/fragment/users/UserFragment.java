@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.fragment.FilterUserFragment;
-import com.leathersoft.parleo.network.AccountResponse;
+import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.UserPageAdapter;
 
