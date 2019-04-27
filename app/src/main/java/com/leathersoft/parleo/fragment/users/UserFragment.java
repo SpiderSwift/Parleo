@@ -8,10 +8,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.fragment.FilterUserFragment;
+import com.leathersoft.parleo.network.AccountResponse;
+import com.leathersoft.parleo.network.SingletonRetrofitClient;
+import com.leathersoft.parleo.network.UserPageAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +24,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserFragment extends BaseFragment {
 
@@ -58,7 +65,39 @@ public class UserFragment extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_users,container,false);
         ButterKnife.bind(this,v);
 
-        UserAdapter adapter = new UserAdapter(mPushFragmentInterface);
+
+        Call<AccountResponse> call = SingletonRetrofitClient
+                .getInsance()
+                .getApi()
+                .getUsers(
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        0,
+                        10
+                );
+
+        call.enqueue(new Callback<AccountResponse>() {
+            @Override
+            public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
+                AccountResponse accountResponse = response.body();
+                Toast.makeText(getContext(),"Done " + accountResponse.entities.size(), Toast.LENGTH_LONG).show();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<AccountResponse> call, Throwable t) {
+                Toast.makeText(getContext(),"Failed", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+        UserPageAdapter adapter = new UserPageAdapter();
+//        UserAdapter adapter = new UserAdapter(mPushFragmentInterface);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(adapter);
         return v;
