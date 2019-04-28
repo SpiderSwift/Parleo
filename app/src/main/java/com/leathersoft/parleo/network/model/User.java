@@ -74,6 +74,7 @@ public class User implements Serializable {
         return hobbies;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,5 +89,10 @@ public class User implements Serializable {
                 Objects.equals(email, user.email) &&
                 Objects.equals(languages, user.languages) &&
                 Objects.equals(hobbies, user.hobbies);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, accountImage, name, about, gender, distanceFromCurrentUser, email, languages, hobbies);
     }
 }

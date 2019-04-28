@@ -2,7 +2,6 @@ package com.leathersoft.parleo.util;
 
 import android.widget.ImageView;
 
-import com.leathersoft.parleo.R;
 import com.squareup.picasso.Picasso;
 
 public class ImageUtil {
@@ -12,7 +11,16 @@ public class ImageUtil {
     public static void setImage(String path, ImageView imageView, int placeholderId){
         Picasso.get()
                 .load(path)
+                .fit()
+                .centerCrop()
                 .placeholder(placeholderId)
+                .error(placeholderId)
                 .into(imageView);
+
+
+    }
+
+    public static void setBackground(String path, ImageView imageView, int placeholderId){
+
     }
 }

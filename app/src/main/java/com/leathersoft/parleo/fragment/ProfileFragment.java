@@ -56,7 +56,7 @@ public class ProfileFragment extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_profile_screen,container,false);
         ButterKnife.bind(this,v);
 
-        ImageUtil.setImage(mUser.getAccountImage(),mUserAvatar,R.drawable.bg_avatar_placeholder);
+        ImageUtil.setImage(mUser.getAccountImage(),mUserAvatar,R.color.placeholderGray);
         mUserName.setText(mUser.getName());
         mUserDescription.setText(mUser.getAbout());
 //        mUserDistance.setText(""+ mUser.getDistanceFromCurrentUser());

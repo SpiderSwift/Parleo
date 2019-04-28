@@ -46,14 +46,14 @@ public class FilterUserFragment extends BaseFragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.user_filter_menu,menu);
+        inflater.inflate(R.menu.save_menu,menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.user_filter_save:
+            case R.id.menu_save:
                 Snackbar.make(getView(),"TODO save event",Snackbar.LENGTH_SHORT).show();
                 return true;
             default:

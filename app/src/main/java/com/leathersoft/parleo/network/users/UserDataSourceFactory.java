@@ -1,10 +1,11 @@
-package com.leathersoft.parleo.network;
+package com.leathersoft.parleo.network.users;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import androidx.paging.PageKeyedDataSource;
 
 import com.leathersoft.parleo.network.model.User;
+import com.leathersoft.parleo.network.users.UserDataSource;
 
 public class UserDataSourceFactory extends DataSource.Factory {
 

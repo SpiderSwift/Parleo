@@ -8,15 +8,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.fragment.FilterUserFragment;
-import com.leathersoft.parleo.network.UserViewModel;
-import com.leathersoft.parleo.network.model.AccountResponse;
-import com.leathersoft.parleo.network.SingletonRetrofitClient;
-import com.leathersoft.parleo.network.UserPageAdapter;
+import com.leathersoft.parleo.network.users.UserViewModel;
+import com.leathersoft.parleo.network.users.UserPageAdapter;
 import com.leathersoft.parleo.network.model.User;
 
 import androidx.annotation.NonNull;
@@ -29,9 +26,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class UserFragment extends BaseFragment {
 
@@ -74,7 +68,9 @@ public class UserFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setHasFixedSize(true);
 
-        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        UserViewModel userViewModel = ViewModelProviders.of(this)
+                .get(UserViewModel.class);
+
         final UserPageAdapter userPageAdapter = new UserPageAdapter(mPushFragmentInterface);
 
         userViewModel.getUserPagedList().observe(this, new Observer<PagedList<User>>() {

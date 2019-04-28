@@ -1,8 +1,9 @@
-package com.leathersoft.parleo.network;
+package com.leathersoft.parleo.network.users;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 
+import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.User;
 
@@ -18,24 +19,16 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, User> callback) {
-
-        SingletonRetrofitClient.getInsance()
-                .getApi()
-                .getUsers(
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        FIRST_PAGE,
-                        PAGE_SIZE
-                ).enqueue(new Callback<AccountResponse>() {
+            getUserCall(FIRST_PAGE,PAGE_SIZE)
+                .enqueue(new Callback<AccountResponse>() {
             @Override
             public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
                 if(response.body() != null){
                     AccountResponse accountResponse = response.body();
-                    List<User> users = accountResponse.getEntities();
-                    callback.onResult(users,null, FIRST_PAGE + 1);
+                    callback.onResult(
+                            accountResponse.getEntities(),
+                            null,
+                            FIRST_PAGE + 1);
                 }
             }
 
@@ -49,17 +42,8 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
     @Override
     public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, User> callback) {
 
-        SingletonRetrofitClient.getInsance()
-                .getApi()
-                .getUsers(
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        params.key,
-                        PAGE_SIZE
-                ).enqueue(new Callback<AccountResponse>() {
+        getUserCall(params.key,PAGE_SIZE)
+                .enqueue(new Callback<AccountResponse>() {
             @Override
             public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
 
@@ -80,17 +64,8 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, User> callback) {
 
-        SingletonRetrofitClient.getInsance()
-                .getApi()
-                .getUsers(
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        params.key,
-                        PAGE_SIZE
-                ).enqueue(new Callback<AccountResponse>() {
+        getUserCall(params.key,PAGE_SIZE)
+                .enqueue(new Callback<AccountResponse>() {
             @Override
             public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
                 Integer pageNumber = response.body().getPageNumber();
@@ -100,7 +75,7 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
                 Integer totalAmount = response.body().getTotalAmount();
 
                 Integer key;
-                if( pageNumber*pageSize >= totalAmount){
+                if(pageNumber * pageSize >= totalAmount){
                     key = null;
                 }else {
                     key = params.key + 1;
@@ -119,4 +94,19 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
             }
         });
     }
+
+    private Call<AccountResponse> getUserCall(Integer page, Integer pageSize){
+        return SingletonRetrofitClient.getInsance()
+                .getApi()
+                .getUsers(
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        page,
+                        pageSize
+                );
+    }
+
 }

@@ -82,6 +82,10 @@ dependencies {
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //maps
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
 
+    //circleimageview
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
 }

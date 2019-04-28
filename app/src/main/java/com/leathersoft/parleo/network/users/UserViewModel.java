@@ -1,4 +1,4 @@
-package com.leathersoft.parleo.network;
+package com.leathersoft.parleo.network.users;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -10,28 +10,28 @@ import com.leathersoft.parleo.network.model.User;
 
 public class UserViewModel extends ViewModel {
 
-    private LiveData<PagedList<User>> userPagedList;
-    private LiveData<PageKeyedDataSource<Integer,User>> liveDataSource;
+    private LiveData<PagedList<User>> mUserPagedList;
+    private LiveData<PageKeyedDataSource<Integer,User>> mLiveDataSource;
 
 
 
     public UserViewModel() {
-        UserDataSourceFactory  userDataSourceFactory = new UserDataSourceFactory();
-        liveDataSource = userDataSourceFactory.getUserLiveDataSource();
+        UserDataSourceFactory userDataSourceFactory = new UserDataSourceFactory();
+        mLiveDataSource = userDataSourceFactory.getUserLiveDataSource();
         PagedList.Config config =
                 (new PagedList.Config.Builder())
                 .setEnablePlaceholders(false)
                 .setPageSize(UserDataSource.PAGE_SIZE)
                 .build();
 
-        userPagedList = (new LivePagedListBuilder(userDataSourceFactory,config)).build();
+        mUserPagedList = (new LivePagedListBuilder(userDataSourceFactory,config)).build();
     }
 
     public LiveData<PagedList<User>> getUserPagedList() {
-        return userPagedList;
+        return mUserPagedList;
     }
 
     public LiveData<PageKeyedDataSource<Integer, User>> getLiveDataSource() {
-        return liveDataSource;
+        return mLiveDataSource;
     }
 }

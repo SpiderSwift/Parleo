@@ -1,4 +1,4 @@
-package com.leathersoft.parleo.network;
+package com.leathersoft.parleo.network.users;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +28,6 @@ public class UserPageAdapter extends PagedListAdapter<User, UserViewHolder> {
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(parent.getContext(), R.layout.user_item_view,null);
-
-
-
         return new UserViewHolder(view);
     }
 
@@ -58,7 +55,7 @@ public class UserPageAdapter extends PagedListAdapter<User, UserViewHolder> {
                 @Override
                 public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
 //                    TODO
-                    return oldItem.equals(newItem);
+                    return oldItem == newItem;
                 }
 
                 @Override

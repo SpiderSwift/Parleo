@@ -35,7 +35,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
     }
     public void bind(User user){
 
-        ImageUtil.setImage(user.getAccountImage(),mUserAvatar,R.drawable.bg_avatar_placeholder);
+        ImageUtil.setImage(user.getAccountImage(),mUserAvatar,R.color.placeholderGray);
         mUserName.setText(user.getName());
         mUserDescription.setText(user.getAbout());
         mUserDistance.setText(""+ user.getDistanceFromCurrentUser());
