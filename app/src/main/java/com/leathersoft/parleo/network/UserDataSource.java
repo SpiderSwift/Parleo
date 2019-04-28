@@ -13,9 +13,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserDataSource extends PageKeyedDataSource<Integer, User> {
-    public static final int SIZE = 10;
-    private static final int FIRST_PAGE = 0;
-    private static final String SITE_NAME = "";
+    public static final int PAGE_SIZE = 5;
+    private static final int FIRST_PAGE = 1;
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, User> callback) {
@@ -29,7 +28,7 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
                         null,
                         null,
                         FIRST_PAGE,
-                        SIZE
+                        PAGE_SIZE
                 ).enqueue(new Callback<AccountResponse>() {
             @Override
             public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
@@ -59,7 +58,7 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
                         null,
                         null,
                         params.key,
-                        SIZE
+                        PAGE_SIZE
                 ).enqueue(new Callback<AccountResponse>() {
             @Override
             public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
@@ -90,11 +89,11 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
                         null,
                         null,
                         params.key,
-                        SIZE
+                        PAGE_SIZE
                 ).enqueue(new Callback<AccountResponse>() {
             @Override
             public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
-                Integer pageNumber = response.body().getPageNumber() + 1;
+                Integer pageNumber = response.body().getPageNumber();
                 Integer pageSize = response.body().getPageSize();
 
 

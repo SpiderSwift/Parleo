@@ -1,6 +1,8 @@
 package com.leathersoft.parleo.network.model;
 
-public class Language {
+import java.io.Serializable;
+
+public class Language implements Serializable {
     String code;
     int level;
 }

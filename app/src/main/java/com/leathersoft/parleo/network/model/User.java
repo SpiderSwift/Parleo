@@ -4,10 +4,11 @@ package com.leathersoft.parleo.network.model;
 import com.leathersoft.parleo.network.model.Hobby;
 import com.leathersoft.parleo.network.model.Language;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
 
     String id;
     String accountImage;

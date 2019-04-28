@@ -13,13 +13,18 @@ import android.widget.Toast;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.fragment.FilterUserFragment;
+import com.leathersoft.parleo.network.UserViewModel;
 import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.UserPageAdapter;
+import com.leathersoft.parleo.network.model.User;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -66,40 +71,20 @@ public class UserFragment extends BaseFragment {
         ButterKnife.bind(this,v);
 
 
-        Call<AccountResponse> call = SingletonRetrofitClient
-                .getInsance()
-                .getApi()
-                .getUsers(
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        0,
-                        10
-                );
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setHasFixedSize(true);
 
-        call.enqueue(new Callback<AccountResponse>() {
+        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        final UserPageAdapter userPageAdapter = new UserPageAdapter(mPushFragmentInterface);
+
+        userViewModel.getUserPagedList().observe(this, new Observer<PagedList<User>>() {
             @Override
-            public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
-                AccountResponse accountResponse = response.body();
-                Toast.makeText(getContext(),"Done " + accountResponse.entities.size(), Toast.LENGTH_LONG).show();
-
-
-            }
-
-            @Override
-            public void onFailure(Call<AccountResponse> call, Throwable t) {
-                Toast.makeText(getContext(),"Failed", Toast.LENGTH_LONG).show();
+            public void onChanged(PagedList<User> users) {
+                userPageAdapter.submitList(users);
             }
         });
 
-
-
-        UserPageAdapter adapter = new UserPageAdapter();
-//        UserAdapter adapter = new UserAdapter(mPushFragmentInterface);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(userPageAdapter);
         return v;
     }
 
