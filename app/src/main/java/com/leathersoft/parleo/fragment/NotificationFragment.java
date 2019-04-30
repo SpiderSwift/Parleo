@@ -1,26 +1,25 @@
 package com.leathersoft.parleo.fragment;
 
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.adapter.NotificationsAdapter;
+import com.leathersoft.parleo.util.ActionBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NotificationFragment extends Fragment {
+public class NotificationFragment extends BaseFragment {
 
     @BindView(R.id.list_notifications) RecyclerView view;
 
@@ -50,11 +49,7 @@ public class NotificationFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Activity activity = getActivity();
-        if(activity != null){
-            getActivity().setTitle(getResources().getString(R.string.notifiactions));
-        }
-
+        ActionBarUtil.setFragmentTitle(getActivity(),R.string.notifiactions);
     }
 
     public static NotificationFragment newInstance(){
