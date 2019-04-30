@@ -97,6 +97,17 @@
             </LinearLayout>
 
             <!--TODO:CHANGE IMAGEVIEW TO MAP-->
+            <!--<com.google.android.gms.maps.MapView-->
+                <!--android:id="@+id/map"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:minHeight="178dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:layout_marginBottom="16dp"-->
+
+                <!--android:src="@drawable/map_placeholder"-->
+                <!--android:elevation="10dp"-->
+                <!--android:layout_weight="1"/>-->
             <ImageView
                 android:id="@+id/map"
                 android:layout_width="match_parent"
