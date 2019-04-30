@@ -23,12 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class EventListFragment extends BaseFragment {
-
-    private static final String TAG = "EventListFragment";
-
-    LinearLayoutManager mLayoutManager;
-    EventListAdapter mEventListAdapter;
-
     @BindView(R.id.recycler_view_events) RecyclerView mRecyclerView;
     @Nullable
     @Override
@@ -55,23 +49,7 @@ public class EventListFragment extends BaseFragment {
 
         mRecyclerView.setAdapter(eventPageAdapter);
 
-
-//        mLayoutManager = new LinearLayoutManager(getContext());
-//
-//        mEventListAdapter = new EventListAdapter(mPushFragmentInterface);
-//        DividerItemDecoration decoration = new DividerItemDecoration(mRecyclerView.getContext(),mLayoutManager.getOrientation());
-//
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mRecyclerView.setAdapter(mEventListAdapter);
-//        mRecyclerView.addItemDecoration(decoration);
-
         return v;
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     public static EventListFragment newInstance(){

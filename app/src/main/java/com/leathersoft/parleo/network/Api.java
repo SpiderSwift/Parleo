@@ -39,6 +39,7 @@ public interface Api {
     Call<User> getMe();
 
 
+
     @GET("Event")
     Call<EventResponse> getEvents(
             @Query("MinNumberOfParticipants") Integer minNumberOfParticipants,
@@ -49,6 +50,11 @@ public interface Api {
 //            @Query("MaxStartDate") Integer maxStartDate,
             @Query("PageNumber") Integer page,
             @Query("PageSize") Integer pageSize
+    );
+
+    @GET("Event/{eventId}")
+    Call<Event> getEvent(
+            @Path("eventId") String eventId
     );
 
     @POST("Event/create")

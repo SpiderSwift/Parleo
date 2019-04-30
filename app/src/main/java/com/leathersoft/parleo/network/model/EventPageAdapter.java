@@ -27,7 +27,6 @@ public class EventPageAdapter extends PagedListAdapter<Event, EventViewHolder> {
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(parent.getContext(),R.layout.include_event_item_view,null);
-
         return new EventViewHolder(view);
     }
 

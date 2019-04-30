@@ -23,6 +23,7 @@ public class User implements Serializable {
     List<Language> languages;
     List<Hobby> hobbies;
 
+    List<AttendingEvent> attendingEvents;
 //     "id": "a7727de6-8583-4479-99dc-00fa25972ac1",
 //             "accountImage": null,
 //             "name": null,
@@ -74,6 +75,9 @@ public class User implements Serializable {
         return hobbies;
     }
 
+    public List<AttendingEvent> getAttendingEvents() {
+        return attendingEvents;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -94,5 +98,32 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, accountImage, name, about, gender, distanceFromCurrentUser, email, languages, hobbies);
+    }
+
+    public class AttendingEvent implements Serializable{
+         String id;
+         String image;
+         String name;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return "AttendingEvent{" +
+                    "id='" + id + '\'' +
+                    ", image='" + image + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
 }
