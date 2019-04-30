@@ -31,7 +31,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/transparent_bg_bordered_button"
             android:fontFamily="@font/montserrat"
-            android:text="@string/profile_add_friend"
+            android:text="@string/profile_edit_profile"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="@+id/include_profile_header"
             app:layout_constraintStart_toStartOf="@+id/include_profile_header"

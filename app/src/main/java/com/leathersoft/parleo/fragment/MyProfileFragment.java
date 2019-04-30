@@ -18,11 +18,12 @@ import androidx.annotation.Nullable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyProfileFragment extends BaseFragment {
+public class MyProfileFragment extends BaseFragment implements ReloadDataInterface{
 
     private User mMe;
 
@@ -36,11 +37,15 @@ public class MyProfileFragment extends BaseFragment {
     @BindView(R.id.tv_profile_page_description)
     TextView mUserDescription;
 
+    @OnClick(R.id.edit_profile_btn)
+    public void openEdit(){
+        mPushFragmentInterface.push(EditProfileFragment.newInstance(this));
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUser();
+        reloadData();
     }
 
     private void setUser(){
@@ -90,5 +95,10 @@ public class MyProfileFragment extends BaseFragment {
 
     public static MyProfileFragment newInstance(){
         return new MyProfileFragment();
+    }
+
+    @Override
+    public void reloadData() {
+        setUser();
     }
 }

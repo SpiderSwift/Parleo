@@ -6,6 +6,7 @@ import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.EventResponse;
 import com.leathersoft.parleo.network.model.Language;
 import com.leathersoft.parleo.network.model.User;
+import com.leathersoft.parleo.network.model.UserUpdateModel;
 
 import java.util.List;
 
@@ -34,6 +35,14 @@ public interface Api {
             @Query("PageNumber") Integer page,
             @Query("PageSize") Integer pageSize
     );
+
+    @PUT("Account/{userId}")
+    Call<AccountResponse> updateUser(
+            @Path("userId") String userId,
+            @Query("entity")UserUpdateModel userUpdateModel
+            );
+
+
 
     @GET("Account/me")
     Call<User> getMe();

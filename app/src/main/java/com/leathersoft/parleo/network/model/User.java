@@ -14,7 +14,7 @@ public class User implements Serializable {
     String accountImage;
     String name;
     String about;
-    //birthdate
+    String birthdate;
     boolean gender;
     int distanceFromCurrentUser;
     String email;
@@ -39,44 +39,92 @@ public class User implements Serializable {
 //             "hobbies": []
 
 
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAccountImage() {
         return accountImage;
     }
 
+    public void setAccountImage(String accountImage) {
+        this.accountImage = accountImage;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAbout() {
         return about;
     }
 
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
     public boolean isGender() {
         return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
 
     public int getDistanceFromCurrentUser() {
         return distanceFromCurrentUser;
     }
 
+    public void setDistanceFromCurrentUser(int distanceFromCurrentUser) {
+        this.distanceFromCurrentUser = distanceFromCurrentUser;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Language> getLanguages() {
         return languages;
     }
 
+    public void setLanguages(List<Language> languages) {
+        this.languages = languages;
+    }
+
     public List<Hobby> getHobbies() {
         return hobbies;
     }
 
+    public void setHobbies(List<Hobby> hobbies) {
+        this.hobbies = hobbies;
+    }
+
     public List<AttendingEvent> getAttendingEvents() {
         return attendingEvents;
+    }
+
+    public void setAttendingEvents(List<AttendingEvent> attendingEvents) {
+        this.attendingEvents = attendingEvents;
     }
 
     @Override
