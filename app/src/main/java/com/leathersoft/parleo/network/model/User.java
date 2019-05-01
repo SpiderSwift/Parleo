@@ -5,6 +5,7 @@ import com.leathersoft.parleo.network.model.Hobby;
 import com.leathersoft.parleo.network.model.Language;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class User implements Serializable {
     String accountImage;
     String name;
     String about;
-    String birthdate;
+    Date birthdate;
     boolean gender;
     int distanceFromCurrentUser;
     String email;
@@ -39,11 +40,11 @@ public class User implements Serializable {
 //             "hobbies": []
 
 
-    public String getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 

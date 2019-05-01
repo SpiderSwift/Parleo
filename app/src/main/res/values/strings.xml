@@ -74,4 +74,9 @@
     <!--Notifications-->
     <string name="notifiactions">Notifications</string>
 
+
+    <!--Snackbar Messages-->
+    <string name="snack_bar_ok">Ok</string>
+    <string name="snack_bar_something_wrong">Something went wrong</string>
+
 </resources>

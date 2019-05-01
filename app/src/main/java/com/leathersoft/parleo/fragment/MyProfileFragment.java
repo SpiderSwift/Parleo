@@ -93,12 +93,13 @@ public class MyProfileFragment extends BaseFragment implements ReloadDataInterfa
         ActionBarUtil.setFragmentTitle(getActivity(),R.string.my_profile);
     }
 
-    public static MyProfileFragment newInstance(){
-        return new MyProfileFragment();
-    }
-
     @Override
     public void reloadData() {
         setUser();
+    }
+
+
+    public static MyProfileFragment newInstance(){
+        return new MyProfileFragment();
     }
 }

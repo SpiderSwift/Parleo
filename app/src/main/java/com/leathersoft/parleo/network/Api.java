@@ -39,7 +39,7 @@ public interface Api {
     @PUT("Account/{userId}")
     Call<AccountResponse> updateUser(
             @Path("userId") String userId,
-            @Query("entity")UserUpdateModel userUpdateModel
+            @Body UserUpdateModel userUpdateModel
             );
 
 
