@@ -1,8 +1,11 @@
 package com.leathersoft.parleo.fragment.events;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +26,15 @@ import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.util.ActionBarUtil;
 import com.leathersoft.parleo.util.ImageUtil;
+import com.leathersoft.parleo.util.LocaleUtil;
 import com.leathersoft.parleo.util.TouchUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -35,6 +42,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class EventDetailFragment extends BaseFragment {
+
+    private final static String START_DATE_FORMAT = "d MMM yyyy HH:mm";
 
     @BindView(R.id.map)
     ScrollableMapView mMapView;
@@ -50,6 +59,13 @@ public class EventDetailFragment extends BaseFragment {
     TextView mEventPlaceDescription;
     @BindView(R.id.iv_language_icon)
     ImageView mLanguageIcon;
+
+    @BindView(R.id.tv_date_and_time)
+    TextView mTvEventDateTime;
+
+    @BindView(R.id.tv_adress)
+    TextView mTvAdress;
+
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +85,10 @@ public class EventDetailFragment extends BaseFragment {
         mEventPlaceTitle.setText(mEvent.getName());
         mEventPlaceDescription.setText(mEvent.getDescription());
 
+        SimpleDateFormat mDateFormat = new SimpleDateFormat(START_DATE_FORMAT, LocaleUtil.getCurrentLocale(getContext()));
+        mTvEventDateTime.setText(
+                mDateFormat.format(mEvent.getStartTime())
+        );
 
         mLanguageIcon.setVisibility(View.GONE);
         return v;
@@ -96,9 +116,43 @@ public class EventDetailFragment extends BaseFragment {
 //                mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                 mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                Geocoder geocoder = new Geocoder(getContext());
+                List<Address> addresses;
+                try {
+                    addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1);
+                    if(addresses.size() > 0) {
+
+                        Address address = addresses.get(0);
+
+                        mTvAdress.setText(getStringFromAddress(address));
+                        Log.d("EVENT",address.toString());
+                    }
+
+                }catch (IOException e){
+
+                }
+
             }
         });
+
+
 //        mGoogleMap.setMyLocationEnabled(true);
+    }
+
+    private String getStringFromAddress(Address address){
+
+        String res = "";
+        for(int i = 0; i <= address.getMaxAddressLineIndex(); i++){
+            res += address.getAddressLine(i);
+        }
+//        String result = address.getLocality()
+//                + ", "
+//                + address.getSubLocality()
+//                + ", "
+//                + address.getThoroughfare();
+
+        return res;
     }
 
     @Override

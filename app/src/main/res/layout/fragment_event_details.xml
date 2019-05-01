@@ -53,6 +53,7 @@
                     android:gravity="center_vertical"/>
 
                 <TextView
+                    android:id="@+id/tv_date_and_time"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
 
@@ -82,13 +83,14 @@
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="22dp"
+                    android:layout_height="wrap_content"
                     android:text="@string/event_headline_place"
                     android:textAppearance="@style/event_headline_style"
                     android:gravity="center_vertical"/>
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:id="@+id/tv_adress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
                     android:layout_marginStart="8dp"
                     android:text="@string/placeholder"
