@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,20 +20,17 @@
             android:layout_width="match_parent"
             android:layout_height="128dp">
 
-            <ImageView
-                android:id="@+id/user_avatar"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_user_avatar"
                 android:layout_width="88dp"
                 android:layout_height="88dp"
-
                 android:layout_margin="8dp"
-
-                android:src="@drawable/user_avatar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:id="@+id/user_card_info"
+                android:id="@+id/ll_user_card_info"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
 
@@ -44,18 +41,20 @@
 
                 android:orientation="vertical"
 
-                app:layout_constraintStart_toEndOf="@id/user_avatar"
-                app:layout_constraintTop_toTopOf="@id/user_avatar"
+                app:layout_constraintStart_toEndOf="@id/iv_user_avatar"
+                app:layout_constraintTop_toTopOf="@id/iv_user_avatar"
                 app:layout_constraintBottom_toTopOf="@id/user_card_profile_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 >
 
                 <TextView
+                    android:id="@+id/tv_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/user_card_title"
                     android:text="Title"/>
                 <TextView
+                    android:id="@+id/tv_user_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="3"
@@ -70,10 +69,11 @@
                         android:layout_height="13dp"
                         android:background="@drawable/ic_location"/>
                     <TextView
+                        android:id="@+id/tv_user_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/user_card_distance"
-                        android:text="13.37 km away"/>
+                        tools:text="13.37 km away"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -88,7 +88,7 @@
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/user_card_info"
+                app:layout_constraintTop_toBottomOf="@id/ll_user_card_info"
 
                 android:text="@string/users_profile_button"
                 android:textAppearance="@style/user_card_profile_btn"

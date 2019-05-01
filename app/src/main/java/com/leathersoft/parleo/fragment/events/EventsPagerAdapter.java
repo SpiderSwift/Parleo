@@ -15,7 +15,7 @@ public class EventsPagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
         mFragmentList = new ArrayList<>();
         mFragmentList.add(EventListFragment.newInstance());
-        mFragmentList.add(EventListFragment.newInstance());
+        mFragmentList.add(MyEventListFragment.newInstance());
     }
 
     @Override
