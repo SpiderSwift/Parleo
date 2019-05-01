@@ -3,6 +3,7 @@
     package="com.leathersoft.parleo">
 
 
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -31,6 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ChatActivity"></activity>
+
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDAnB_3aaWIvFHHE9VI1AUJsBbCypJ5G6Q"/>
     </application>
 
 </manifest>
