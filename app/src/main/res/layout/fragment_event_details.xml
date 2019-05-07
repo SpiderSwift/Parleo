@@ -1,161 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff">
 
-    <ImageView
-        android:id="@+id/iv_event_image"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="247dp"
-
-
-        android:scaleType="centerCrop"
-        android:src="@drawable/cafe_placeholder"
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-        android:layout_marginStart="18dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="1"
-        app:layout_constraintEnd_toEndOf="@id/iv_event_image"
-        app:layout_constraintStart_toStartOf="@id/iv_event_image"
-        app:layout_constraintTop_toTopOf="@id/iv_event_image"
-        app:layout_constraintBottom_toBottomOf="@id/iv_event_image">
-    <TextView
-            android:id="@+id/tv_event_place_title"
-            android:layout_width="160dp"
-            android:layout_height="35dp"
-            android:gravity="center_vertical"
-            android:text="@string/event_place_title"
-            android:textAppearance="@style/place_title_text_style"/>
-        <TextView
-            android:id="@+id/tv_event_place_description"
-            android:layout_width="162dp"
-            android:layout_height="27dp"
-
-            android:gravity="center_vertical"
-            android:text="@string/event_place_description"
-            android:textAppearance="@style/place_description_text_style"/>
-    </LinearLayout>
+        android:background="#ffffff">
 
 
-    <!---->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_margin="16dp"
-
-        app:layout_constraintTop_toBottomOf="@id/iv_event_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        <include
+            android:id="@+id/include_image"
+            layout="@layout/include_event_item_view">
+        </include>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:text="@string/event_headline_members"
-                android:textAppearance="@style/event_headline_style"
-                android:gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:text="@string/event_headline_date_time"
-                android:textAppearance="@style/event_headline_style"
-                android:gravity="center_vertical"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:layout_marginStart="8dp"
-                android:text="@string/placeholder"
-                android:textAppearance="@style/event_data_text_style"
-                android:gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:text="@string/event_headline_languages"
-                android:textAppearance="@style/event_headline_style"
-                android:gravity="center_vertical"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:text="@string/event_headline_place"
-                android:textAppearance="@style/event_headline_style"
-                android:gravity="center_vertical"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:layout_marginStart="8dp"
-                android:text="@string/placeholder"
-                android:textAppearance="@style/event_data_text_style"
-                android:gravity="center_vertical"/>
-        </LinearLayout>
-
-        <!--TODO:CHANGE IMAGEVIEW TO MAP-->
-        <ImageView
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:minHeight="178dp"
-            android:layout_height="0dp"
+            android:orientation="vertical"
             android:layout_margin="16dp"
-            android:src="@drawable/map_placeholder"
-            android:elevation="10dp"
-            android:layout_weight="1"
-            />
 
-        <Button
-            android:id="@+id/rectangle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_drawable_blue"
+            app:layout_constraintTop_toBottomOf="@id/include_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            android:fontFamily="@font/montserrat"
-            android:text="@string/event_button_join"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:text="@string/event_headline_members"
+                    android:textAppearance="@style/event_headline_style"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
 
-            />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:text="@string/event_headline_date_time"
+                    android:textAppearance="@style/event_headline_style"
+                    android:gravity="center_vertical"/>
 
-</android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:layout_marginStart="8dp"
+                    android:text="@string/placeholder"
+                    android:textAppearance="@style/event_data_text_style"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:text="@string/event_headline_languages"
+                    android:textAppearance="@style/event_headline_style"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:text="@string/event_headline_place"
+                    android:textAppearance="@style/event_headline_style"
+                    android:gravity="center_vertical"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:layout_marginStart="8dp"
+                    android:text="@string/placeholder"
+                    android:textAppearance="@style/event_data_text_style"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+
+            <!--TODO:CHANGE IMAGEVIEW TO MAP-->
+            <!--<com.google.android.gms.maps.MapView-->
+                <!--android:id="@+id/map"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:minHeight="178dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:layout_marginBottom="16dp"-->
+
+                <!--android:src="@drawable/map_placeholder"-->
+                <!--android:elevation="10dp"-->
+                <!--android:layout_weight="1"/>-->
+            <ImageView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:minHeight="178dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+
+                android:src="@drawable/map_placeholder"
+                android:elevation="10dp"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/rectangle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_drawable_blue"
+
+                android:fontFamily="@font/montserrat"
+                android:text="@string/event_button_join"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+
+                />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

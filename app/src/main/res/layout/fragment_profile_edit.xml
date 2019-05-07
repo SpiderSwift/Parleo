@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <EditText
+        android:id="@+id/et_profile_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/et_one_line_rounded"
+
+        android:ems="10"
+        android:hint="@string/profile_edit_name_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/et_profile_age"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+
+    <Button
+        android:id="@+id/et_profile_age"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/et_one_line_rounded"
+        android:ems="10"
+        android:hint="@string/profile_edit_age_hint"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+        app:layout_constraintEnd_toEndOf="@+id/et_profile_name"
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar" />
+
+
+    <!--TODO В КОДЕ ПОВЕСИТЬ СЮДА ШТУКУ ЧТО БУДЕТ ПОЗВОЛЯТЬ СКРОЛЛ -->
+    <EditText
+        android:id="@+id/et_profile_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="40dp"
+        android:background="@drawable/et_multiline_rounded"
+        android:gravity="top"
+        android:hint="@string/profile_edit_description_hint"
+        android:inputType="textMultiLine"
+
+
+        android:lines="7"
+        android:overScrollMode="always"
+
+        android:paddingStart="15dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp"
+
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+
+        android:textAlignment="gravity"
+
+        android:textColor="#80000000"
+        android:textColorHint="#80000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_profile_age"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/iv_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+
+    <Button
+        android:id="@+id/btn_your_languages"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/btn_drawable_grey"
+        android:text="@string/profile_edit_your_languages"
+        app:layout_constraintEnd_toEndOf="@+id/et_profile_description"
+        app:layout_constraintStart_toStartOf="@+id/et_profile_description"
+        app:layout_constraintTop_toBottomOf="@+id/et_profile_description" />
+
+    <Button
+        android:id="@+id/btn_your_interests"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/profile_edit_your_interests"
+        android:background="@drawable/btn_drawable_grey"
+        app:layout_constraintEnd_toEndOf="@+id/btn_your_languages"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_your_languages"
+        app:layout_constraintTop_toBottomOf="@+id/btn_your_languages" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_drawable_blue"
+        android:text="@string/save"
+
+        app:layout_constraintEnd_toEndOf="@+id/btn_your_interests"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_your_interests"
+        app:layout_constraintTop_toBottomOf="@+id/btn_your_interests" />
+</androidx.constraintlayout.widget.ConstraintLayout>
