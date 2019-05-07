@@ -11,7 +11,6 @@ public class Event implements Serializable {
     String description;
 
     String image;
-    //birthdate
     int maxParticipants;
     float latitude;
     float longitude;

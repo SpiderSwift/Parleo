@@ -1,13 +1,14 @@
 package com.leathersoft.parleo.network.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class UserUpdateModel implements Serializable {
 
     String name;
     String about;
-    String birthdate;
+    Date birthdate;
     boolean gender;
 
 
@@ -39,11 +40,11 @@ public class UserUpdateModel implements Serializable {
         this.about = about;
     }
 
-    public String getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 

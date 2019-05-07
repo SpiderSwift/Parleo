@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.network.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class CreateEventModel {
@@ -11,8 +12,9 @@ public class CreateEventModel {
     float longitude = 35f;
     boolean isFinished = false;
 
-    String startTime = "2019-04-28T21:25:41.746Z";
-    String endDate =  "2019-04-28T21:25:41.746Z";
+    //TODO
+    Date startTime;
+    Date endDate;
 
     String creatorId = "4377a0f9-f4d8-45b0-b263-0149dda2d634";
 
@@ -45,11 +47,11 @@ public class CreateEventModel {
         isFinished = finished;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
