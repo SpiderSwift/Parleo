@@ -12,9 +12,13 @@ import android.widget.PopupWindow;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.adapter.InterestsAdapter;
 import com.leathersoft.parleo.messaging.Interest;
+import com.leathersoft.parleo.network.SingletonRetrofitClient;
+import com.leathersoft.parleo.network.model.Lang;
+import com.leathersoft.parleo.network.model.Language;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +28,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegistrationContinueActivity extends AppCompatActivity {
 
@@ -40,7 +47,6 @@ public class RegistrationContinueActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //MenuInflater inflater = getMenuInflater();
 
-
         View viewLanguages = getLayoutInflater().inflate(R.layout.window_list, null);
         windowLanguages = new PopupWindow(viewLanguages, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         //windowLanguages.setElevation(1000);
@@ -52,18 +58,40 @@ public class RegistrationContinueActivity extends AppCompatActivity {
                 windowLanguages.dismiss();
             }
         });
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         InterestsAdapter adapter = new InterestsAdapter();
+
+        SingletonRetrofitClient.getInsance().getApi().getLanguages()
+                .enqueue(new Callback<List<Lang>>() {
+                    @Override
+                    public void onResponse(Call<List<Lang>> call, Response<List<Lang>> response) {
+                        List<Lang> languages = response.body();
+                        List<Interest> interests = new ArrayList<>();
+                        for (Lang language : languages) {
+                            Locale locale = new Locale(language.getId());
+                            interests.add(new Interest(locale.getDisplayName(), getDrawable(R.drawable.ic_english)));
+                        }
+                        adapter.setInterests(interests);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Lang>> call, Throwable t) {
+
+                    }
+                });
+
+
         recyclerView.setAdapter(adapter);
-        List<Interest> languages = new ArrayList<>();
-        languages.add(new Interest("English", getDrawable(R.drawable.ic_english)));
-        languages.add(new Interest("Russian", getDrawable(R.drawable.ic_russian)));
-        languages.add(new Interest("Spanish", getDrawable(R.drawable.ic_spanish)));
-        languages.add(new Interest("English", getDrawable(R.drawable.ic_english)));
-        languages.add(new Interest("Russian", getDrawable(R.drawable.ic_russian)));
-        languages.add(new Interest("Spanish", getDrawable(R.drawable.ic_spanish)));
-        adapter.setInterests(languages);
+//        List<Interest> languages = new ArrayList<>();
+//        languages.add(new Interest("English", getDrawable(R.drawable.ic_english)));
+//        languages.add(new Interest("Russian", getDrawable(R.drawable.ic_russian)));
+//        languages.add(new Interest("Spanish", getDrawable(R.drawable.ic_spanish)));
+//        languages.add(new Interest("English", getDrawable(R.drawable.ic_english)));
+//        languages.add(new Interest("Russian", getDrawable(R.drawable.ic_russian)));
+//        languages.add(new Interest("Spanish", getDrawable(R.drawable.ic_spanish)));
+
         Button b = viewLanguages.findViewById(R.id.btn_done);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,8 +174,8 @@ public class RegistrationContinueActivity extends AppCompatActivity {
         windowInterests.dismiss();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        finish();
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        finish();
+//    }
 }

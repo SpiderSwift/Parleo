@@ -52,10 +52,13 @@ public class MyEventListFragment extends BaseFragment {
                                     response.body()
                                             .getAttendingEvents();
 
-                            for(User.AttendingEvent event:attendingEvents){
-                                Log.d("EVENT",event.toString());
-                                getEvent(event.getId(),eventPageAdapter);
+                            if (attendingEvents != null) {
+                                for(User.AttendingEvent event:attendingEvents){
+                                    Log.d("EVENT",event.toString());
+                                    getEvent(event.getId(),eventPageAdapter);
+                                }
                             }
+
                         }
                     }
 
