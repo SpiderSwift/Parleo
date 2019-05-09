@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.network.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class CreateEventModel {
@@ -11,14 +12,35 @@ public class CreateEventModel {
     float longitude = 35f;
     boolean isFinished = false;
 
-    String startTime = "2019-04-28T21:25:41.746Z";
-    String endDate =  "2019-04-28T21:25:41.746Z";
+    //TODO
+    Date startTime;
+    Date endDate;
 
     String creatorId = "4377a0f9-f4d8-45b0-b263-0149dda2d634";
 
     String languageCode = "aa";
 
     public CreateEventModel() {
+        startTime = new Date();
+        endDate = new Date();
+    }
+
+    public CreateEventModel(String name,
+                            String description,
+                            int maxParticipants,
+                            float latitude,
+                            float longitude,
+                            Date startTime,
+                            Date endDate,
+                            String languageCode) {
+        this.name = name;
+        this.description = description;
+        this.maxParticipants = maxParticipants;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.languageCode = languageCode;
     }
 
     public void setName(String name) {
@@ -45,11 +67,11 @@ public class CreateEventModel {
         isFinished = finished;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -59,5 +81,45 @@ public class CreateEventModel {
 
     public void setLanguageCode(String languageCode) {
         this.languageCode = languageCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getMaxParticipants() {
+        return maxParticipants;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public String getLanguageCode() {
+        return languageCode;
     }
 }

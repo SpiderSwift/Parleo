@@ -1,6 +1,7 @@
 package com.leathersoft.parleo.network.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,12 +12,14 @@ public class Event implements Serializable {
     String description;
 
     String image;
-    //birthdate
     int maxParticipants;
     float latitude;
     float longitude;
-
     boolean isFinished;
+
+    Date startTime;
+    Date endDate;
+
     int distanceFromCurrentUser;
     String email;
 
@@ -108,6 +111,22 @@ public class Event implements Serializable {
 
     public void setFinished(boolean finished) {
         isFinished = finished;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public int getDistanceFromCurrentUser() {

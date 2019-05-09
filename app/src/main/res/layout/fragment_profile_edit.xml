@@ -34,7 +34,7 @@
         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
         app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
 
-    <EditText
+    <Button
         android:id="@+id/et_profile_age"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:background="@drawable/et_one_line_rounded"
         android:ems="10"
         android:hint="@string/profile_edit_age_hint"
-        android:inputType="numberSigned"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
         app:layout_constraintEnd_toEndOf="@+id/et_profile_name"
         app:layout_constraintStart_toEndOf="@+id/iv_avatar" />
