@@ -12,6 +12,7 @@ import com.leathersoft.parleo.fragment.NotificationFragment;
 import com.leathersoft.parleo.fragment.PushFragmentInterface;
 import com.leathersoft.parleo.fragment.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.users.UserFragment;
+import com.leathersoft.parleo.util.StorageUtil;
 import com.ncapdevi.fragnav.FragNavController;
 
 import org.jetbrains.annotations.NotNull;
@@ -139,7 +140,8 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
     public void onBackPressed() {
 
         if(mFragNavController.isRootFragment() || !mFragNavController.popFragment()){
-
+            StorageUtil.save(this, "password", "");
+            StorageUtil.save(this, "login", "");
             super.onBackPressed();
         }
     }

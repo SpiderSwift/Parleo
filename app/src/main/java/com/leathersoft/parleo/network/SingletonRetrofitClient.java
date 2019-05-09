@@ -14,10 +14,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SingletonRetrofitClient {
 
-    private static final String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZsYWRwZXRydXNoa2V2aWNoMTk5OUBnbWFpbC5jb20iLCJqdGkiOiI0Mzc3YTBmOS1mNGQ4LTQ1YjAtYjI2My0wMTQ5ZGRhMmQ2MzQiLCJleHAiOjE1NTg5NjEzMDN9.jGMyVdzrDuAH8HAaktz7E1WIeiGy8OviJlvYIGDcr3g";
+    private static String TOKEN = "";
     private static final String BASE_URL = "https://awesomeparleobackend.azurewebsites.net/api/";
     private static SingletonRetrofitClient mInstance;
     private Retrofit retrofit;
+
+    public static void setToken(String token) {
+        TOKEN = token;
+    }
 
     private SingletonRetrofitClient(){
 

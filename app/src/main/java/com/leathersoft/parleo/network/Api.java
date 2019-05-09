@@ -4,7 +4,12 @@ import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.CreateEventModel;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.EventResponse;
+import com.leathersoft.parleo.network.model.Lang;
 import com.leathersoft.parleo.network.model.Language;
+import com.leathersoft.parleo.network.model.LanguageResponse;
+import com.leathersoft.parleo.network.model.LoginResponse;
+import com.leathersoft.parleo.network.model.LoginViewModel;
+import com.leathersoft.parleo.network.model.RegisterViewModel;
 import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.network.model.UserUpdateModel;
 
@@ -24,7 +29,18 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    @GET("Account")
+    @POST("Accounts/register")
+    Call<ResponseBody> register(@Body RegisterViewModel registerViewModel);
+
+    @POST("Accounts/login")
+    Call<LoginResponse> login(@Body LoginViewModel loginViewModel);
+
+
+
+    @GET("Utilities/languages")
+    Call<List<Lang>> getLanguages();
+
+    @GET("Users")
     Call<AccountResponse> getUsers(
             @Query("MinAge") Integer minAge,
             @Query("MaxAge") Integer maxAge,
@@ -36,7 +52,7 @@ public interface Api {
             @Query("PageSize") Integer pageSize
     );
 
-    @PUT("Account/{userId}")
+    @PUT("Users/{userId}")
     Call<AccountResponse> updateUser(
             @Path("userId") String userId,
             @Body UserUpdateModel userUpdateModel
@@ -44,12 +60,12 @@ public interface Api {
 
 
 
-    @GET("Account/me")
+    @GET("Users/current")
     Call<User> getMe();
 
 
 
-    @GET("Event")
+    @GET("Events")
     Call<EventResponse> getEvents(
             @Query("MinNumberOfParticipants") Integer minNumberOfParticipants,
             @Query("MaxNumberOfParticipants") Integer maxNumberOfParticipants,
@@ -61,16 +77,16 @@ public interface Api {
             @Query("PageSize") Integer pageSize
     );
 
-    @GET("Event/{eventId}")
+    @GET("Events/{eventId}")
     Call<Event> getEvent(
             @Path("eventId") String eventId
     );
 
-    @POST("Event/create")
+    @POST("Events/create")
     Call<Event> postEvent(@Body CreateEventModel createEventModel);
 
     @Multipart
-    @PUT("Event/{eventId}/image")
+    @PUT("Events/{eventId}/image")
     Call<ResponseBody> putImage(@Path("eventId") String eventId,
                                 @Part MultipartBody.Part filePart);
 
