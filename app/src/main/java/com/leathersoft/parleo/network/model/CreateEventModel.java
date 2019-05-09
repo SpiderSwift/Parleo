@@ -21,6 +21,26 @@ public class CreateEventModel {
     String languageCode = "aa";
 
     public CreateEventModel() {
+        startTime = new Date();
+        endDate = new Date();
+    }
+
+    public CreateEventModel(String name,
+                            String description,
+                            int maxParticipants,
+                            float latitude,
+                            float longitude,
+                            Date startTime,
+                            Date endDate,
+                            String languageCode) {
+        this.name = name;
+        this.description = description;
+        this.maxParticipants = maxParticipants;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.languageCode = languageCode;
     }
 
     public void setName(String name) {
@@ -61,5 +81,45 @@ public class CreateEventModel {
 
     public void setLanguageCode(String languageCode) {
         this.languageCode = languageCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getMaxParticipants() {
+        return maxParticipants;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public String getLanguageCode() {
+        return languageCode;
     }
 }
