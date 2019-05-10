@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -34,6 +35,7 @@ import com.leathersoft.parleo.util.DateUtil;
 import com.leathersoft.parleo.util.ImageUtil;
 import com.leathersoft.parleo.util.LocaleUtil;
 import com.leathersoft.parleo.util.TouchUtils;
+import com.schibstedspain.leku.LocationPickerActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,6 +62,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.schibstedspain.leku.LocationPickerActivityKt.ADDRESS;
+import static com.schibstedspain.leku.LocationPickerActivityKt.LATITUDE;
+import static com.schibstedspain.leku.LocationPickerActivityKt.LOCATION_ADDRESS;
+import static com.schibstedspain.leku.LocationPickerActivityKt.LONGITUDE;
+import static com.schibstedspain.leku.LocationPickerActivityKt.TIME_ZONE_DISPLAY_NAME;
+import static com.schibstedspain.leku.LocationPickerActivityKt.TIME_ZONE_ID;
+import static com.schibstedspain.leku.LocationPickerActivityKt.TRANSITION_BUNDLE;
+import static com.schibstedspain.leku.LocationPickerActivityKt.ZIPCODE;
+
 public class EventCreateFragment extends BaseFragment {
 
     private final static String DATE_FORMAT = "EEE, d MMM yyyy";
@@ -72,6 +83,7 @@ public class EventCreateFragment extends BaseFragment {
 
 
     private static final int GET_PHOTO_REQUEST_CODE = 200;
+    private static final int GET_LOCATION_REQUEST_CODE = 300;
 
     private Uri mImageUri;
 
@@ -106,6 +118,17 @@ public class EventCreateFragment extends BaseFragment {
         i.addCategory(Intent.CATEGORY_OPENABLE);
         i.setType("image/*");
         startActivityForResult(i, GET_PHOTO_REQUEST_CODE);
+    }
+
+    @BindView(R.id.add_location_button)
+    TextView mTvLocation;
+
+    @OnClick(R.id.add_location_button)
+    public void getLocation(){
+        Intent intent = new LocationPickerActivity.Builder()
+                .build(getContext());
+
+        startActivityForResult(intent, GET_LOCATION_REQUEST_CODE);
     }
 
     @Override
@@ -323,45 +346,38 @@ public class EventCreateFragment extends BaseFragment {
         if(requestCode == GET_PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK){
             mImageUri = data.getData();
             ImageUtil.setImage(mImageUri.toString(),mEventImage,R.color.placeholderGray);
-
-
-            String path = mImageUri.getPath();
-            String path2 = mImageUri.toString();
-
-            try {
-
-
-                ParcelFileDescriptor parcelFileDescriptor =
-                        getActivity().getContentResolver().openFileDescriptor(mImageUri, "r");
-                FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-                Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-                parcelFileDescriptor.close();
-            }catch (Exception e){
-
-            }
-
-            File file = new File(path);
-            if(!file.exists()){
-                return;
-            }
-
-
-            try {
-
-                InputStream stream = getActivity().getContentResolver().openInputStream(mImageUri);
-
-//                pass it like this
-//                RequestBody requestFile =
-//                        RequestBody.create(MediaType.parse("multipart/form-data"), stream);
+//            String path = mImageUri.getPath();
 //
-//                 MultipartBody.Part is used to send also the actual file name
-//                MultipartBody.Part body =
-//                        MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+//            try {
+//                ParcelFileDescriptor parcelFileDescriptor =
+//                        getActivity().getContentResolver().openFileDescriptor(mImageUri, "r");
+//                FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+//                Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+//                parcelFileDescriptor.close();
+//            }catch (Exception e){
+//
+//            }
+//
+//            File file = new File(path);
+//            if(!file.exists()){
+//                return;
+//            }
+//
+        }
 
-            }catch (FileNotFoundException e){
+        if(requestCode == GET_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK){
 
-            }
+            final String ADDRESS = "ADDRESS";
+            Double latitude = data.getDoubleExtra(LATITUDE, 0.0);
+            Log.d(ADDRESS, latitude.toString());
+            Double longitude = data.getDoubleExtra(LONGITUDE, 0.0);
+            Log.d(ADDRESS, longitude.toString());
+            String address = data.getStringExtra(LOCATION_ADDRESS);
+            Log.d(ADDRESS, address);
+            String postalcode = data.getStringExtra(ZIPCODE);
+            Log.d(ADDRESS, postalcode);
 
+            mTvLocation.setText(address);
 
         }
 
