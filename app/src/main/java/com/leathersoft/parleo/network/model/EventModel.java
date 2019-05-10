@@ -3,36 +3,35 @@ package com.leathersoft.parleo.network.model;
 import java.util.Date;
 import java.util.List;
 
-public class CreateEventModel {
+public class EventModel {
 
     String name;
     String description;
     int maxParticipants = 10;
-    float latitude  = 22f;
-    float longitude = 35f;
+    float latitude;
+    float longitude;
     boolean isFinished = false;
 
     //TODO
     Date startTime;
     Date endDate;
 
-    String creatorId = "4377a0f9-f4d8-45b0-b263-0149dda2d634";
-
     String languageCode = "aa";
 
-    public CreateEventModel() {
+    public EventModel() {
         startTime = new Date();
         endDate = new Date();
     }
 
-    public CreateEventModel(String name,
-                            String description,
-                            int maxParticipants,
-                            float latitude,
-                            float longitude,
-                            Date startTime,
-                            Date endDate,
-                            String languageCode) {
+
+    public EventModel(String name,
+                      String description,
+                      int maxParticipants,
+                      float latitude,
+                      float longitude,
+                      Date startTime,
+                      Date endDate,
+                      String languageCode) {
         this.name = name;
         this.description = description;
         this.maxParticipants = maxParticipants;
@@ -75,9 +74,6 @@ public class CreateEventModel {
         this.endDate = endDate;
     }
 
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId;
-    }
 
     public void setLanguageCode(String languageCode) {
         this.languageCode = languageCode;
@@ -113,10 +109,6 @@ public class CreateEventModel {
 
     public Date getEndDate() {
         return endDate;
-    }
-
-    public String getCreatorId() {
-        return creatorId;
     }
 
     public String getLanguageCode() {

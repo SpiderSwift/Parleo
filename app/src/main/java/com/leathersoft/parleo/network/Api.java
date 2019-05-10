@@ -2,13 +2,12 @@ package com.leathersoft.parleo.network;
 
 import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.ActivateResponse;
-import com.leathersoft.parleo.network.model.CreateEventModel;
+import com.leathersoft.parleo.network.model.EventModel;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.EventResponse;
 import com.leathersoft.parleo.network.model.Hobby;
 import com.leathersoft.parleo.network.model.Lang;
 import com.leathersoft.parleo.network.model.Language;
-import com.leathersoft.parleo.network.model.LanguageResponse;
 import com.leathersoft.parleo.network.model.LoginResponse;
 import com.leathersoft.parleo.network.model.LoginViewModel;
 import com.leathersoft.parleo.network.model.RegisterViewModel;
@@ -87,8 +86,9 @@ public interface Api {
             @Path("eventId") String eventId
     );
 
-    @POST("Events/create")
-    Call<Event> postEvent(@Body CreateEventModel createEventModel);
+    //v1.2
+    @POST("Events")
+    Call<Event> postEvent(@Body EventModel eventModel);
 
     @Multipart
     @PUT("Events/{eventId}/image")
