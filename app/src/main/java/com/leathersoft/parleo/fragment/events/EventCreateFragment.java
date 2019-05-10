@@ -1,15 +1,12 @@
 package com.leathersoft.parleo.fragment.events;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -24,17 +22,21 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.BaseFragment;
-import com.leathersoft.parleo.fragment.FilterEventFragment;
+import com.leathersoft.parleo.listener.ButtonOnDateSetListener;
+import com.leathersoft.parleo.listener.ButtonOnTimeSetListener;
+import com.leathersoft.parleo.listener.DateButtonOnClickListener;
+import com.leathersoft.parleo.listener.TimeButtonOnClickListener;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.CreateEventModel;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.util.ActionBarUtil;
+import com.leathersoft.parleo.util.DateUtil;
 import com.leathersoft.parleo.util.ImageUtil;
+import com.leathersoft.parleo.util.LocaleUtil;
 import com.leathersoft.parleo.util.TouchUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.Fragment;
 
 import org.json.JSONObject;
@@ -43,6 +45,9 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,6 +62,15 @@ import retrofit2.Response;
 
 public class EventCreateFragment extends BaseFragment {
 
+    private final static String DATE_FORMAT = "EEE, d MMM yyyy";
+    private final static String TIME_FORMAT = "HH:mm";
+
+    private CreateEventModel mCreateEventModel;
+
+    private SimpleDateFormat mDateFormat;
+    private SimpleDateFormat mTimeFormat;
+
+
     private static final int GET_PHOTO_REQUEST_CODE = 200;
 
     private Uri mImageUri;
@@ -69,6 +83,18 @@ public class EventCreateFragment extends BaseFragment {
 
     @BindView(R.id.te_event_descriprion)
     EditText mEventDescription;
+
+    @BindView(R.id.btn_start_date_picker)
+    Button mBtnStartDatePicker;
+
+    @BindView(R.id.btn_start_time_picker)
+    Button mBtnStartTimePicker;
+
+    @BindView(R.id.btn_end_date_picker)
+    Button mBtnEndDatePicker;
+
+    @BindView(R.id.btn_end_time_picker)
+    Button mBtnEndTimePicker;
 
     @OnClick(R.id.iv_photo)
     public void getImage(){
@@ -86,6 +112,7 @@ public class EventCreateFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mCreateEventModel = new CreateEventModel();
     }
 
     @Override
@@ -96,12 +123,8 @@ public class EventCreateFragment extends BaseFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        Fragment fragment;
         switch (item.getItemId()) {
             case R.id.menu_save:
-//                fragment = EventCreateFragment.newInstance();
-//                mPushFragmentInterface.push(fragment);
                 if(canCreateEvent()){
                     createEvent();
                 }
@@ -116,11 +139,11 @@ public class EventCreateFragment extends BaseFragment {
             return false;
         }
 
-        if(mEventName.getText().toString().isEmpty()){
+        if(mEventName.getText().toString().trim().isEmpty()){
             return false;
         }
 
-        if(mEventDescription.getText().toString().isEmpty()){
+        if(mEventDescription.getText().toString().trim().isEmpty()){
             return false;
         }
 
@@ -131,14 +154,41 @@ public class EventCreateFragment extends BaseFragment {
         String eventName = mEventName.getText().toString();
         String eventDescription = mEventDescription.getText().toString();
 
-        CreateEventModel createEventModel = new CreateEventModel();
+        mCreateEventModel.setName(eventName);
+        mCreateEventModel.setDescription(eventDescription);
 
-        createEventModel.setName(eventName);
-        createEventModel.setDescription(eventDescription);
+        Date startDate = null;
+        Date endDate = null;
+        try {
+            startDate = DateUtil.getDateFromStringDateAndStringTime(
+                    mBtnStartDatePicker.getText().toString(),
+                    mBtnStartTimePicker.getText().toString(),
+                    mDateFormat,
+                    mTimeFormat
+            );
+
+            endDate = DateUtil.getDateFromStringDateAndStringTime(
+                    mBtnEndDatePicker.getText().toString(),
+                    mBtnEndTimePicker.getText().toString(),
+                    mDateFormat,
+                    mTimeFormat
+            );
+        }catch (ParseException e){
+            Snackbar.make(getView(),getResources().getString(R.string.snack_bar_something_wrong),Snackbar.LENGTH_LONG);
+            return;
+        }finally {
+            mCreateEventModel.setStartTime(startDate);
+            mCreateEventModel.setEndDate(endDate);
+        }
+
+
+
+//        createEventModel.setName(eventName);
+//        createEventModel.setDescription(eventDescription);
 
         SingletonRetrofitClient.getInsance()
                 .getApi()
-                .postEvent(createEventModel)
+                .postEvent(mCreateEventModel)
                 .enqueue(new Callback<Event>() {
                     @Override
                     public void onResponse(Call<Event> call, Response<Event> response) {
@@ -170,17 +220,6 @@ public class EventCreateFragment extends BaseFragment {
 
     private void sendImage(String eventId){
 
-
-//        String result;
-//        Cursor cursor = getContext().getContentResolver().query(mImageUri, null, null, null, null);
-//        if (cursor == null) { // Source is Dropbox or other similar local file path
-//            result = mImageUri.getPath();
-//        } else {
-//            cursor.moveToFirst();
-//            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-//            result = cursor.getString(idx);
-//            cursor.close();
-//        }
 
         File file = new File(mImageUri.toString());
         if(!file.exists()){
@@ -225,15 +264,50 @@ public class EventCreateFragment extends BaseFragment {
                 });
     }
 
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_event_create,container,false);
         ButterKnife.bind(this,v);
         TouchUtils.setEditTextMultilineScrolling(mEventDescription);
+
+        mDateFormat = new SimpleDateFormat(DATE_FORMAT, LocaleUtil.getCurrentLocale(getContext()));
+        mTimeFormat = new SimpleDateFormat(TIME_FORMAT, LocaleUtil.getCurrentLocale(getContext()));
+        initDataButtons(mDateFormat,mTimeFormat,mCreateEventModel.getStartTime());
+
         return v;
+    }
+
+    private void initDataButtons(SimpleDateFormat dateFormat, SimpleDateFormat timeFormat, Date date){
+        mBtnStartDatePicker.setText(dateFormat.format(date));
+        mBtnEndDatePicker.setText((dateFormat.format(date)));
+
+        mBtnStartTimePicker.setText(timeFormat.format(date));
+        mBtnEndTimePicker.setText(timeFormat.format(date));
+
+        mBtnStartDatePicker.setOnClickListener(
+                new DateButtonOnClickListener(
+                        new ButtonOnDateSetListener(mBtnStartDatePicker,dateFormat)
+                )
+        );
+
+        mBtnEndDatePicker.setOnClickListener(
+                new DateButtonOnClickListener(
+                        new ButtonOnDateSetListener(mBtnEndDatePicker,dateFormat)
+                )
+        );
+
+        mBtnStartTimePicker.setOnClickListener(
+                new TimeButtonOnClickListener(
+                        new ButtonOnTimeSetListener(mBtnStartTimePicker,timeFormat)
+                )
+        );
+
+        mBtnEndTimePicker.setOnClickListener(
+                new TimeButtonOnClickListener(
+                        new ButtonOnTimeSetListener(mBtnEndTimePicker,timeFormat)
+                )
+        );
     }
 
     @Override
@@ -253,14 +327,6 @@ public class EventCreateFragment extends BaseFragment {
 
             String path = mImageUri.getPath();
             String path2 = mImageUri.toString();
-
-
-//            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-//            Cursor cursor = getActivity().getContentResolver().query(mImageUri, filePathColumn, null, null, null);
-//            cursor.moveToFirst();
-//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//            String filePath = cursor.getString(columnIndex);
-//            cursor.close();
 
             try {
 

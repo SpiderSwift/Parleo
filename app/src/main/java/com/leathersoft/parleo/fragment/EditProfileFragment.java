@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.listener.DateButtonOnClickListener;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.User;
@@ -62,31 +63,6 @@ public class EditProfileFragment extends BaseFragment {
 
     @BindView(R.id.btn_save)
     Button mBtnSave;
-
-    @OnClick(R.id.et_profile_age)
-    public void getBirthDateDialog(){
-        if(getContext() == null){
-            return;
-        }
-
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-        calendar.setTime(mUser.getBirthdate());
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                getContext(),
-                this::onDateSet,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-        );
-
-        datePickerDialog.show();
-    }
-
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        mUser.setBirthdate(DateUtil.getDateFromDatePicker(datePicker));
-        setInfoToViews();
-    }
 
     @OnClick(R.id.btn_save)
     public void save(){
@@ -149,6 +125,15 @@ public class EditProfileFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile_edit,container,false);
         ButterKnife.bind(this,v);
+        mEtProfileAge.setOnClickListener(new DateButtonOnClickListener(
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        mUser.setBirthdate(DateUtil.getDateFromDatePicker(datePicker));
+                        setInfoToViews();
+                    }
+                }
+        ));
         return v;
     }
 
