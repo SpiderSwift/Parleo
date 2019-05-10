@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.RegisterViewModel;
+import com.leathersoft.parleo.util.StorageUtil;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,8 @@ public class RegistrationStartActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             Snackbar.make(editEmail,"OK",Snackbar.LENGTH_LONG).show();
                             Log.d("TAG", response.toString());
+                            StorageUtil.save(RegistrationStartActivity.this,"email", editEmail.getText().toString());
+                            StorageUtil.save(RegistrationStartActivity.this,"password", editPassword.getText().toString());
                             onBackPressed();
                         } else {
                             Snackbar.make(editEmail,"failed",Snackbar.LENGTH_LONG).show();

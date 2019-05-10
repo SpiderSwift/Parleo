@@ -13,15 +13,19 @@ public class UserUpdateModel implements Serializable {
 
 
     List<Language> languages;
-    List<Hobby> hobbies;
+    List<String> hobbies;
 
-    public UserUpdateModel(User user) {
-        this.name = user.getName();
-        this.about = user.getAbout();
-        this.birthdate = user.getBirthdate();
-        this.gender = user.isGender();
-        this.languages = user.getLanguages();
-        this.hobbies = user.getHobbies();
+//    public UserUpdateModel(User user) {
+//        this.name = user.getName();
+//        this.about = user.getAbout();
+//        this.birthdate = user.getBirthdate();
+//        this.gender = user.isGender();
+//        this.languages = user.getLanguages();
+//        this.hobbies = user.getHobbies();
+//    }
+
+
+    public UserUpdateModel() {
     }
 
     public String getName() {
@@ -64,11 +68,11 @@ public class UserUpdateModel implements Serializable {
         this.languages = languages;
     }
 
-    public List<Hobby> getHobbies() {
+    public List<String> getHobbies() {
         return hobbies;
     }
 
-    public void setHobbies(List<Hobby> hobbies) {
+    public void setHobbies(List<String> hobbies) {
         this.hobbies = hobbies;
     }
 }

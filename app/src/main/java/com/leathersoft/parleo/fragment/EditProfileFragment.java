@@ -98,26 +98,26 @@ public class EditProfileFragment extends BaseFragment {
         mUser.setAbout(mDescription.getText().toString());
         mUser.setName(mEtProfileName.getText().toString());
 
-        UserUpdateModel model = new UserUpdateModel(mUser);
+        //UserUpdateModel model = new UserUpdateModel(mUser);
 
-        SingletonRetrofitClient.getInsance()
-                .getApi()
-                .updateUser(mUser.getId(),model)
-                .enqueue(new Callback<AccountResponse>() {
-                    @Override
-                    public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
-                        if(response.isSuccessful()){
-                            Snackbar.make(getView(),getResources().getString(R.string.snack_bar_ok),Snackbar.LENGTH_LONG).show();
-                            mReloadDataInterface.reloadData();
-                            getActivity().onBackPressed();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<AccountResponse> call, Throwable t) {
-                        Snackbar.make(getView(),getResources().getString(R.string.snack_bar_something_wrong),Snackbar.LENGTH_LONG).show();
-                    }
-                });
+//        SingletonRetrofitClient.getInsance()
+//                .getApi()
+//                .updateUser(mUser.getId(),model)
+//                .enqueue(new Callback<AccountResponse>() {
+//                    @Override
+//                    public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
+//                        if(response.isSuccessful()){
+//                            Snackbar.make(getView(),getResources().getString(R.string.snack_bar_ok),Snackbar.LENGTH_LONG).show();
+//                            mReloadDataInterface.reloadData();
+//                            getActivity().onBackPressed();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<AccountResponse> call, Throwable t) {
+//                        Snackbar.make(getView(),getResources().getString(R.string.snack_bar_something_wrong),Snackbar.LENGTH_LONG).show();
+//                    }
+//                });
     }
 
     @Override

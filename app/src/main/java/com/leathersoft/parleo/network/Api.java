@@ -1,9 +1,11 @@
 package com.leathersoft.parleo.network;
 
 import com.leathersoft.parleo.network.model.AccountResponse;
+import com.leathersoft.parleo.network.model.ActivateResponse;
 import com.leathersoft.parleo.network.model.CreateEventModel;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.EventResponse;
+import com.leathersoft.parleo.network.model.Hobby;
 import com.leathersoft.parleo.network.model.Lang;
 import com.leathersoft.parleo.network.model.Language;
 import com.leathersoft.parleo.network.model.LanguageResponse;
@@ -36,9 +38,15 @@ public interface Api {
     Call<LoginResponse> login(@Body LoginViewModel loginViewModel);
 
 
+    @GET("Accounts/activate")
+    Call<ActivateResponse> activate(@Query("token") String token);
+
 
     @GET("Utilities/languages")
     Call<List<Lang>> getLanguages();
+
+    @GET("Utilities/hobbies")
+    Call<List<Hobby>> getHobbies();
 
     @GET("Users")
     Call<AccountResponse> getUsers(
@@ -52,11 +60,8 @@ public interface Api {
             @Query("PageSize") Integer pageSize
     );
 
-    @PUT("Users/{userId}")
-    Call<AccountResponse> updateUser(
-            @Path("userId") String userId,
-            @Body UserUpdateModel userUpdateModel
-            );
+    @PUT("Users/current")
+    Call<ResponseBody> updateUser(@Body UserUpdateModel userUpdateModel);
 
 
 
@@ -89,6 +94,14 @@ public interface Api {
     @PUT("Events/{eventId}/image")
     Call<ResponseBody> putImage(@Path("eventId") String eventId,
                                 @Part MultipartBody.Part filePart);
+
+
+    @Multipart
+    @PUT("Users/current/image")
+    Call<ResponseBody> putUserImage(@Part MultipartBody.Part filePart);
+
+
+
 
 
 //    {

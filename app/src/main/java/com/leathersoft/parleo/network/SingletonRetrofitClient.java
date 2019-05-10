@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SingletonRetrofitClient {
 
-    private static String TOKEN = "";
+    public static String TOKEN = "";
     private static final String BASE_URL = "https://awesomeparleobackend.azurewebsites.net/api/";
     private static SingletonRetrofitClient mInstance;
     private Retrofit retrofit;

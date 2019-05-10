@@ -76,12 +76,12 @@ public class FilterEventFragment extends BaseFragment {
         InterestsAdapter adapter = new InterestsAdapter();
         recyclerView.setAdapter(adapter);
         List<Interest> languages = new ArrayList<>();
-        languages.add(new Interest("English", getActivity().getDrawable(R.drawable.ic_english)));
-        languages.add(new Interest("Russian", getActivity().getDrawable(R.drawable.ic_russian)));
-        languages.add(new Interest("Spanish", getActivity().getDrawable(R.drawable.ic_spanish)));
-        languages.add(new Interest("English", getActivity().getDrawable(R.drawable.ic_english)));
-        languages.add(new Interest("Russian", getActivity().getDrawable(R.drawable.ic_russian)));
-        languages.add(new Interest("Spanish", getActivity().getDrawable(R.drawable.ic_spanish)));
+        languages.add(new Interest("English"));
+        languages.add(new Interest("Russian"));
+        languages.add(new Interest("Russian"));
+        languages.add(new Interest("Russian"));
+        languages.add(new Interest("Russian"));
+        languages.add(new Interest("Russian"));
         adapter.setInterests(languages);
 
         return v;

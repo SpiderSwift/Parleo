@@ -44,7 +44,7 @@ public class DialogImpl implements IDialog {
         }
     };
 
-    public static IMessage message = new IMessage() {
+    public IMessage message = new IMessage() {
         @Override
         public String getId() {
             return "gagga";
@@ -67,7 +67,7 @@ public class DialogImpl implements IDialog {
     };
 
 
-    public static IMessage message2 = new IMessage() {
+    public IMessage message2 = new IMessage() {
         @Override
         public String getId() {
             return "gagga";
@@ -121,7 +121,7 @@ public class DialogImpl implements IDialog {
 
     @Override
     public void setLastMessage(IMessage message) {
-        DialogImpl.message = message;
+        this.message = message;
     }
 
     @Override

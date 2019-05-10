@@ -12,12 +12,17 @@ import com.leathersoft.parleo.fragment.NotificationFragment;
 import com.leathersoft.parleo.fragment.PushFragmentInterface;
 import com.leathersoft.parleo.fragment.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.users.UserFragment;
+import com.leathersoft.parleo.network.SingletonRetrofitClient;
+import com.leathersoft.parleo.network.model.MessageViewModel;
 import com.leathersoft.parleo.util.StorageUtil;
+import com.microsoft.signalr.HubConnection;
+import com.microsoft.signalr.HubConnectionBuilder;
 import com.ncapdevi.fragnav.FragNavController;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -27,6 +32,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Completable;
+import okhttp3.internal.platform.Platform;
+import retrofit2.Retrofit;
 
 public class TabsActivity extends AppCompatActivity implements PushFragmentInterface {
 
@@ -98,6 +106,9 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
             }
         });
         mFragNavController.initialize(INDEX_EVENTS,savedInstanceState);
+
+
+
     }
 
     private List<Fragment> getFragmentList(){

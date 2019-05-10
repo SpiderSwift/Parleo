@@ -20,22 +20,41 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <!--<action android:name="android.intent.action.VIEW" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <!--<category android:name="android.intent.category.BROWSABLE" />-->
+                <!--<data android:scheme="https"-->
+                    <!--android:host="localhost:6800"-->
+                    <!--android:pathPrefix="/authenticate" />-->
+
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http"
+                    android:host="localhost"
+                    android:port="6800"
+                    android:pathPrefix="/"/>
             </intent-filter>
         </activity>
         <activity android:name=".activity.auth.LoginActivity" />
         <activity android:name=".activity.auth.RegistrationFinishActivity" />
         <activity android:name=".activity.auth.RegistrationContinueActivity">
 
-            <intent-filter android:label="@string/chats">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http"
-                    android:host="localhost:6800"
-                    android:pathPrefix="/" />
-            </intent-filter>
+            <!--<intent-filter android:label="@string/chats">-->
+                <!---->
+            <!--</intent-filter>-->
 
         </activity>
+
+
+        <activity android:name=".activity.LanguageWindowActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+
+        <activity android:name=".activity.InterestsWindowActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".activity.auth.RegistrationStartActivity" />
         <activity android:name=".activity.auth.MainActivity" />
 

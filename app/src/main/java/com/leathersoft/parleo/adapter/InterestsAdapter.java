@@ -4,11 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.messaging.Interest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -17,12 +20,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.InterestsViewHolder> {
+public class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.InterestsViewHolder> implements Filterable {
 
     private List<Interest> interests;
+    private List<Interest> interestsFiltered;
 
     public void setInterests(List<Interest> interests) {
         this.interests = interests;
+        interestsFiltered = interests;
         notifyDataSetChanged();
     }
 
@@ -36,12 +41,60 @@ public class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.Inte
 
     @Override
     public void onBindViewHolder(@NonNull InterestsViewHolder notificationViewHolder, int i) {
-        notificationViewHolder.bind(interests.get(i));
+        Interest interest;
+        try {
+            interest = interestsFiltered.get(i);
+        } catch (Exception e) {
+            return;
+        }
+
+        notificationViewHolder.box.setOnCheckedChangeListener(null);
+
+        notificationViewHolder.box.setChecked(interest.isChosen() == 1);
+
+        notificationViewHolder.box.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            interest.setChosen(isChecked? 1 : 0);
+            notifyItemChanged(i);
+        });
+
+        notificationViewHolder.bind(interest);
     }
 
     @Override
     public int getItemCount() {
-        return interests.size();
+        return interestsFiltered.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    interestsFiltered = interests;
+                } else {
+                    List<Interest> filteredList = new ArrayList<>();
+                    for (Interest row : interests) {
+                        if (row.getName().contains(charSequence)) {
+                            filteredList.add(row);
+                        }
+                    }
+
+                    interestsFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = interestsFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                interestsFiltered = (ArrayList<Interest>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     class InterestsViewHolder extends RecyclerView.ViewHolder {
@@ -57,8 +110,6 @@ public class InterestsAdapter extends RecyclerView.Adapter<InterestsAdapter.Inte
 
         public void bind(Interest interest) {
             name.setText(interest.getName());
-            view.setImageDrawable(interest.getDrawable());
-            //todo add box handling
         }
     }
 

@@ -31,11 +31,11 @@ public class ChatActivity extends AppCompatActivity {
                 imageView.setImageDrawable(getResources().getDrawable(R.drawable.billy));
             }
         });
-        adapter.addToStart(DialogImpl.message, false);
-        adapter.addToStart(DialogImpl.message2, false);
-        adapter.addToStart(DialogImpl.message2, false);
-        adapter.addToStart(DialogImpl.message2, false);
-        adapter.addToStart(DialogImpl.message, false);
+        //adapter.addToStart(DialogImpl.message, false);
+        //adapter.addToStart(DialogImpl.message2, false);
+        //adapter.addToStart(DialogImpl.message2, false);
+        //adapter.addToStart(DialogImpl.message2, false);
+        //adapter.addToStart(DialogImpl.message, false);
         messagesList.setAdapter(adapter);
     }
 }
