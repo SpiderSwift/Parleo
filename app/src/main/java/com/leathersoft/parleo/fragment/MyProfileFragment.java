@@ -28,14 +28,16 @@ public class MyProfileFragment extends BaseFragment implements ReloadDataInterfa
     private User mMe;
 
 
-    @BindView(R.id.iv_profile_avatar)
-    ImageView mUserAvatar;
+//    @BindView(R.id.iv_profile_avatar)
+//    ImageView mUserAvatar;
 
-    @BindView(R.id.tv_profile_page_name)
-    TextView mUserName;
-
-    @BindView(R.id.tv_profile_page_description)
-    TextView mUserDescription;
+//    View v;
+//
+//    @BindView(R.id.tv_profile_page_name)
+//    TextView mUserName;
+//
+//    @BindView(R.id.tv_profile_page_description)
+//    TextView mUserDescription;
 
     @OnClick(R.id.edit_profile_btn)
     public void openEdit(){
@@ -45,6 +47,7 @@ public class MyProfileFragment extends BaseFragment implements ReloadDataInterfa
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         reloadData();
     }
 
@@ -69,9 +72,12 @@ public class MyProfileFragment extends BaseFragment implements ReloadDataInterfa
     }
 
     private void setInfoToViews(){
-        ImageUtil.setImage(mMe.getAccountImage(),mUserAvatar,R.color.placeholderGray);
-        mUserName.setText(mMe.getName());
-        mUserDescription.setText(mMe.getAbout());
+        ImageView view = getActivity().findViewById(R.id.iv_profile_avatar);
+        ImageUtil.setImage(mMe.getAccountImage(),view,R.color.placeholderGray);
+        TextView tvName = getActivity().findViewById(R.id.tv_profile_page_name);
+        TextView tvDesc = getActivity().findViewById(R.id.tv_profile_page_description);
+        tvName.setText(mMe.getName());
+        tvDesc.setText(mMe.getAbout());
     }
 
     @Nullable
@@ -80,9 +86,11 @@ public class MyProfileFragment extends BaseFragment implements ReloadDataInterfa
         View v = inflater.inflate(R.layout.fragment_my_profile_screen,container,false);
         ButterKnife.bind(this,v);
 
-        if(mMe != null){
-            setInfoToViews();
-        }
+//        if(mMe != null){
+//            setInfoToViews();
+//        }
+
+        setUser();
 
         return v;
     }

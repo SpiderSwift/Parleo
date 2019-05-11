@@ -23,6 +23,7 @@ import com.leathersoft.parleo.network.model.Hobby;
 import com.leathersoft.parleo.network.model.Lang;
 import com.leathersoft.parleo.network.model.Language;
 import com.leathersoft.parleo.network.model.UserUpdateModel;
+import com.leathersoft.parleo.util.LanguageHolderUtil;
 
 import org.json.JSONObject;
 
@@ -68,9 +69,24 @@ public class RegistrationContinueActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<Lang>> call, Response<List<Lang>> response) {
                         List<Lang> languages = response.body();
+                        LanguageHolderUtil.getInstance().clearMap();
+                        LanguageHolderUtil.getInstance().fillMap(getBaseContext(), languages);
                         for (Lang language : languages) {
+
+
                             Locale locale = new Locale(language.getId());
-                            languageModels.add(new LanguageModel(language.getId(),locale.getDisplayName(), 0, 0));
+
+                            //todo спасибо беку и ребятам на пк версии за охуенный костыль
+                            if (language.getId().equals("gb")) {
+                                languageModels.add(new LanguageModel(language.getId(),"English", 0, 0));
+                            } else if (language.getId().equals("bh")) {
+                                languageModels.add(new LanguageModel(language.getId(),"Bhojpuri", 0, 0));
+                            } else {
+                                languageModels.add(new LanguageModel(language.getId(),locale.getDisplayName(), 0, 0));
+                            }
+
+
+
                         }
                     }
 

@@ -55,7 +55,7 @@ public class ChatFragment extends BaseFragment {
 
     private DialogsListAdapter<DialogImpl> adapter;
 
-    private Subscription on;
+    //private Subscription on;
 
     private HubConnection hubConnection = SingletonSignalrClient.getInstance().getConnection();
 
@@ -99,7 +99,7 @@ public class ChatFragment extends BaseFragment {
     public void onResume() {
 
         Log.d("TAG", "onResume");
-        on = hubConnection.on(SingletonSignalrClient.RECEIVE_SUBSCRIPTION, onMessage, MessageViewModel.class);
+        //on = hubConnection.on(SingletonSignalrClient.RECEIVE_SUBSCRIPTION, onMessage, MessageViewModel.class);
 
         SingletonRetrofitClient.getInsance().getApi().getChats(1,100)
                 .enqueue(new Callback<ChatListModel>() {
@@ -163,8 +163,8 @@ public class ChatFragment extends BaseFragment {
     public void onStop() {
         //hubConnection.remove(SingletonSignalrClient.RECEIVE_SUBSCRIPTION);
         Log.d("TAG", "onStop");
-        on.unsubscribe();
-        on = null;
+//        on.unsubscribe();
+//        on = null;
         super.onStop();
     }
 

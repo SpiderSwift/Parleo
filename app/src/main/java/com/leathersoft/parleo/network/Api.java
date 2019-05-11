@@ -54,6 +54,9 @@ public interface Api {
     @GET("Accounts/activate")
     Call<ActivateResponse> activate(@Query("token") String token);
 
+    @GET("Chats/userId")
+    Call<ChatModel> getChatWithUser(@Query("userId") String userId);
+
 
     @GET("Utilities/languages")
     Call<List<Lang>> getLanguages();

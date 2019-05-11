@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.messaging.LanguageModel;
+import com.leathersoft.parleo.util.LanguageHolderUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,10 +150,12 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Intere
 
         public void bind(LanguageModel interest) {
             name.setText(interest.getName());
-
+            view.setImageDrawable(LanguageHolderUtil.getInstance().findById(interest.getCode()));
             if (interest.isChosen() == 1) {
                 bar.setVisibility(View.VISIBLE);
                 levelName.setVisibility(View.VISIBLE);
+                //view.setImageDrawable();
+
             } else {
                 bar.setVisibility(View.GONE);
                 levelName.setVisibility(View.GONE);

@@ -24,6 +24,9 @@ public class LanguageModel implements Serializable {
         langLevelMap.put(4, "Native");
     }
 
+    public LanguageModel() {
+    }
+
     public LanguageModel(String code, String name, int level, int chosen) {
         this.code = code;
         this.name = name;

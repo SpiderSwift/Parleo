@@ -14,6 +14,7 @@ public class SingletonSignalrClient {
     public static final String SEND_COMMAND = "SendMessage";
     public static final String RECEIVE_SUBSCRIPTION = "receiveMessage";
     public static final String CHAT_SUBSCRIBE_COMMAND = "SubscribeToChat";
+    public static final String CHATS_SUBSCRIBE_COMMAND = "SubscribeToChats";
 
     public static String currentId = "";
 

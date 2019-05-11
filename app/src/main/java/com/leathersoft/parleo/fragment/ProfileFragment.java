@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.activity.ChatActivity;
+import com.leathersoft.parleo.network.SingletonRetrofitClient;
+import com.leathersoft.parleo.network.model.ChatModel;
 import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.util.ActionBarUtil;
 import com.leathersoft.parleo.util.ImageUtil;
@@ -18,6 +22,10 @@ import androidx.annotation.Nullable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileFragment extends BaseFragment {
 
@@ -69,6 +77,28 @@ public class ProfileFragment extends BaseFragment {
         super.onResume();
         ActionBarUtil.setFragmentTitle(getActivity(),R.string.profile);
     }
+
+
+    @OnClick(R.id.btn_profile_send_message)
+    public void onSendMessage() {
+
+        SingletonRetrofitClient.getInsance().getApi().getChatWithUser(mUser.getId())
+                .enqueue(new Callback<ChatModel>() {
+                    @Override
+                    public void onResponse(Call<ChatModel> call, Response<ChatModel> response) {
+                        if (response.isSuccessful()) {
+                            startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("chatId", response.body().getId()));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ChatModel> call, Throwable t) {
+
+                    }
+                });
+
+    }
+
 
 
     public static ProfileFragment newInstance(User user){

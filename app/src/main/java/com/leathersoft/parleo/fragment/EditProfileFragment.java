@@ -41,7 +41,7 @@ public class EditProfileFragment extends BaseFragment {
 
     User mUser;
 
-    ReloadDataInterface mReloadDataInterface;
+    //ReloadDataInterface mReloadDataInterface;
 
     @BindView(R.id.iv_avatar)
     ImageView mAvatar;
@@ -99,7 +99,7 @@ public class EditProfileFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mReloadDataInterface = (ReloadDataInterface) getArguments().getSerializable(ARGS_INTERFACE_KEY);
+        //mReloadDataInterface = (ReloadDataInterface) getArguments().getSerializable(ARGS_INTERFACE_KEY);
 
         SingletonRetrofitClient.getInsance()
                 .getApi()
