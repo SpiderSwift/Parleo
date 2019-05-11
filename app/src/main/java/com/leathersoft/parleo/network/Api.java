@@ -2,6 +2,8 @@ package com.leathersoft.parleo.network;
 
 import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.ActivateResponse;
+import com.leathersoft.parleo.network.model.ChatListModel;
+import com.leathersoft.parleo.network.model.ChatModel;
 import com.leathersoft.parleo.network.model.CreateEventModel;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.EventResponse;
@@ -11,6 +13,7 @@ import com.leathersoft.parleo.network.model.Language;
 import com.leathersoft.parleo.network.model.LanguageResponse;
 import com.leathersoft.parleo.network.model.LoginResponse;
 import com.leathersoft.parleo.network.model.LoginViewModel;
+import com.leathersoft.parleo.network.model.MessageListModel;
 import com.leathersoft.parleo.network.model.RegisterViewModel;
 import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.network.model.UserUpdateModel;
@@ -37,6 +40,16 @@ public interface Api {
     @POST("Accounts/login")
     Call<LoginResponse> login(@Body LoginViewModel loginViewModel);
 
+
+    @GET("Chats")
+    Call<ChatListModel> getChats(@Query("PageNumber")int pageNumber, @Query("PageSize") int pageSize);
+
+
+    @GET("Chats/{chatId}")
+    Call<ChatModel> getChat(@Path("chatId") String chatId);
+
+    @GET("Chats/{chatId}/messages")
+    Call<MessageListModel> getMessages(@Path("chatId") String chatId,@Query("PageNumber")int pageNumber, @Query("PageSize") int pageSize);
 
     @GET("Accounts/activate")
     Call<ActivateResponse> activate(@Query("token") String token);

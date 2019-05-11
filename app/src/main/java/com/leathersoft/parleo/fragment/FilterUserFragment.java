@@ -15,7 +15,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.adapter.InterestsAdapter;
 import com.leathersoft.parleo.messaging.Interest;
+import com.leathersoft.parleo.network.SingletonSignalrClient;
 import com.leathersoft.parleo.util.ActionBarUtil;
+import com.microsoft.signalr.HubConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class FilterUserFragment extends BaseFragment {
     @BindView(R.id.range_bar) CrystalRangeSeekbar seekbar;
     @BindView(R.id.tv_min) TextView min;
     @BindView(R.id.tv_max) TextView max;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,6 +98,12 @@ public class FilterUserFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         ActionBarUtil.setFragmentTitle(getActivity(),R.string.filter);
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 
     public static FilterUserFragment newInstance(){

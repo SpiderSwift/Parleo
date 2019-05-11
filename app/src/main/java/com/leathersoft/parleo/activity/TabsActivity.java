@@ -1,6 +1,7 @@
 package com.leathersoft.parleo.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -13,7 +14,9 @@ import com.leathersoft.parleo.fragment.PushFragmentInterface;
 import com.leathersoft.parleo.fragment.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.users.UserFragment;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
+import com.leathersoft.parleo.network.SingletonSignalrClient;
 import com.leathersoft.parleo.network.model.MessageViewModel;
+import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.util.StorageUtil;
 import com.microsoft.signalr.HubConnection;
 import com.microsoft.signalr.HubConnectionBuilder;
@@ -34,6 +37,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Completable;
 import okhttp3.internal.platform.Platform;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class TabsActivity extends AppCompatActivity implements PushFragmentInterface {
@@ -66,6 +72,26 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
         ButterKnife.bind(this);
+        SingletonSignalrClient.getInstance();
+        SingletonRetrofitClient.getInsance()
+                .getApi()
+                .getMe()
+                .enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if(response.isSuccessful()){
+                            SingletonSignalrClient.setCurrentId(response.body() != null ? response.body().getId() : null);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+
+                    }
+                });
+
+
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 

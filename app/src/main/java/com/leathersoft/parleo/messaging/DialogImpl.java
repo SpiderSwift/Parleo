@@ -7,106 +7,57 @@ import com.stfalcon.chatkit.commons.models.IUser;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class DialogImpl implements IDialog {
 
-    public static IUser user = new IUser() {
-        @Override
-        public String getId() {
-            return "userId";
-        }
-
-        @Override
-        public String getName() {
-            return "User Name";
-        }
-
-        @Override
-        public String getAvatar() {
-            return "user avatar";
-        }
-    };
-
-    public static IUser user2 = new IUser() {
-        @Override
-        public String getId() {
-            return "me";
-        }
-
-        @Override
-        public String getName() {
-            return "HEHE";
-        }
-
-        @Override
-        public String getAvatar() {
-            return "user avatar";
-        }
-    };
-
-    public IMessage message = new IMessage() {
-        @Override
-        public String getId() {
-            return "gagga";
-        }
-
-        @Override
-        public String getText() {
-            return "asdjasdjnsdsdnvsjkvnjkds";
-        }
-
-        @Override
-        public IUser getUser() {
-            return user;
-        }
-
-        @Override
-        public Date getCreatedAt() {
-            return new Date();
-        }
-    };
+    private IMessage lastMessage;
+    private List<IUser> users;
+    private String dialogName;
+    private String dialogPhoto;
+    private String id;
+    private int unreadCount;
 
 
-    public IMessage message2 = new IMessage() {
-        @Override
-        public String getId() {
-            return "gagga";
-        }
+    public DialogImpl(String id) {
+        this.id = id;
+    }
 
-        @Override
-        public String getText() {
-            return "WAT";
-        }
+    public DialogImpl(List<IUser> users, String dialogName, String dialogPhoto, String id, int unreadCount, IMessage lastMessage) {
+        this.users = users;
+        this.dialogName = dialogName;
+        this.dialogPhoto = dialogPhoto;
+        this.id = id;
+        this.unreadCount = unreadCount;
+        this.lastMessage = lastMessage;
+    }
 
-        @Override
-        public IUser getUser() {
-            return user2;
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DialogImpl dialog = (DialogImpl) o;
+        return Objects.equals(id, dialog.id);
+    }
 
-        @Override
-        public Date getCreatedAt() {
-            return new Date();
-        }
-    };
-
-
-    private static List<IUser> users = Collections.singletonList(user);
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Override
     public String getId() {
-        return "hi";
+        return id;
     }
 
     @Override
     public String getDialogPhoto() {
-        return "hello there";
+        return dialogPhoto;
     }
 
     @Override
     public String getDialogName() {
-        return "wow";
+        return dialogName;
     }
 
     @Override
@@ -116,16 +67,16 @@ public class DialogImpl implements IDialog {
 
     @Override
     public IMessage getLastMessage() {
-        return message;
+        return lastMessage;
     }
 
     @Override
     public void setLastMessage(IMessage message) {
-        this.message = message;
+        this.lastMessage = message;
     }
 
     @Override
     public int getUnreadCount() {
-        return 0;
+        return unreadCount;
     }
 }

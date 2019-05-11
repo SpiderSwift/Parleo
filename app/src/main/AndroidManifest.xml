@@ -15,20 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.StartupActivity">
+        <activity android:name=".activity.StartupActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-
-                <!--<action android:name="android.intent.action.VIEW" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-                <!--<category android:name="android.intent.category.BROWSABLE" />-->
-                <!--<data android:scheme="https"-->
-                    <!--android:host="localhost:6800"-->
-                    <!--android:pathPrefix="/authenticate" />-->
-
             </intent-filter>
+
+        </activity>
+
+        <activity android:name=".activity.DeepLinkStartupActivity"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -39,15 +36,11 @@
                     android:pathPrefix="/"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.auth.LoginActivity" />
         <activity android:name=".activity.auth.RegistrationFinishActivity" />
-        <activity android:name=".activity.auth.RegistrationContinueActivity">
+        <activity android:name=".activity.auth.RegistrationContinueActivity" />
 
-            <!--<intent-filter android:label="@string/chats">-->
-                <!---->
-            <!--</intent-filter>-->
-
-        </activity>
 
 
         <activity android:name=".activity.LanguageWindowActivity"
@@ -66,7 +59,7 @@
         <activity android:name=".activity.TabsActivity">
 
         </activity>
-        <activity android:name=".activity.ChatActivity"></activity>
+        <activity android:name=".activity.ChatActivity" />
 
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDAnB_3aaWIvFHHE9VI1AUJsBbCypJ5G6Q"/>
 

@@ -48,9 +48,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             Snackbar.make(editEmail,"OK",Snackbar.LENGTH_LONG).show();
                             SingletonRetrofitClient.setToken(response.body().getToken());
-                            startActivity(new Intent(getApplicationContext(), TabsActivity.class));
                             StorageUtil.save(LoginActivity.this, "email", editEmail.getText().toString());
                             StorageUtil.save(LoginActivity.this, "password", editPassword.getText().toString());
+                            startActivity(new Intent(getApplicationContext(), TabsActivity.class));
+
                         } else {
                             try {
                                 JSONObject jObjError = new JSONObject(response.errorBody().string());

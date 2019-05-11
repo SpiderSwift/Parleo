@@ -38,8 +38,6 @@ public class RegistrationStartActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_continue)
     public void onContinue() {
-        //startActivityForResult(new Intent(getApplicationContext(), RegistrationContinueActivity.class), 0);
-
         SingletonRetrofitClient.getInsance().getApi()
                 .register(new RegisterViewModel(editEmail.getText().toString(), editPassword.getText().toString()))
                 .enqueue(new Callback<ResponseBody>() {
@@ -65,8 +63,5 @@ public class RegistrationStartActivity extends AppCompatActivity {
                 });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        finish();
-    }
+
 }

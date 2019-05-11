@@ -195,13 +195,6 @@ public class RegistrationContinueActivity extends AppCompatActivity {
         }
 
 
-        Log.d("LOG" ,"Name " + editName.getText());
-        Log.d("LOG" ,"date " + dateBirth);
-        Log.d("LOG" ,"gender " + gender);
-        Log.d("LOG" ,"langs " + languages);
-        Log.d("LOG" ,"hobbies " + hobbies);
-
-
         UserUpdateModel model = new UserUpdateModel();
         model.setAbout("");
         model.setBirthdate(dateBirth);

@@ -15,6 +15,13 @@ public class SingletonSignalrClient {
     public static final String RECEIVE_SUBSCRIPTION = "receiveMessage";
     public static final String CHAT_SUBSCRIBE_COMMAND = "SubscribeToChat";
 
+    public static String currentId = "";
+
+
+    public static void setCurrentId(String currentId) {
+        SingletonSignalrClient.currentId = currentId;
+    }
+
     private HubConnection connection;
 
     private SingletonSignalrClient() {
