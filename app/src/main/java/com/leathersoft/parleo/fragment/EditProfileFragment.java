@@ -1,6 +1,9 @@
 package com.leathersoft.parleo.fragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,20 +16,16 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.listener.DateButtonOnClickListener;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
-import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.User;
-import com.leathersoft.parleo.network.model.UserUpdateModel;
 import com.leathersoft.parleo.util.ActionBarUtil;
 import com.leathersoft.parleo.util.DateUtil;
 import com.leathersoft.parleo.util.ImageUtil;
 import com.leathersoft.parleo.util.LocaleUtil;
 
 import java.util.Calendar;
-import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,12 +38,25 @@ public class EditProfileFragment extends BaseFragment {
 
     private static final String ARGS_INTERFACE_KEY = "reload_key";
 
+    private static final int GET_AVATAR_REQUEST_CODE = 400;
+
     User mUser;
+
+    private Uri mImageUri;
 
     ReloadDataInterface mReloadDataInterface;
 
     @BindView(R.id.iv_avatar)
     ImageView mAvatar;
+
+//    TODO FIX crash on click
+//    @OnClick(R.id.iv_avatar)
+//    public void getImage(){
+//        Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//        i.addCategory(Intent.CATEGORY_OPENABLE);
+//        i.setType("image/*");
+//        startActivityForResult(i, GET_AVATAR_REQUEST_CODE);
+//    }
 
     @BindView(R.id.et_profile_name)
     EditText mEtProfileName;
@@ -144,7 +156,7 @@ public class EditProfileFragment extends BaseFragment {
     }
 
     private void setInfoToViews(){
-        ImageUtil.setImage(mUser.getAccountImage(),mAvatar,R.drawable.avatar_placeholder);
+        ImageUtil.setImage(mUser.getAccountImage(),mAvatar,R.color.placeholderGray);
         mEtProfileName.setText(mUser.getName());
         mEtProfileAge.setText(
                 String.format(
@@ -154,6 +166,19 @@ public class EditProfileFragment extends BaseFragment {
                 )
         );
         mDescription.setText(mUser.getAbout());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(data==null)return;
+
+        if(requestCode == GET_AVATAR_REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            mImageUri = data.getData();
+            ImageUtil.setImage(mImageUri.toString(),mAvatar,R.color.placeholderGray);
+        }
+
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 

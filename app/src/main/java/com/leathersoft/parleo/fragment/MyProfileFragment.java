@@ -27,7 +27,6 @@ public class MyProfileFragment extends BaseFragment implements ReloadDataInterfa
 
     private User mMe;
 
-
     @BindView(R.id.iv_profile_avatar)
     ImageView mUserAvatar;
 
