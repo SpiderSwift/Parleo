@@ -2,8 +2,8 @@ package com.leathersoft.parleo.network;
 
 import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.ActivateResponse;
-import com.leathersoft.parleo.network.model.EventModel;
 import com.leathersoft.parleo.network.model.Event;
+import com.leathersoft.parleo.network.model.EventModel;
 import com.leathersoft.parleo.network.model.EventResponse;
 import com.leathersoft.parleo.network.model.Hobby;
 import com.leathersoft.parleo.network.model.Lang;
@@ -62,6 +62,10 @@ public interface Api {
     @PUT("Users/current")
     Call<ResponseBody> updateUser(@Body UserUpdateModel userUpdateModel);
 
+
+    @PUT("Events/{eventId}/participants")
+    Call<ResponseBody> addParticipants(@Path("eventId") String eventId,
+                                       @Body List<String> userIds);
 
 
     @GET("Users/current")

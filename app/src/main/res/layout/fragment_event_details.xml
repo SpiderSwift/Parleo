@@ -117,18 +117,8 @@
                     android:src="@drawable/map_placeholder"
                      />
             </androidx.cardview.widget.CardView>
-            <!--<ImageView-->
-                <!--android:id="@+id/map"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:minHeight="178dp"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--android:layout_marginBottom="16dp"-->
 
-                <!--android:src="@drawable/map_placeholder"-->
-                <!--android:elevation="10dp"-->
-                <!--android:layout_weight="1"-->
-                <!--/>-->
+
 
             <Button
                 android:id="@+id/rectangle"
@@ -136,6 +126,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_drawable_blue"
 
+                android:layout_marginBottom="8dp"
+
+                android:padding="8dp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/event_button_join"
                 android:textAllCaps="false"
