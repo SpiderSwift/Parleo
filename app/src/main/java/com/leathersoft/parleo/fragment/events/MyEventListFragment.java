@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +18,8 @@ import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.Event;
+import com.leathersoft.parleo.network.model.EventPageAdapter;
+import com.leathersoft.parleo.network.model.EventViewModel;
 import com.leathersoft.parleo.network.model.User;
 
 import java.util.List;
@@ -37,63 +42,26 @@ public class MyEventListFragment extends BaseFragment {
         ButterKnife.bind(this,v);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setHasFixedSize(true);
 
-        final EventListAdapter eventPageAdapter =
-                new EventListAdapter(mPushFragmentInterface);
+        EventViewModel eventViewModel = ViewModelProviders.of(this)
+                .get(EventViewModel.class);
+        eventViewModel.initFactory(this.getClass());
 
-        SingletonRetrofitClient.getInsance()
-                .getApi()
-                .getMe()
-                .enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.isSuccessful()){
-                            List<User.AttendingEvent> attendingEvents =
-                                    response.body()
-                                            .getAttendingEvents();
 
-                            if (attendingEvents != null) {
-                                for(User.AttendingEvent event:attendingEvents){
-                                    Log.d("EVENT",event.toString());
-                                    getEvent(event.getId(),eventPageAdapter);
-                                }
-                            }
+        final EventPageAdapter eventPageAdapter =
+                new EventPageAdapter(mPushFragmentInterface);
 
-                        }
-                    }
+        eventViewModel.getEventPagedList().observe(this, new Observer<PagedList<Event>>() {
+            @Override
+            public void onChanged(PagedList<Event> events) {
+                eventPageAdapter.submitList(events);
+            }
+        });
 
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-
-                    }
-                });
         mRecyclerView.setAdapter(eventPageAdapter);
 
         return v;
-    }
-
-    private void getEvent(String id,EventListAdapter adapter){
-        SingletonRetrofitClient.getInsance()
-                .getApi()
-                .getEvent(id)
-                .enqueue(new Callback<Event>() {
-                    @Override
-                    public void onResponse(Call<Event> call, Response<Event> response) {
-                        if(response.isSuccessful()){
-                            Event e = response.body();
-                            adapter.getEvents().add(e);
-                            adapter.notifyItemInserted(
-                                    adapter.getEvents().size()
-                            );
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Event> call, Throwable t) {
-                        Log.d("EVENT",t.toString());
-
-                    }
-                });
     }
 
     public static MyEventListFragment newInstance(){

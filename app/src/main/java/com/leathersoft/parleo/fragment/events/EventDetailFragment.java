@@ -1,9 +1,7 @@
 package com.leathersoft.parleo.fragment.events;
 
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -22,24 +22,25 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.ScrollableMapView;
 import com.leathersoft.parleo.fragment.BaseFragment;
+import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.util.ActionBarUtil;
 import com.leathersoft.parleo.util.ImageUtil;
 import com.leathersoft.parleo.util.LocaleUtil;
-import com.leathersoft.parleo.util.TouchUtils;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EventDetailFragment extends BaseFragment {
 
@@ -66,6 +67,50 @@ public class EventDetailFragment extends BaseFragment {
     @BindView(R.id.tv_adress)
     TextView mTvAdress;
 
+
+    @OnClick(R.id.rectangle)
+    public void join(){
+        SingletonRetrofitClient.getInsance()
+                .getApi()
+                .getMe()
+                .enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if(response.isSuccessful()){
+                            List<String> users = new ArrayList<>();
+                            users.add(response.body().getId());
+                            joinEvent(mEvent.getId(),users);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+
+                    }
+
+                    private void joinEvent(String eventId,List<String> users){
+                        SingletonRetrofitClient.getInsance()
+                                .getApi()
+                                .addParticipants(eventId,users)
+                                .enqueue(new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                                        //TODO add error message
+                                        if(response.isSuccessful()){
+                                            getActivity().onBackPressed();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                                    }
+                                });
+                    }
+                });
+    }
     
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -136,23 +181,16 @@ public class EventDetailFragment extends BaseFragment {
             }
         });
 
-
 //        mGoogleMap.setMyLocationEnabled(true);
     }
 
     private String getStringFromAddress(Address address){
 
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for(int i = 0; i <= address.getMaxAddressLineIndex(); i++){
-            res += address.getAddressLine(i);
+            res.append(address.getAddressLine(i));
         }
-//        String result = address.getLocality()
-//                + ", "
-//                + address.getSubLocality()
-//                + ", "
-//                + address.getThoroughfare();
-
-        return res;
+        return res.toString();
     }
 
     @Override
@@ -175,7 +213,6 @@ public class EventDetailFragment extends BaseFragment {
     }
 
     public static EventDetailFragment newInstance(Event event){
-
         EventDetailFragment fragment = new EventDetailFragment();
         Bundle args = new Bundle();
         args.putSerializable("event",event);

@@ -92,7 +92,7 @@ public class EventDataSource extends PageKeyedDataSource<Integer, Event> {
                 });
     }
 
-    private Call<EventResponse> getEventCall(Integer page, Integer pageSize){
+    protected Call<EventResponse> getEventCall(Integer page, Integer pageSize){
         return SingletonRetrofitClient.getInsance()
                 .getApi()
                 .getEvents(

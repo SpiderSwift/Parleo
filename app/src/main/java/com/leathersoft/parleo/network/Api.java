@@ -6,11 +6,11 @@ import com.leathersoft.parleo.network.model.ChatListModel;
 import com.leathersoft.parleo.network.model.ChatModel;
 import com.leathersoft.parleo.network.model.CreateEventModel;
 import com.leathersoft.parleo.network.model.Event;
+import com.leathersoft.parleo.network.model.EventModel;
 import com.leathersoft.parleo.network.model.EventResponse;
 import com.leathersoft.parleo.network.model.Hobby;
 import com.leathersoft.parleo.network.model.Lang;
 import com.leathersoft.parleo.network.model.Language;
-import com.leathersoft.parleo.network.model.LanguageResponse;
 import com.leathersoft.parleo.network.model.LoginResponse;
 import com.leathersoft.parleo.network.model.LoginViewModel;
 import com.leathersoft.parleo.network.model.MessageListModel;
@@ -77,11 +77,21 @@ public interface Api {
     Call<ResponseBody> updateUser(@Body UserUpdateModel userUpdateModel);
 
 
+    @PUT("Events/{eventId}/participants")
+    Call<ResponseBody> addParticipants(@Path("eventId") String eventId,
+                                       @Body List<String> userIds);
+
 
     @GET("Users/current")
     Call<User> getMe();
 
 
+
+    @GET("Users/current/attending-events")
+    Call<EventResponse> getMyEvents(
+            @Query("PageNumber") Integer page,
+            @Query("PageSize") Integer pageSize
+    );
 
     @GET("Events")
     Call<EventResponse> getEvents(
@@ -95,13 +105,15 @@ public interface Api {
             @Query("PageSize") Integer pageSize
     );
 
+
     @GET("Events/{eventId}")
     Call<Event> getEvent(
             @Path("eventId") String eventId
     );
 
-    @POST("Events/create")
-    Call<Event> postEvent(@Body CreateEventModel createEventModel);
+    //v1.2
+    @POST("Events")
+    Call<Event> postEvent(@Body EventModel eventModel);
 
     @Multipart
     @PUT("Events/{eventId}/image")

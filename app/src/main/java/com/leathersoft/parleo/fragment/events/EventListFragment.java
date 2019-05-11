@@ -36,6 +36,7 @@ public class EventListFragment extends BaseFragment {
 
         EventViewModel eventViewModel = ViewModelProviders.of(this)
                 .get(EventViewModel.class);
+        eventViewModel.initFactory(this.getClass());
 
         final EventPageAdapter eventPageAdapter =
                 new EventPageAdapter(mPushFragmentInterface);

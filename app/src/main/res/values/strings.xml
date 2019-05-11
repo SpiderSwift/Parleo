@@ -15,7 +15,7 @@
     <string name="event_add_location">Add location on Map</string>
     <string name="event_invite_friends">Invite friends</string>
     <string name="event_set_time_date">Set time and date</string>
-    <string name="event_add_languages">Add languages</string>
+    <string name="event_add_language">Add language</string>
 
 
     <!--Event details fragment-->

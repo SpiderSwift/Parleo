@@ -2,11 +2,8 @@ package com.leathersoft.parleo.fragment.events;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -27,24 +25,22 @@ import com.leathersoft.parleo.listener.ButtonOnTimeSetListener;
 import com.leathersoft.parleo.listener.DateButtonOnClickListener;
 import com.leathersoft.parleo.listener.TimeButtonOnClickListener;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
-import com.leathersoft.parleo.network.model.CreateEventModel;
+import com.leathersoft.parleo.network.model.EventModel;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.util.ActionBarUtil;
 import com.leathersoft.parleo.util.DateUtil;
 import com.leathersoft.parleo.util.ImageUtil;
 import com.leathersoft.parleo.util.LocaleUtil;
 import com.leathersoft.parleo.util.TouchUtils;
+import com.leathersoft.parleo.util.UriUtil;
+import com.schibstedspain.leku.LocationPickerActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,18 +56,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.schibstedspain.leku.LocationPickerActivityKt.LATITUDE;
+import static com.schibstedspain.leku.LocationPickerActivityKt.LOCATION_ADDRESS;
+import static com.schibstedspain.leku.LocationPickerActivityKt.LONGITUDE;
+import static com.schibstedspain.leku.LocationPickerActivityKt.ZIPCODE;
+
 public class EventCreateFragment extends BaseFragment {
 
     private final static String DATE_FORMAT = "EEE, d MMM yyyy";
     private final static String TIME_FORMAT = "HH:mm";
 
-    private CreateEventModel mCreateEventModel;
+    private EventModel mEventModel;
 
     private SimpleDateFormat mDateFormat;
     private SimpleDateFormat mTimeFormat;
 
+    private Float mLatitude;
+    private Float mLongitude;
+
 
     private static final int GET_PHOTO_REQUEST_CODE = 200;
+    private static final int GET_LOCATION_REQUEST_CODE = 300;
 
     private Uri mImageUri;
 
@@ -98,21 +103,28 @@ public class EventCreateFragment extends BaseFragment {
 
     @OnClick(R.id.iv_photo)
     public void getImage(){
-
         Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-//                Intent i = new Intent(Intent.ACTION_GET_CONTENT,
-//                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
         i.addCategory(Intent.CATEGORY_OPENABLE);
         i.setType("image/*");
         startActivityForResult(i, GET_PHOTO_REQUEST_CODE);
+    }
+
+    @BindView(R.id.add_location_button)
+    TextView mTvLocation;
+
+    @OnClick(R.id.add_location_button)
+    public void getLocation(){
+        Intent intent = new LocationPickerActivity.Builder()
+                .build(getContext());
+
+        startActivityForResult(intent, GET_LOCATION_REQUEST_CODE);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mCreateEventModel = new CreateEventModel();
+        mEventModel = new EventModel();
     }
 
     @Override
@@ -147,16 +159,13 @@ public class EventCreateFragment extends BaseFragment {
             return false;
         }
 
+        if(mLongitude == null || mLatitude == null){
+            return false;
+        }
         return true;
     }
 
     private void createEvent(){
-        String eventName = mEventName.getText().toString();
-        String eventDescription = mEventDescription.getText().toString();
-
-        mCreateEventModel.setName(eventName);
-        mCreateEventModel.setDescription(eventDescription);
-
         Date startDate = null;
         Date endDate = null;
         try {
@@ -177,18 +186,21 @@ public class EventCreateFragment extends BaseFragment {
             Snackbar.make(getView(),getResources().getString(R.string.snack_bar_something_wrong),Snackbar.LENGTH_LONG);
             return;
         }finally {
-            mCreateEventModel.setStartTime(startDate);
-            mCreateEventModel.setEndDate(endDate);
+            mEventModel = new EventModel(
+                    mEventName.getText().toString(),
+                    mEventDescription.getText().toString(),
+                    10,
+                    mLatitude,
+                    mLongitude,
+                    startDate,
+                    endDate,
+                    "aa"
+            );
         }
-
-
-
-//        createEventModel.setName(eventName);
-//        createEventModel.setDescription(eventDescription);
 
         SingletonRetrofitClient.getInsance()
                 .getApi()
-                .postEvent(mCreateEventModel)
+                .postEvent(mEventModel)
                 .enqueue(new Callback<Event>() {
                     @Override
                     public void onResponse(Call<Event> call, Response<Event> response) {
@@ -219,22 +231,15 @@ public class EventCreateFragment extends BaseFragment {
     }
 
     private void sendImage(String eventId){
+        Log.d("TAG", mImageUri.toString());
+        File file = new File(UriUtil.getPath(getContext(), mImageUri));
 
-
-        File file = new File(mImageUri.toString());
-        if(!file.exists()){
-            return;
-        }
-
-        //pass it like this
+        //TODO remove dublicate code MULTIPART DATA
         RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
-        // MultipartBody.Part is used to send also the actual file name
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-
-//        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
 
         SingletonRetrofitClient.getInsance()
                 .getApi()
@@ -243,23 +248,16 @@ public class EventCreateFragment extends BaseFragment {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if(response.isSuccessful()){
-                            Snackbar.make(getView(),"OK",Snackbar.LENGTH_LONG).show();
+//                            Toast.makeText(getContext(),"OK",Toast.LENGTH_LONG).show();
+                            getActivity().onBackPressed();
                         }else {
-                            try {
-                                JSONObject jObjError = new JSONObject(response.errorBody().string());
-                                Log.d("JSON",jObjError.toString());
-                                Toast.makeText(getContext(), jObjError.getString("error"), Toast.LENGTH_LONG).show();
-                            } catch (Exception e) {
-                                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
+                            Toast.makeText(getContext(),"SOME PROBLEMS",Toast.LENGTH_LONG).show();
                         }
-
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                        Log.d("JSON","Someething bad happended");
+                        Toast.makeText(getContext(),"ERROR",Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -273,7 +271,7 @@ public class EventCreateFragment extends BaseFragment {
 
         mDateFormat = new SimpleDateFormat(DATE_FORMAT, LocaleUtil.getCurrentLocale(getContext()));
         mTimeFormat = new SimpleDateFormat(TIME_FORMAT, LocaleUtil.getCurrentLocale(getContext()));
-        initDataButtons(mDateFormat,mTimeFormat,mCreateEventModel.getStartTime());
+        initDataButtons(mDateFormat,mTimeFormat, mEventModel.getStartTime());
 
         return v;
     }
@@ -323,50 +321,26 @@ public class EventCreateFragment extends BaseFragment {
         if(requestCode == GET_PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK){
             mImageUri = data.getData();
             ImageUtil.setImage(mImageUri.toString(),mEventImage,R.color.placeholderGray);
+        }
 
+        if(requestCode == GET_LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK){
 
-            String path = mImageUri.getPath();
-            String path2 = mImageUri.toString();
+            final String ADDRESS = "ADDRESS";
+            Double latitude = data.getDoubleExtra(LATITUDE, 0.0);
+            Log.d(ADDRESS, latitude.toString());
+            Double longitude = data.getDoubleExtra(LONGITUDE, 0.0);
+            Log.d(ADDRESS, longitude.toString());
+            String address = data.getStringExtra(LOCATION_ADDRESS);
+            Log.d(ADDRESS, address);
 
-            try {
-
-
-                ParcelFileDescriptor parcelFileDescriptor =
-                        getActivity().getContentResolver().openFileDescriptor(mImageUri, "r");
-                FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-                Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-                parcelFileDescriptor.close();
-            }catch (Exception e){
-
-            }
-
-            File file = new File(path);
-            if(!file.exists()){
-                return;
-            }
-
-
-            try {
-
-                InputStream stream = getActivity().getContentResolver().openInputStream(mImageUri);
-
-//                pass it like this
-//                RequestBody requestFile =
-//                        RequestBody.create(MediaType.parse("multipart/form-data"), stream);
-//
-//                 MultipartBody.Part is used to send also the actual file name
-//                MultipartBody.Part body =
-//                        MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-
-            }catch (FileNotFoundException e){
-
-            }
-
-
+            mTvLocation.setText(address);
+            mLatitude = latitude.floatValue();
+            mLongitude = longitude.floatValue();
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
     public static EventCreateFragment newInstance(){
         return new EventCreateFragment();

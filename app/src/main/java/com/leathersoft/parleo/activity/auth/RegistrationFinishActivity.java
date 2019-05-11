@@ -78,6 +78,7 @@ public class RegistrationFinishActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), TabsActivity.class));
             }
 
+            //TODO remove dublicate code MULTIPART DATA
             RequestBody requestFile =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
