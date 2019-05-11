@@ -69,6 +69,12 @@ public interface Api {
 
 
 
+    @GET("Users/current/attending-events")
+    Call<EventResponse> getMyEvents(
+            @Query("PageNumber") Integer page,
+            @Query("PageSize") Integer pageSize
+    );
+
     @GET("Events")
     Call<EventResponse> getEvents(
             @Query("MinNumberOfParticipants") Integer minNumberOfParticipants,
@@ -80,6 +86,7 @@ public interface Api {
             @Query("PageNumber") Integer page,
             @Query("PageSize") Integer pageSize
     );
+
 
     @GET("Events/{eventId}")
     Call<Event> getEvent(

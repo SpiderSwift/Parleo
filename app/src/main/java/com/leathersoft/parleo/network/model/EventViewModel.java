@@ -11,18 +11,23 @@ public class EventViewModel extends ViewModel {
     private LiveData<PagedList<Event>> mEventPagedList;
     private LiveData<PageKeyedDataSource<Integer,Event>> mLiveDataSource;
 
-    public EventViewModel() {
+    private void initData(Class classId){
 
-        EventDataSourceFactory eventDataSourceFactory = new EventDataSourceFactory();
+        EventDataSourceFactory eventDataSourceFactory = new EventDataSourceFactory(classId);
         mLiveDataSource = eventDataSourceFactory.getEventLiveDataSource();
 
         PagedList.Config config =
                 (new PagedList.Config.Builder())
-                .setEnablePlaceholders(false)
-                .setPageSize(EventDataSource.PAGE_SIZE)
-                .build();
+                        .setEnablePlaceholders(false)
+                        .setPageSize(EventDataSource.PAGE_SIZE)
+                        .build();
 
         mEventPagedList = (new LivePagedListBuilder(eventDataSourceFactory,config)).build();
+
+    }
+
+    public void initFactory(Class classId){
+        initData(classId);
     }
 
     public LiveData<PagedList<Event>> getEventPagedList() {

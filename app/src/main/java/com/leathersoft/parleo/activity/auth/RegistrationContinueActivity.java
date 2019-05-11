@@ -3,64 +3,39 @@ package com.leathersoft.parleo.activity.auth;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.activity.InterestsWindowActivity;
 import com.leathersoft.parleo.activity.LanguageWindowActivity;
-import com.leathersoft.parleo.adapter.InterestsAdapter;
-import com.leathersoft.parleo.adapter.LanguageAdapter;
 import com.leathersoft.parleo.messaging.Interest;
 import com.leathersoft.parleo.messaging.LanguageModel;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
-import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.Hobby;
 import com.leathersoft.parleo.network.model.Lang;
 import com.leathersoft.parleo.network.model.Language;
-import com.leathersoft.parleo.network.model.MessageViewModel;
 import com.leathersoft.parleo.network.model.UserUpdateModel;
-import com.microsoft.signalr.HubConnection;
-import com.microsoft.signalr.HubConnectionBuilder;
+
+import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParseException;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import org.json.JSONObject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnTouch;
-import io.reactivex.Completable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
