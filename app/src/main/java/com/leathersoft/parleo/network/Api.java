@@ -4,7 +4,7 @@ import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.ActivateResponse;
 import com.leathersoft.parleo.network.model.ChatListModel;
 import com.leathersoft.parleo.network.model.ChatModel;
-import com.leathersoft.parleo.network.model.CreateEventModel;
+//import com.leathersoft.parleo.network.model.CreateEventModel;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.EventModel;
 import com.leathersoft.parleo.network.model.EventResponse;

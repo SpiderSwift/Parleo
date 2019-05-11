@@ -66,9 +66,6 @@
         <activity android:name=".activity.TabsActivity">
 
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".activity.ChatActivity" />
-=======
         <activity android:name=".activity.ChatActivity"/>
 
         <activity
@@ -87,7 +84,6 @@
                 android:value=".activity.TabsActivity" />
         </activity>
 
->>>>>>> 49e5b17f3bf7566d96d88812f450b82420fb42fa
 
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDAnB_3aaWIvFHHE9VI1AUJsBbCypJ5G6Q"/>
 
