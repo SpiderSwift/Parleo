@@ -38,6 +38,12 @@ public class RegistrationStartActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_continue)
     public void onContinue() {
+
+        if (!editPassword.getText().toString().equals(editConfirm.getText().toString())) {
+            Snackbar.make(editEmail,"Passwords must match",Snackbar.LENGTH_LONG).show();
+            return;
+        }
+
         SingletonRetrofitClient.getInsance().getApi()
                 .register(new RegisterViewModel(editEmail.getText().toString(), editPassword.getText().toString()))
                 .enqueue(new Callback<ResponseBody>() {
