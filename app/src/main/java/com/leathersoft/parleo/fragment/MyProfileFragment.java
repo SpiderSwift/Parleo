@@ -8,10 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.messaging.LanguageModel;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
+import com.leathersoft.parleo.network.model.Hobby;
+import com.leathersoft.parleo.network.model.Language;
 import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.util.ActionBarUtil;
 import com.leathersoft.parleo.util.ImageUtil;
+import com.leathersoft.parleo.util.LanguageHolderUtil;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +48,12 @@ public class MyProfileFragment extends BaseFragment implements ReloadDataInterfa
         mPushFragmentInterface.push(EditProfileFragment.newInstance(this));
     }
 
+
+    @OnClick(R.id.tv_friends)
+    public void openFriends() {
+        mPushFragmentInterface.push(FriendListFragment.newInstance());
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,12 +82,30 @@ public class MyProfileFragment extends BaseFragment implements ReloadDataInterfa
     }
 
     private void setInfoToViews(){
-        ImageView view = getActivity().findViewById(R.id.iv_profile_avatar);
-        ImageUtil.setImage(mMe.getAccountImage(),view,R.color.placeholderGray);
-        TextView tvName = getActivity().findViewById(R.id.tv_profile_page_name);
-        TextView tvDesc = getActivity().findViewById(R.id.tv_profile_page_description);
-        tvName.setText(mMe.getName());
-        tvDesc.setText(mMe.getAbout());
+        if (mMe != null) {
+            ImageView view = getActivity().findViewById(R.id.iv_profile_avatar);
+            if (view != null) {
+                ImageUtil.setImage(mMe.getAccountImage(),view,R.color.placeholderGray);
+                TextView tvName = getActivity().findViewById(R.id.tv_profile_page_name);
+                TextView tvDesc = getActivity().findViewById(R.id.tv_profile_page_description);
+                TextView tvHobbiesAndLanguages =  getActivity().findViewById(R.id.tv_profile_page_hobbies);
+                StringBuilder desc = new StringBuilder("Hobbies : ");
+                for (Hobby hobby : mMe.getHobbies()) {
+                    desc.append(hobby.getName() + " ");
+                }
+                desc.append("\n");
+                desc.append("Languages : ");
+                for (Language language : mMe.getLanguages()) {
+                    String name = LanguageHolderUtil.getInstance().findNameById(language.getCode());
+                    String level = LanguageModel.langLevelMap.get(language.getLevel() - 1);
+                    String s = name + "(" + level + ") ";
+                    desc.append(s);
+                }
+                tvHobbiesAndLanguages.setText(desc.toString());
+                tvName.setText(mMe.getName());
+                tvDesc.setText(mMe.getAbout());
+            }
+        }
     }
 
     @Nullable

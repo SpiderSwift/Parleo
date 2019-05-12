@@ -11,6 +11,7 @@ import com.leathersoft.parleo.network.model.EventResponse;
 import com.leathersoft.parleo.network.model.Hobby;
 import com.leathersoft.parleo.network.model.Lang;
 import com.leathersoft.parleo.network.model.Language;
+import com.leathersoft.parleo.network.model.LocationModel;
 import com.leathersoft.parleo.network.model.LoginResponse;
 import com.leathersoft.parleo.network.model.LoginViewModel;
 import com.leathersoft.parleo.network.model.MessageListModel;
@@ -24,6 +25,7 @@ import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -64,6 +66,18 @@ public interface Api {
     @GET("Utilities/hobbies")
     Call<List<Hobby>> getHobbies();
 
+
+    @PUT("Users/current/friends/{userToId}")
+    Call<ResponseBody> addFriend(@Path("userToId") String userId);
+
+    @DELETE("Users/current/friends/{userId}")
+    Call<ResponseBody> removeFriend(@Path("userId") String userId);
+
+
+    @GET("Users/current/friends")
+    Call<AccountResponse> getFriends(@Query("PageNumber") Integer page,
+                                     @Query("PageSize") Integer pageSize);
+
     @GET("Users")
     Call<AccountResponse> getUsers(
             @Query("MinAge") Integer minAge,
@@ -71,7 +85,7 @@ public interface Api {
             @Query("Gender") Boolean gender,
             @Query("MaxDistance") Integer maxDistance,
             @Query("MinLevel") Integer minLevel,
-
+            @Query("Languages") List<String> languages,
             @Query("PageNumber") Integer page,
             @Query("PageSize") Integer pageSize
     );
@@ -98,10 +112,9 @@ public interface Api {
 
     @GET("Events")
     Call<EventResponse> getEvents(
-            @Query("MinNumberOfParticipants") Integer minNumberOfParticipants,
             @Query("MaxNumberOfParticipants") Integer maxNumberOfParticipants,
             @Query("MaxDistance") Integer maxDistance,
-            @Query("Languages") List<Language> languages,
+            @Query("Languages") List<String> languages,
 //            @Query("MinStartDate") Data minNumberOfParticipants,
 //            @Query("MaxStartDate") Integer maxStartDate,
             @Query("PageNumber") Integer page,
@@ -113,6 +126,10 @@ public interface Api {
     Call<Event> getEvent(
             @Path("eventId") String eventId
     );
+
+    @PUT("Users/current/location")
+    Call<ResponseBody> putLocation(@Body LocationModel model);
+
 
     //v1.2
     @POST("Events")

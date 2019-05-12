@@ -2,6 +2,7 @@ package com.leathersoft.parleo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.leathersoft.parleo.util.ChatUtil;
 import com.leathersoft.parleo.util.ImageUtil;
 import com.microsoft.signalr.Action1;
 import com.microsoft.signalr.HubConnection;
+import com.microsoft.signalr.HubConnectionState;
 import com.microsoft.signalr.Subscription;
 import com.squareup.picasso.Picasso;
 import com.stfalcon.chatkit.commons.ImageLoader;
@@ -34,6 +36,10 @@ import com.stfalcon.chatkit.dialogs.DialogsListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,12 +61,42 @@ public class ChatFragment extends BaseFragment {
 
     private DialogsListAdapter<DialogImpl> adapter;
 
-    //private Subscription on;
+    private Subscription on;
 
-    private HubConnection hubConnection = SingletonSignalrClient.getInstance().getConnection();
+    //private HubConnection
 
     Action1<MessageViewModel> onMessage = (model) -> {
         Log.d("TAG", "UPDATE");
+        EventBus.getDefault().post(model);
+
+
+
+        //adapter.notifyDataSetChanged();
+    };
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_dialog, container, false);
+        ButterKnife.bind(this, v);
+        adapter = new DialogsListAdapter<>(R.layout.item_chat, (imageView, url, payload) -> ImageUtil.setImage(url,imageView,R.drawable.billy));
+        dialogsList.setAdapter(adapter);
+
+        adapter.setOnDialogClickListener(dialog -> startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("chatId", dialog.getId())));
+        return v;
+    }
+
+
+    @Override
+    public void onStart() {
+        EventBus.getDefault().register(this);
+        super.onStart();
+    }
+
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageViewModel model) {
+        Log.d("EVENT", "HEEEEEEEEEEEEEEEEEEEEEE");
         adapter.updateDialogWithMessage(model.getChatId(), new IMessage() {
             @Override
             public String getId() {
@@ -82,24 +118,16 @@ public class ChatFragment extends BaseFragment {
                 return model.getCreatedOn();
             }
         });
-    };
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_dialog, container, false);
-        ButterKnife.bind(this, v);
-        adapter = new DialogsListAdapter<>(R.layout.item_chat, (imageView, url, payload) -> ImageUtil.setImage(url,imageView,R.drawable.billy));
-        dialogsList.setAdapter(adapter);
-
-        adapter.setOnDialogClickListener(dialog -> startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("chatId", dialog.getId())));
-        return v;
     }
+
 
     @Override
     public void onResume() {
 
         Log.d("TAG", "onResume");
-        //on = hubConnection.on(SingletonSignalrClient.RECEIVE_SUBSCRIPTION, onMessage, MessageViewModel.class);
+
+        HubConnection hubConnection = SingletonSignalrClient.getInstance().getConnection();
+        on = hubConnection.on(SingletonSignalrClient.RECEIVE_SUBSCRIPTION, onMessage, MessageViewModel.class);
 
         SingletonRetrofitClient.getInsance().getApi().getChats(1,100)
                 .enqueue(new Callback<ChatListModel>() {
@@ -112,7 +140,10 @@ public class ChatFragment extends BaseFragment {
                             List<DialogImpl> dialogs = new ArrayList<>();
                             for (ChatModel chatModel : listModel.getEntities()) {
                                 List<IUser> users = new ArrayList<>(chatModel.getMembers());
-                                hubConnection.send(SingletonSignalrClient.CHAT_SUBSCRIBE_COMMAND, chatModel.getId());
+                                HubConnectionState state = hubConnection.getConnectionState();
+                                if (state.equals(HubConnectionState.CONNECTED)) {
+                                    hubConnection.send(SingletonSignalrClient.CHAT_SUBSCRIBE_COMMAND, chatModel.getId());
+                                }
                                 IMessage lastMessage;
                                 if (chatModel.getLastMessage() != null) {
                                     lastMessage  = new IMessage() {
@@ -163,8 +194,9 @@ public class ChatFragment extends BaseFragment {
     public void onStop() {
         //hubConnection.remove(SingletonSignalrClient.RECEIVE_SUBSCRIPTION);
         Log.d("TAG", "onStop");
-//        on.unsubscribe();
-//        on = null;
+        on.unsubscribe();
+        on = null;
+        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 

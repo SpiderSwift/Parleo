@@ -1,12 +1,12 @@
-package com.leathersoft.parleo.network.model;
-
-import android.app.Application;
+package com.leathersoft.parleo.network.friends;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 
 import com.leathersoft.parleo.MainApplication;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
+import com.leathersoft.parleo.network.model.AccountResponse;
+import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.util.StorageUtil;
 
 import java.util.List;
@@ -15,40 +15,42 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EventDataSource extends PageKeyedDataSource<Integer, Event> {
+public class FriendDataSource extends PageKeyedDataSource<Integer, User> {
+
 
     public static final int PAGE_SIZE = 5;
     private static final int FIRST_PAGE = 1;
 
     @Override
-    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Event> callback) {
-
-        getEventCall(FIRST_PAGE,PAGE_SIZE)
-                .enqueue(new Callback<EventResponse>() {
+    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, User> callback) {
+        getUserCall(FIRST_PAGE,PAGE_SIZE)
+                .enqueue(new Callback<AccountResponse>() {
                     @Override
-                    public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                    public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
                         if(response.body() != null){
+                            AccountResponse accountResponse = response.body();
                             callback.onResult(
-                                    response.body().getEntities(),
+                                    accountResponse.getEntities(),
                                     null,
-                                    FIRST_PAGE + 1
-                            );
+                                    FIRST_PAGE + 1);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<EventResponse> call, Throwable t) {
+                    public void onFailure(Call<AccountResponse> call, Throwable t) {
 
                     }
                 });
     }
 
     @Override
-    public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Event> callback) {
-        getEventCall(params.key,PAGE_SIZE)
-                .enqueue(new Callback<EventResponse>() {
+    public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, User> callback) {
+
+        getUserCall(params.key,PAGE_SIZE)
+                .enqueue(new Callback<AccountResponse>() {
                     @Override
-                    public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                    public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
+
                         Integer key = (params.key > 1) ? params.key -1 : null;
 
                         if(response.body() != null){
@@ -57,20 +59,19 @@ public class EventDataSource extends PageKeyedDataSource<Integer, Event> {
                     }
 
                     @Override
-                    public void onFailure(Call<EventResponse> call, Throwable t) {
+                    public void onFailure(Call<AccountResponse> call, Throwable t) {
 
                     }
                 });
     }
 
     @Override
-    public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Event> callback) {
+    public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, User> callback) {
 
-        getEventCall(params.key,PAGE_SIZE)
-                .enqueue(new Callback<EventResponse>() {
+        getUserCall(params.key,PAGE_SIZE)
+                .enqueue(new Callback<AccountResponse>() {
                     @Override
-                    public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
-
+                    public void onResponse(Call<AccountResponse> call, Response<AccountResponse> response) {
                         Integer pageNumber = response.body().getPageNumber();
                         Integer pageSize = response.body().getPageSize();
 
@@ -92,29 +93,20 @@ public class EventDataSource extends PageKeyedDataSource<Integer, Event> {
                     }
 
                     @Override
-                    public void onFailure(Call<EventResponse> call, Throwable t) {
+                    public void onFailure(Call<AccountResponse> call, Throwable t) {
 
                     }
                 });
     }
 
-    protected Call<EventResponse> getEventCall(Integer page, Integer pageSize){
+    private Call<AccountResponse> getUserCall(Integer page, Integer pageSize){
 
-
-        int memberEvent = StorageUtil.loadInt(MainApplication.getAppContext(), "maxMemberEvent");
-        int distanceEvent = StorageUtil.loadInt(MainApplication.getAppContext(), "maxDistanceEvent");
-        List<String> stringList = StorageUtil.loadList(MainApplication.getAppContext(), "langListEvent");
-        if (stringList.isEmpty()) {
-            stringList = null;
-        }
         return SingletonRetrofitClient.getInsance()
                 .getApi()
-                .getEvents(
-                        memberEvent,
-                        distanceEvent,
-                        stringList,
+                .getFriends(
                         page,
                         pageSize
                 );
     }
+
 }

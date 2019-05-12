@@ -17,6 +17,8 @@
     <string name="event_set_time_date">Set time and date</string>
     <string name="event_add_language">Add language</string>
 
+    <string name="filter_set_languages">Set languages</string>
+
 
     <!--Event details fragment-->
     <string name="event_place_title">Kate\'s Cafe</string>
@@ -32,6 +34,7 @@
 
     <!--Users fragment-->
     <string name="users">Users</string>
+    <string name="friends">Friends</string>
     <string name="users_profile_button">Profile \></string>
     <string name="user_card_placeholder">
         I like PHP, hate React, drink sugarless tea, do nothing, watch anime, play tanks and whatnot. 😊😊
@@ -59,10 +62,10 @@
     <!--Event filter-->
     <string name="filter">Filter</string>
     <string name="save">Save</string>
-    <string name="event_filter_number_of_members">Number of members</string>
+    <string name="event_filter_number_of_members">Max number of members</string>
     <string name="event_filter_1_1">1+1</string>
     <string name="event_filter_3_plus">3+</string>
-    <string name="event_filter_distance_from_me">Distance from me (km)</string>
+    <string name="event_filter_distance_from_me">Max distance from me (km)</string>
     <string name="event_filter_languages">Languages</string>
 
     <!-- TODO: Remove or change this placeholder text -->

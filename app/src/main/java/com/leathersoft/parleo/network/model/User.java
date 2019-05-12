@@ -19,7 +19,15 @@ public class User implements Serializable {
     boolean gender;
     int distanceFromCurrentUser;
     String email;
+    boolean isFriend;
 
+    public boolean isFriend() {
+        return isFriend;
+    }
+
+    public void setFriend(boolean friend) {
+        isFriend = friend;
+    }
 
     List<Language> languages;
     List<Hobby> hobbies;

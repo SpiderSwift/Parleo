@@ -1,5 +1,8 @@
 package com.leathersoft.parleo.activity;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -13,10 +16,17 @@ import com.leathersoft.parleo.fragment.NotificationFragment;
 import com.leathersoft.parleo.fragment.PushFragmentInterface;
 import com.leathersoft.parleo.fragment.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.users.UserFragment;
+import com.leathersoft.parleo.messaging.Interest;
+import com.leathersoft.parleo.messaging.LanguageModel;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.SingletonSignalrClient;
+import com.leathersoft.parleo.network.model.Hobby;
+import com.leathersoft.parleo.network.model.Lang;
+import com.leathersoft.parleo.network.model.LocationModel;
 import com.leathersoft.parleo.network.model.MessageViewModel;
 import com.leathersoft.parleo.network.model.User;
+import com.leathersoft.parleo.util.HobbyHolderUtil;
+import com.leathersoft.parleo.util.LanguageHolderUtil;
 import com.leathersoft.parleo.util.StorageUtil;
 import com.microsoft.signalr.HubConnection;
 import com.microsoft.signalr.HubConnectionBuilder;
@@ -27,6 +37,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +47,7 @@ import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Completable;
+import okhttp3.ResponseBody;
 import okhttp3.internal.platform.Platform;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,7 +84,6 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
         ButterKnife.bind(this);
-        SingletonSignalrClient.getInstance();
         SingletonRetrofitClient.getInsance()
                 .getApi()
                 .getMe()
@@ -89,6 +100,82 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
 
                     }
                 });
+
+
+        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+        LocationModel model = new LocationModel(latitude, longitude);
+
+        SingletonRetrofitClient.getInsance().getApi().putLocation(model)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+
+
+        SingletonRetrofitClient.getInsance().getApi().getHobbies()
+                .enqueue(new Callback<List<Hobby>>() {
+                    @Override
+                    public void onResponse(Call<List<Hobby>> call, Response<List<Hobby>> response) {
+                        List<Hobby> hobbies = response.body();
+                        HobbyHolderUtil.setServerHobbies(hobbies);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Hobby>> call, Throwable t) {
+
+                    }
+                });
+
+
+        SingletonRetrofitClient.getInsance().getApi().getLanguages()
+                .enqueue(new Callback<List<Lang>>() {
+                    @Override
+                    public void onResponse(Call<List<Lang>> call, Response<List<Lang>> response) {
+                        List<Lang> languages = response.body();
+
+                        List<LanguageModel> languageModels = new ArrayList<>();
+                        for (Lang language : languages) {
+
+                            Locale locale = new Locale(language.getId());
+
+                            //todo спасибо беку и ребятам на пк версии за охуенный костыль
+                            if (language.getId().equals("gb")) {
+                                languageModels.add(new LanguageModel(language.getId(),"English", 0, 0));
+                            } else if (language.getId().equals("bh")) {
+                                languageModels.add(new LanguageModel(language.getId(),"Bhojpuri", 0, 0));
+                            } else {
+                                languageModels.add(new LanguageModel(language.getId(),locale.getDisplayName(), 0, 0));
+                            }
+
+
+
+                        }
+
+                        LanguageHolderUtil.getInstance().clearMap();
+                        LanguageHolderUtil.getInstance().fillMapModel(getBaseContext(), languageModels);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Lang>> call, Throwable t) {
+
+                    }
+                });
+
+
+
+
+
 
 
 

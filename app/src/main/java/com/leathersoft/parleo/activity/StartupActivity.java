@@ -37,10 +37,9 @@ public class StartupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
 
-
         ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                200);
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                201);
 
     }
 
@@ -58,6 +57,7 @@ public class StartupActivity extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
 
+                    SingletonSignalrClient.getInstance();
                     String email = StorageUtil.load(this, "email");
                     String password = StorageUtil.load(this, "password");
 
@@ -85,6 +85,16 @@ public class StartupActivity extends AppCompatActivity {
                     finish();
                 }
                 return;
+            }
+
+            case 201: {
+                if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    finish();
+                } else {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            200);
+                }
             }
 
             // other 'case' lines to check for other

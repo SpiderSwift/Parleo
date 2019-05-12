@@ -22,6 +22,7 @@ public class LanguageModel implements Serializable {
         langLevelMap.put(2, "Intermediate");
         langLevelMap.put(3, "Advanced");
         langLevelMap.put(4, "Native");
+        langLevelMap.put(5, "Super");
     }
 
     public LanguageModel() {

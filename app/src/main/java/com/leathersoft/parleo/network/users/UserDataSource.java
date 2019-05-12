@@ -3,9 +3,11 @@ package com.leathersoft.parleo.network.users;
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 
+import com.leathersoft.parleo.MainApplication;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.AccountResponse;
 import com.leathersoft.parleo.network.model.User;
+import com.leathersoft.parleo.util.StorageUtil;
 
 import java.util.List;
 
@@ -14,6 +16,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserDataSource extends PageKeyedDataSource<Integer, User> {
+
+
+    private int minAge;
+    private int maxAge;
+    private int maxDistance;
+    private int languageLevel;
+    private List<String> languageList;
+    private boolean male;
+    private boolean female;
+
     public static final int PAGE_SIZE = 5;
     private static final int FIRST_PAGE = 1;
 
@@ -96,14 +108,33 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
     }
 
     private Call<AccountResponse> getUserCall(Integer page, Integer pageSize){
+
+        minAge = StorageUtil.loadInt(MainApplication.getAppContext(), "minAge", 16);
+        maxAge = StorageUtil.loadInt(MainApplication.getAppContext(), "maxAge", 25);
+        maxDistance = StorageUtil.loadInt(MainApplication.getAppContext(), "maxDistanceUser", 200);
+        languageList = StorageUtil.loadList(MainApplication.getAppContext(), "langListUser");
+        languageLevel = StorageUtil.loadInt(MainApplication.getAppContext(), "langLevelUser", 2);
+        male = StorageUtil.loadBooalen(MainApplication.getAppContext(), "male", true);
+        female = StorageUtil.loadBooalen(MainApplication.getAppContext(), "female", true);
+
+        Boolean gender = null;
+        if (male || female) {
+            gender = male;
+        }
+
+        if (languageList.isEmpty()) {
+            languageList = null;
+        }
+
         return SingletonRetrofitClient.getInsance()
                 .getApi()
                 .getUsers(
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
+                        minAge,
+                        maxAge,
+                        gender,
+                        maxDistance,
+                        languageLevel + 1,
+                        languageList,
                         page,
                         pageSize
                 );

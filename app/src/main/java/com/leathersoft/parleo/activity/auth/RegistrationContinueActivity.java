@@ -236,8 +236,7 @@ public class RegistrationContinueActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_gender)
     public void showGender() {
-
-        String[] genders = {"Male", "Female"};
+        String[] genders = {"Female", "Male"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Your gender");
         builder.setItems(genders, (dialog, which) -> gender = which == 1); //todo check if right?

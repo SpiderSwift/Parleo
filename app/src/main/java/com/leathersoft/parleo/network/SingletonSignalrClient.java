@@ -5,6 +5,7 @@ import android.util.Log;
 import com.leathersoft.parleo.network.model.MessageViewModel;
 import com.microsoft.signalr.HubConnection;
 import com.microsoft.signalr.HubConnectionBuilder;
+import com.microsoft.signalr.HubConnectionState;
 
 public class SingletonSignalrClient {
 
@@ -41,6 +42,13 @@ public class SingletonSignalrClient {
     }
 
     public HubConnection getConnection() {
+        if (!connection.getConnectionState().equals(HubConnectionState.CONNECTED)) {
+            connection = HubConnectionBuilder
+                    .create(HUB_URL)
+                    .build();
+            connection.start();
+            //hubConnection.send(SingletonSignalrClient.CHAT_SUBSCRIBE_COMMAND, chatModel.getId());
+        }
         return connection;
     }
 

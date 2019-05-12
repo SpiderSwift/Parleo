@@ -1,7 +1,12 @@
 package com.leathersoft.parleo.fragment;
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,28 +14,52 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.leathersoft.parleo.MainApplication;
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.activity.InterestsWindowActivity;
+import com.leathersoft.parleo.activity.LanguageWindowActivity;
+import com.leathersoft.parleo.activity.TabsActivity;
+import com.leathersoft.parleo.activity.auth.RegistrationFinishActivity;
 import com.leathersoft.parleo.listener.DateButtonOnClickListener;
+import com.leathersoft.parleo.messaging.Interest;
+import com.leathersoft.parleo.messaging.LanguageModel;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.AccountResponse;
+import com.leathersoft.parleo.network.model.Hobby;
+import com.leathersoft.parleo.network.model.Language;
 import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.network.model.UserUpdateModel;
 import com.leathersoft.parleo.util.ActionBarUtil;
 import com.leathersoft.parleo.util.DateUtil;
+import com.leathersoft.parleo.util.HobbyHolderUtil;
 import com.leathersoft.parleo.util.ImageUtil;
+import com.leathersoft.parleo.util.LanguageHolderUtil;
 import com.leathersoft.parleo.util.LocaleUtil;
+import com.leathersoft.parleo.util.UriUtil;
 
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,6 +93,25 @@ public class EditProfileFragment extends BaseFragment {
     @BindView(R.id.btn_save)
     Button mBtnSave;
 
+    @BindView(R.id.sw_gender)
+    Switch genderSwitch;
+
+    private List<LanguageModel> languageModels = new ArrayList<>();
+    private List<Interest> interests = new ArrayList<>();
+
+    Uri mImageUri;
+
+
+    @OnClick(R.id.btn_your_interests)
+    public void interests(){
+        startActivityForResult(new Intent(MainApplication.getAppContext(), InterestsWindowActivity.class).putExtra("listInterests", (Serializable) interests), 201);
+    }
+
+    @OnClick(R.id.btn_your_languages)
+    public void languages(){
+        startActivityForResult(new Intent(MainApplication.getAppContext(), LanguageWindowActivity.class).putExtra("listLanguages", (Serializable) languageModels), 200);
+    }
+
     @OnClick(R.id.btn_save)
     public void save(){
         if(mUser == null){
@@ -73,6 +121,76 @@ public class EditProfileFragment extends BaseFragment {
         //TODO Maybe add ontext change listener instead of this
         mUser.setAbout(mDescription.getText().toString());
         mUser.setName(mEtProfileName.getText().toString());
+
+
+        List<Language> languages = new ArrayList<>();
+        for (LanguageModel languageModel : languageModels) {
+            if (languageModel.isChosen() == 1) {
+                Language language = new Language();
+                language.setCode(languageModel.getCode());
+                language.setLevel(languageModel.getLevel() + 1); // todo тут нужно подумать, можно ли сделать нормально?
+                languages.add(language);
+            }
+        }
+
+        List<String> hobbies = new ArrayList<>();
+
+        for (Interest interest : interests) {
+            if (interest.isChosen() == 1) {
+                hobbies.add(interest.getName());
+            }
+        }
+
+
+
+        UserUpdateModel model = new UserUpdateModel();
+        model.setAbout(mDescription.getText().toString());
+        model.setBirthdate(mUser.getBirthdate());
+        model.setHobbies(hobbies);
+        model.setLanguages(languages);
+        model.setGender(mUser.isGender());
+        model.setName(mEtProfileName.getText().toString());
+        SingletonRetrofitClient.getInsance()
+                .getApi()
+                .updateUser(model)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+
+        if (mImageUri != null) {
+            Log.d("TAG", mImageUri.toString());
+            File file = new File(UriUtil.getPath(MainApplication.getAppContext(), mImageUri));
+
+            //TODO remove dublicate code MULTIPART DATA
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+            MultipartBody.Part body =
+                    MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
+
+            SingletonRetrofitClient.getInsance()
+                    .getApi()
+                    .putUserImage(body)
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) { }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) { }
+                    });
+        }
+
+        Snackbar.make(getView(),"Saved",Snackbar.LENGTH_LONG).show();
+
 
         //UserUpdateModel model = new UserUpdateModel(mUser);
 
@@ -125,6 +243,7 @@ public class EditProfileFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile_edit,container,false);
         ButterKnife.bind(this,v);
+
         mEtProfileAge.setOnClickListener(new DateButtonOnClickListener(
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -144,6 +263,8 @@ public class EditProfileFragment extends BaseFragment {
     }
 
     private void setInfoToViews(){
+        languageModels = LanguageHolderUtil.getInstance().createModelLists(mUser.getLanguages());
+        interests = HobbyHolderUtil.getHobbyModels(mUser.getHobbies());
         ImageUtil.setImage(mUser.getAccountImage(),mAvatar,R.drawable.avatar_placeholder);
         mEtProfileName.setText(mUser.getName());
         mEtProfileAge.setText(
@@ -154,8 +275,44 @@ public class EditProfileFragment extends BaseFragment {
                 )
         );
         mDescription.setText(mUser.getAbout());
+        genderSwitch.setChecked(mUser.isGender());
+        genderSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mUser.setGender(isChecked);
+        });
     }
 
+
+    @OnClick(R.id.iv_avatar)
+    public void onPhotoChange() {
+        Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        i.addCategory(Intent.CATEGORY_OPENABLE);
+        i.setType("image/*");
+        startActivityForResult(i, 300);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(data==null)return;
+
+        if(requestCode == 300 && resultCode == Activity.RESULT_OK){
+            mImageUri = data.getData();
+            ImageUtil.setImage(mImageUri.toString(),mAvatar,R.color.placeholderGray);
+        }
+
+
+        if (requestCode == 200) {
+            languageModels = (List<LanguageModel>) data.getSerializableExtra("listLanguages");
+            Log.d("TAG", languageModels.toString());
+        }
+
+        if (requestCode == 201) {
+            interests = (List<Interest>) data.getSerializableExtra("listInterests");
+            Log.d("TAG", interests.toString());
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     public static EditProfileFragment newInstance(ReloadDataInterface reloadDataInterface){
         EditProfileFragment fragment =  new EditProfileFragment();

@@ -1,6 +1,7 @@
 package com.leathersoft.parleo.network.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Hobby implements Serializable {
 
@@ -17,6 +18,20 @@ public class Hobby implements Serializable {
         this.category = category;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hobby hobby = (Hobby) o;
+        return Objects.equals(name, hobby.name) &&
+                Objects.equals(category, hobby.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, category);
+    }
 
     public String getName() {
         return name;
