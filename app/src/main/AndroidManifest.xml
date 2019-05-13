@@ -1,33 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.leathersoft.parleo">
 
-    <application
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-feature android:name="android.hardware.location.network" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false"  />
+
+    <application android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/generalnotitle">
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegistrationFinishActivity" />
-        <activity android:name=".activity.RegistrationContinueActivity" />
-        <activity android:name=".activity.RegistrationStartActivity" />
-        <activity android:name=".activity.MainActivity">
+        android:theme="@style/CustomAppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.StartupActivity"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name=".activity.LanguageChooseWindowActivity" />
+
+        <activity android:name=".activity.DeepLinkStartupActivity"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http"
+                    android:host="localhost"
+                    android:port="6800"
+                    android:pathPrefix="/"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.auth.LoginActivity" />
+        <activity android:name=".activity.auth.RegistrationFinishActivity" />
+        <activity android:name=".activity.auth.RegistrationContinueActivity" />
+
+
+
+        <activity android:name=".activity.LanguageWindowActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+
+        <activity android:name=".activity.InterestsWindowActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".activity.auth.RegistrationStartActivity" />
+        <activity android:name=".activity.auth.MainActivity" />
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".activity.TabsActivity" />
-        <activity android:name=".activity.MessagesActivity"></activity>
+        <activity android:name=".activity.TabsActivity">
+
+        </activity>
+        <activity android:name=".activity.ChatActivity"/>
+
+        <activity
+            android:name="com.schibstedspain.leku.LocationPickerActivity"
+            android:label="@string/leku_title_activity_location_picker"
+            android:theme="@style/CustomAppTheme"
+            android:windowSoftInputMode="adjustPan"
+            android:parentActivityName=".activity.TabsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/leku_searchable" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.TabsActivity" />
+        </activity>
+
+
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDAnB_3aaWIvFHHE9VI1AUJsBbCypJ5G6Q"/>
+
     </application>
 
 </manifest>

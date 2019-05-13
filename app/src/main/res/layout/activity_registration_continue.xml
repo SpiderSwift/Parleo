@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity"
+    tools:context=".activity.auth.MainActivity"
     android:background="#FFFFFF">
 
 
@@ -14,27 +14,24 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:text="Sign up to start"
         android:textColor="@android:color/black"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/montserrat"
         android:text="Sign up now and search for people to meet, wherever you are."
         android:textAlignment="center"
@@ -68,7 +65,7 @@
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/tv_drawable_registration"
         android:hint="Your name"
@@ -83,18 +80,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_step" />
 
 
-    <EditText
-        android:id="@+id/te_city"
+    <Button
+        android:id="@+id/te_date"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/tv_drawable_registration"
-        android:hint="Your city"
         android:paddingStart="15dp"
-        android:inputType="textPassword"
+        android:text="Your birthday"
         android:textAlignment="viewStart"
+        android:textAllCaps="false"
         android:textColor="#80000000"
         android:textColorHint="#80000000"
         android:textSize="14sp"
@@ -102,6 +99,27 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/te_name" />
+
+
+    <Button
+        android:id="@+id/btn_gender"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/tv_drawable_registration"
+        android:paddingStart="15dp"
+        android:text="Your gender"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="#80000000"
+        android:textColorHint="#80000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/te_date" />
 
     <Button
         android:id="@+id/btn_languages"
@@ -120,7 +138,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/te_city" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_gender" />
 
 
     <Button
@@ -147,7 +165,7 @@
         android:id="@+id/tv_step"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="Step 2 of 3: Details"
         android:textAlignment="center"
         android:textColor="#80000000"
@@ -158,4 +176,4 @@
 
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,21 +1,39 @@
 package com.leathersoft.parleo.messaging;
 
-import android.graphics.drawable.Drawable;
+import java.io.Serializable;
 
-public class Interest {
+public class Interest implements Serializable {
+
     private String name;
-    private Drawable drawable;
+    private int chosen;
 
-    public Interest(String name, Drawable drawable) {
+    public Interest(String name) {
         this.name = name;
-        this.drawable = drawable;
+        chosen = 0;
     }
 
     public String getName() {
         return name;
     }
 
-    public Drawable getDrawable() {
-        return drawable;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int isChosen() {
+        return chosen;
+    }
+
+    public void setChosen(int chosen) {
+        this.chosen = chosen;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Interest{" +
+                "name='" + name + '\'' +
+                ", chosen=" + chosen +
+                '}';
     }
 }

@@ -3,5 +3,9 @@
     <color name="colorPrimary">#5264FF</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#B3B3B3</color>
+
     <color name="colorButton">#5264FF</color>
+    <color name="colorToolbarTitle">#80000000</color>
+
+    <color name="placeholderGray">#999999</color>
 </resources>

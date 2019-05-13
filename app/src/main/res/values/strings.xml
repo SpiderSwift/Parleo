@@ -5,6 +5,9 @@
 
     <!--event create fragment-->
     <string name="events">Events</string>
+    <string name="event_create_title">New event</string>
+    <string name="event_details">Event details</string>
+
     <string name="event_add_image">+ Add image</string>
     <string name="event_name">Event name</string>
     <string name="event_description">Event description</string>
@@ -12,7 +15,9 @@
     <string name="event_add_location">Add location on Map</string>
     <string name="event_invite_friends">Invite friends</string>
     <string name="event_set_time_date">Set time and date</string>
-    <string name="event_add_languages">Add languages</string>
+    <string name="event_add_language">Add language</string>
+
+    <string name="filter_set_languages">Set languages</string>
 
 
     <!--Event details fragment-->
@@ -29,6 +34,7 @@
 
     <!--Users fragment-->
     <string name="users">Users</string>
+    <string name="friends">Friends</string>
     <string name="users_profile_button">Profile \></string>
     <string name="user_card_placeholder">
         I like PHP, hate React, drink sugarless tea, do nothing, watch anime, play tanks and whatnot. 😊😊
@@ -36,9 +42,31 @@
 
     <!--Profile fragment-->
     <string name="profile">Profile</string>
+    <string name="my_profile">My Profile</string>
+
     <string name="profile_top_text">Tedik\'s profile</string>
     <string name="profile_add_friend">Add friend</string>
     <string name="profile_send_message">Send message</string>
+    <string name="profile_my_meetings">My meetings</string>
+    <string name="profile_friends">Friends</string>
+    <!--Profile edit -->
+    <string name="profile_edit_profile">Edit profile</string>
+
+    <string name="profile_edit_name_hint">Name</string>
+    <string name="profile_edit_age_hint">Age</string>
+    <string name="profile_edit_description_hint">Input description</string>
+    <string name="profile_edit_your_languages">Your languages</string>
+    <string name="profile_edit_your_interests">Your interests</string>
+
+
+    <!--Event filter-->
+    <string name="filter">Filter</string>
+    <string name="save">Save</string>
+    <string name="event_filter_number_of_members">Max number of members</string>
+    <string name="event_filter_1_1">1+1</string>
+    <string name="event_filter_3_plus">3+</string>
+    <string name="event_filter_distance_from_me">Max distance from me (km)</string>
+    <string name="event_filter_languages">Languages</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -48,5 +76,10 @@
 
     <!--Notifications-->
     <string name="notifiactions">Notifications</string>
+
+
+    <!--Snackbar Messages-->
+    <string name="snack_bar_ok">Ok</string>
+    <string name="snack_bar_something_wrong">Something went wrong</string>
 
 </resources>
