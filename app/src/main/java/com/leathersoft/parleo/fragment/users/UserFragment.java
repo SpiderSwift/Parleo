@@ -78,6 +78,8 @@ public class UserFragment extends BaseFragment {
         UserViewModel userViewModel = ViewModelProviders.of(this)
                 .get(UserViewModel.class);
 
+        userViewModel.initFactory(UserFragment.class);
+
         final UserPageAdapter userPageAdapter = new UserPageAdapter(mPushFragmentInterface);
 
         userViewModel.getUserPagedList().observe(this, new Observer<PagedList<User>>() {

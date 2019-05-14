@@ -6,8 +6,6 @@ import androidx.paging.PageKeyedDataSource;
 
 import com.leathersoft.parleo.fragment.events.EventListFragment;
 
-import retrofit2.Call;
-
 public class EventDataSourceFactory extends DataSource.Factory {
 
     private MutableLiveData<PageKeyedDataSource<Integer, Event>> mEventLiveDataSource = new MutableLiveData<>();

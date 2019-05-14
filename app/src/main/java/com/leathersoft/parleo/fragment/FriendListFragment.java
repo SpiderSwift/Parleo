@@ -3,15 +3,11 @@ package com.leathersoft.parleo.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
@@ -20,10 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.leathersoft.parleo.R;
-import com.leathersoft.parleo.fragment.events.EventScreenFragment;
-import com.leathersoft.parleo.fragment.users.UserFragment;
-import com.leathersoft.parleo.network.friends.FriendPageAdapter;
-import com.leathersoft.parleo.network.friends.FriendViewModel;
 import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.network.users.UserPageAdapter;
 import com.leathersoft.parleo.network.users.UserViewModel;
@@ -57,10 +49,12 @@ public class FriendListFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setHasFixedSize(true);
 
-        FriendViewModel userViewModel = ViewModelProviders.of(this)
-                .get(FriendViewModel.class);
+        UserViewModel userViewModel = ViewModelProviders.of(this)
+                .get(UserViewModel.class);
 
-        final FriendPageAdapter userPageAdapter = new FriendPageAdapter(mPushFragmentInterface);
+        userViewModel.initFactory(FriendListFragment.class);
+
+        final UserPageAdapter userPageAdapter = new UserPageAdapter(mPushFragmentInterface);
 
         userViewModel.getUserPagedList().observe(this, new Observer<PagedList<User>>() {
             @Override

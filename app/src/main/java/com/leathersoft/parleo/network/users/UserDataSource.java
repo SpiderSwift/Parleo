@@ -107,7 +107,7 @@ public class UserDataSource extends PageKeyedDataSource<Integer, User> {
         });
     }
 
-    private Call<AccountResponse> getUserCall(Integer page, Integer pageSize){
+    protected Call<AccountResponse> getUserCall(Integer page, Integer pageSize){
 
         minAge = StorageUtil.loadInt(MainApplication.getAppContext(), "minAge", 16);
         maxAge = StorageUtil.loadInt(MainApplication.getAppContext(), "maxAge", 25);
