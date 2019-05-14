@@ -78,7 +78,7 @@ public class ChatFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_dialog, container, false);
         ButterKnife.bind(this, v);
-        adapter = new DialogsListAdapter<>(R.layout.item_chat, (imageView, url, payload) -> ImageUtil.setImage(url,imageView,R.drawable.billy));
+        adapter = new DialogsListAdapter<>(R.layout.item_chat, (imageView, url, payload) -> ImageUtil.setImage(url,imageView,R.color.placeholderGray));
         dialogsList.setAdapter(adapter);
 
         adapter.setOnDialogClickListener(dialog -> startActivity(new Intent(getActivity(), ChatActivity.class).putExtra("chatId", dialog.getId())));

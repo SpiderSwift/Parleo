@@ -67,13 +67,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="22dp"
-                    android:text="@string/event_headline_languages"
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_headline_language"
                     android:textAppearance="@style/event_headline_style"
                     android:gravity="center_vertical"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
             <LinearLayout

@@ -24,7 +24,7 @@ public class Event implements Serializable {
     String email;
 
 
-    List<Language> languages;
+    Lang language;
     List<Hobby> hobbies;
 
 //     "id": "9f8886ec-b6a6-4a9b-80c5-a05e10afe83c",
@@ -145,12 +145,12 @@ public class Event implements Serializable {
         this.email = email;
     }
 
-    public List<Language> getLanguages() {
-        return languages;
+    public Lang getLanguage() {
+        return language;
     }
 
-    public void setLanguages(List<Language> languages) {
-        this.languages = languages;
+    public void setLanguage(Lang language) {
+        this.language = language;
     }
 
     public List<Hobby> getHobbies() {
@@ -175,12 +175,31 @@ public class Event implements Serializable {
                 Objects.equals(name, event.name) &&
                 Objects.equals(description, event.description) &&
                 Objects.equals(email, event.email) &&
-                Objects.equals(languages, event.languages) &&
+                Objects.equals(language, event.language) &&
                 Objects.equals(hobbies, event.hobbies);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, maxParticipants, latitude, longitude, isFinished, distanceFromCurrentUser, email, languages, hobbies);
+        return Objects.hash(id, name, description, maxParticipants, latitude, longitude, isFinished, distanceFromCurrentUser, email, language, hobbies);
+    }
+
+    public class Lang{
+        private String id;
+
+        public Lang() {
+        }
+
+        public Lang(String id) {
+            this.id = id;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
     }
 }
