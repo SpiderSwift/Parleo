@@ -39,6 +39,12 @@
                     android:text="@string/event_headline_members"
                     android:textAppearance="@style/event_headline_style"
                     android:gravity="center_vertical"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_members"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"/>
+
             </LinearLayout>
 
             <LinearLayout

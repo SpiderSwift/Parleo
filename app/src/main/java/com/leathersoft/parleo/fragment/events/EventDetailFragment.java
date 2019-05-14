@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.ScrollableMapView;
+import com.leathersoft.parleo.adapter.MemberIconsAdapter;
 import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.Event;
@@ -62,6 +65,9 @@ public class EventDetailFragment extends BaseFragment {
     TextView mEventPlaceDescription;
     @BindView(R.id.iv_language_icon)
     ImageView mLanguageIcon;
+
+    @BindView(R.id.rv_members)
+    RecyclerView mRvMembers;
 
     @BindView(R.id.iv_language)
     ImageView mLanguage;
@@ -128,6 +134,13 @@ public class EventDetailFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_event_details,container,false);
         ButterKnife.bind(this,v);
+
+
+
+        mRvMembers.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        mRvMembers.setAdapter(new MemberIconsAdapter(mEvent.getParticipants()));
+
+
 
         initGoogleMap(savedInstanceState);
 

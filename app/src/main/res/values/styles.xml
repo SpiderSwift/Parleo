@@ -4,9 +4,13 @@
     <style name="CustomAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
 
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/montserrat</item> <!-- target android sdk versions < 26 and > 14 if theme other than AppCompat -->
+
         <!--<item name="android:actionBarStyle">@style/AppTheme.ActionBarStyle</item>-->
         <!--<item name="actionBarStyle">@style/AppTheme.ActionBarStyle</item>-->
     </style>
+
 
     <!-- the theme applied to the application or activity -->
 
