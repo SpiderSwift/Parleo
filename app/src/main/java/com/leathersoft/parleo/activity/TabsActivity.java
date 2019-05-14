@@ -249,9 +249,9 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
             case R.id.bottom_nav_chats:
                 mFragNavController.switchTab(INDEX_CHATS);
                 return true;
-            case R.id.bottom_nav_notifications:
-                mFragNavController.switchTab(INDEX_NOTIFICATIONS);
-                return true;
+//            case R.id.bottom_nav_notifications:
+//                mFragNavController.switchTab(INDEX_NOTIFICATIONS);
+//                return true;
             case R.id.bottom_nav_profile:
                 mFragNavController.switchTab(INDEX_MY_PROFILE);
                 return true;
