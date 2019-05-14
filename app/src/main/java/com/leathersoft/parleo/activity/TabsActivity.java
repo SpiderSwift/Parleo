@@ -61,6 +61,7 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
     private static final int INDEX_CHATS = FragNavController.TAB3;
     private static final int INDEX_NOTIFICATIONS = FragNavController.TAB4;
     private static final int INDEX_MY_PROFILE = FragNavController.TAB5;
+    private int mCurrentSelectedIndex = INDEX_EVENTS;
 
     Fragment mEventScreenFragment;
     Fragment mUserFragment;
@@ -222,6 +223,7 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
                 return fragment;
             }
         });
+
         mFragNavController.initialize(INDEX_EVENTS,savedInstanceState);
 
 
@@ -241,22 +243,30 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.bottom_nav_events:
-                mFragNavController.switchTab(INDEX_EVENTS);
+                processNavItemClick(INDEX_EVENTS);
                 return true;
             case R.id.bottom_nav_users:
-                mFragNavController.switchTab(INDEX_USERS);
+                processNavItemClick(INDEX_USERS);
                 return true;
             case R.id.bottom_nav_chats:
-                mFragNavController.switchTab(INDEX_CHATS);
+                processNavItemClick(INDEX_CHATS);
                 return true;
 //            case R.id.bottom_nav_notifications:
 //                mFragNavController.switchTab(INDEX_NOTIFICATIONS);
 //                return true;
             case R.id.bottom_nav_profile:
-                mFragNavController.switchTab(INDEX_MY_PROFILE);
+                processNavItemClick(INDEX_MY_PROFILE);
                 return true;
         }
         return false;
+    }
+
+    private void processNavItemClick(int index){
+        if(mCurrentSelectedIndex == index){
+            mFragNavController.clearStack();
+        }
+        mCurrentSelectedIndex = index;
+        mFragNavController.switchTab(index);
     }
 
     @Override
