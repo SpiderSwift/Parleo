@@ -265,6 +265,12 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
     }
 
     @Override
+    public void replace(Fragment fragment) {
+
+        mFragNavController.replaceFragment(fragment);
+    }
+
+    @Override
     public void onBackPressed() {
 
         if(mFragNavController.isRootFragment() || !mFragNavController.popFragment()){

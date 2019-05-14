@@ -17,8 +17,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.fragment.events.EventScreenFragment;
 import com.leathersoft.parleo.fragment.users.UserFragment;
 import com.leathersoft.parleo.network.friends.FriendPageAdapter;
 import com.leathersoft.parleo.network.friends.FriendViewModel;
@@ -30,6 +32,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FriendListFragment extends BaseFragment {
+
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mRefreshLayout;
 
     @BindView(R.id.recycler_view_users)
     RecyclerView mRecyclerView;
@@ -65,6 +70,13 @@ public class FriendListFragment extends BaseFragment {
         });
 
         mRecyclerView.setAdapter(userPageAdapter);
+
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPushFragmentInterface.replace(FriendListFragment.newInstance());
+            }
+        });
         return v;
     }
 
