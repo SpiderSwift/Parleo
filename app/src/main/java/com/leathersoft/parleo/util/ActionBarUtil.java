@@ -33,5 +33,16 @@ public class ActionBarUtil {
     }
 
 
+    public static void showBackButton(Activity activity,boolean state){
+
+        if(activity instanceof AppCompatActivity){
+            AppCompatActivity appCompatActivity = (AppCompatActivity) activity;
+            if(appCompatActivity.getSupportActionBar() != null){
+                appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(state);
+            }
+        }
+    }
+
+
 
 }

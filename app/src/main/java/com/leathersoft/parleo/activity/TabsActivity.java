@@ -1,8 +1,11 @@
 package com.leathersoft.parleo.activity;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -44,6 +47,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Completable;
@@ -91,7 +95,7 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             SingletonSignalrClient.setCurrentId(response.body() != null ? response.body().getId() : null);
                         }
                     }
@@ -103,7 +107,19 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
                 });
 
 
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                // TODO: Consider calling
+//                //    Activity#requestPermissions
+//                // here to request the missing permissions, and then overriding
+//                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                //                                          int[] grantResults)
+//                // to handle the case where the user grants the permission. See the documentation
+//                // for Activity#requestPermissions for more details.
+//                return;
+//            }
+//        }
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location != null) {
 
