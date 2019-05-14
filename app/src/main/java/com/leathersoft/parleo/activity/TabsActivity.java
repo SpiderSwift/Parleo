@@ -104,22 +104,26 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
 
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
-        LocationModel model = new LocationModel(latitude, longitude);
+        if (location != null) {
 
-        SingletonRetrofitClient.getInsance().getApi().putLocation(model)
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            LocationModel model = new LocationModel(latitude, longitude);
 
-                    }
+            SingletonRetrofitClient.getInsance().getApi().putLocation(model)
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        }
+                    });
+        }
+
 
 
         SingletonRetrofitClient.getInsance().getApi().getHobbies()

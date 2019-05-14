@@ -57,6 +57,7 @@
     <string name="profile_edit_description_hint">Input description</string>
     <string name="profile_edit_your_languages">Your languages</string>
     <string name="profile_edit_your_interests">Your interests</string>
+    <string name="profile_edit_gender">Female/Male</string>
 
 
     <!--Event filter-->

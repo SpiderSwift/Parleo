@@ -49,7 +49,7 @@ public class MyProfileFragment extends BaseFragment implements ReloadDataInterfa
     }
 
 
-    @OnClick(R.id.tv_friends)
+    @OnClick(R.id.ll_friends)
     public void openFriends() {
         mPushFragmentInterface.push(FriendListFragment.newInstance());
     }

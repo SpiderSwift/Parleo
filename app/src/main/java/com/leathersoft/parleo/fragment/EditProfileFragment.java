@@ -42,6 +42,7 @@ import com.leathersoft.parleo.util.HobbyHolderUtil;
 import com.leathersoft.parleo.util.ImageUtil;
 import com.leathersoft.parleo.util.LanguageHolderUtil;
 import com.leathersoft.parleo.util.LocaleUtil;
+import com.leathersoft.parleo.util.TouchUtils;
 import com.leathersoft.parleo.util.UriUtil;
 
 import org.json.JSONObject;
@@ -243,6 +244,7 @@ public class EditProfileFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile_edit,container,false);
         ButterKnife.bind(this,v);
+        TouchUtils.setEditTextMultilineScrolling(mDescription);
 
         mEtProfileAge.setOnClickListener(new DateButtonOnClickListener(
                 new DatePickerDialog.OnDateSetListener() {
@@ -265,7 +267,7 @@ public class EditProfileFragment extends BaseFragment {
     private void setInfoToViews(){
         languageModels = LanguageHolderUtil.getInstance().createModelLists(mUser.getLanguages());
         interests = HobbyHolderUtil.getHobbyModels(mUser.getHobbies());
-        ImageUtil.setImage(mUser.getAccountImage(),mAvatar,R.drawable.avatar_placeholder);
+        ImageUtil.setImage(mUser.getAccountImage(),mAvatar,R.color.placeholderGray);
         mEtProfileName.setText(mUser.getName());
         mEtProfileAge.setText(
                 String.format(
