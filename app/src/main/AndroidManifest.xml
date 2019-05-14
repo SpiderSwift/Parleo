@@ -33,6 +33,8 @@
 
         <activity android:name=".activity.LanguageChooseWindowActivity" />
 
+        <activity android:name=".activity.auth.VerifyActivity" />
+
         <activity android:name=".activity.DeepLinkStartupActivity"
             android:launchMode="singleInstance">
             <intent-filter>

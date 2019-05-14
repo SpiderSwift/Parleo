@@ -54,7 +54,7 @@ public class RegistrationStartActivity extends AppCompatActivity {
                             Log.d("TAG", response.toString());
                             StorageUtil.save(RegistrationStartActivity.this,"email", editEmail.getText().toString());
                             StorageUtil.save(RegistrationStartActivity.this,"password", editPassword.getText().toString());
-                            onBackPressed();
+                            startActivity(new Intent(getApplicationContext(), VerifyActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                         } else {
                             Snackbar.make(editEmail,"failed",Snackbar.LENGTH_LONG).show();
                             Log.d("TAG", response.toString());
