@@ -17,6 +17,7 @@ import com.leathersoft.parleo.util.ActionBarUtil;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +26,9 @@ public class EventScreenFragment extends BaseFragment {
 
     @BindView(R.id.events_tablayout) TabLayout mTabLayout;
     @BindView(R.id.events_viewpager) ViewPager mViewPager;
+
+//    @BindView(R.id.swipe_refresh_layout)
+//    SwipeRefreshLayout mRefreshLayout;
 
 
     EventsPagerAdapter mEventsPagerAdapter;
@@ -51,6 +55,15 @@ public class EventScreenFragment extends BaseFragment {
 
         mViewPager.setAdapter(mEventsPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+
+
+//        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                mPushFragmentInterface.push(EventScreenFragment.newInstance());
+//            }
+//        });
+
         return v;
     }
 

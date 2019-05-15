@@ -20,13 +20,10 @@ public class Event implements Serializable {
     Date startTime;
     Date endDate;
 
-    int distanceFromCurrentUser;
-    String email;
 
+    Lang language;
 
-    List<Language> languages;
-    List<Hobby> hobbies;
-
+    List<Particiant> participants;
 //     "id": "9f8886ec-b6a6-4a9b-80c5-a05e10afe83c",
 //      "name": "Awesome event",
 //      "description": "Event",
@@ -129,37 +126,25 @@ public class Event implements Serializable {
         this.endDate = endDate;
     }
 
-    public int getDistanceFromCurrentUser() {
-        return distanceFromCurrentUser;
+
+
+
+    public Lang getLanguage() {
+        return language;
     }
 
-    public void setDistanceFromCurrentUser(int distanceFromCurrentUser) {
-        this.distanceFromCurrentUser = distanceFromCurrentUser;
+    public void setLanguage(Lang language) {
+        this.language = language;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Particiant> getParticipants() {
+        return participants;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setParticipants(List<Particiant> participants) {
+        this.participants = participants;
     }
 
-    public List<Language> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(List<Language> languages) {
-        this.languages = languages;
-    }
-
-    public List<Hobby> getHobbies() {
-        return hobbies;
-    }
-
-    public void setHobbies(List<Hobby> hobbies) {
-        this.hobbies = hobbies;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -170,17 +155,56 @@ public class Event implements Serializable {
                 Float.compare(event.latitude, latitude) == 0 &&
                 Float.compare(event.longitude, longitude) == 0 &&
                 isFinished == event.isFinished &&
-                distanceFromCurrentUser == event.distanceFromCurrentUser &&
                 Objects.equals(id, event.id) &&
                 Objects.equals(name, event.name) &&
                 Objects.equals(description, event.description) &&
-                Objects.equals(email, event.email) &&
-                Objects.equals(languages, event.languages) &&
-                Objects.equals(hobbies, event.hobbies);
+                Objects.equals(image, event.image) &&
+                Objects.equals(startTime, event.startTime) &&
+                Objects.equals(endDate, event.endDate) &&
+                Objects.equals(language, event.language) &&
+                Objects.equals(participants, event.participants);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, maxParticipants, latitude, longitude, isFinished, distanceFromCurrentUser, email, languages, hobbies);
+        return Objects.hash(id, name, description, image, maxParticipants, latitude, longitude, isFinished, startTime, endDate, language, participants);
+    }
+
+    public class Lang implements Serializable{
+        private String id;
+
+        public Lang() {
+        }
+
+        public Lang(String id) {
+            this.id = id;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+    }
+
+
+    public class Particiant implements Serializable{
+        private String id;
+        private String image;
+        private String name;
+
+        public String getId() {
+            return id;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }

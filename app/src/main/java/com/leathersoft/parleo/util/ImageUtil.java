@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.util;
 
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -17,10 +18,6 @@ public class ImageUtil {
                 .error(placeholderId)
                 .into(imageView);
 
-
-    }
-
-    public static void setBackground(String path, ImageView imageView, int placeholderId){
 
     }
 }

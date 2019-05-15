@@ -18,7 +18,6 @@ public class UserPageAdapter extends PagedListAdapter<User, UserViewHolder> {
 
     private PushFragmentInterface mPushFragmentInterface;
 
-
     public UserPageAdapter(PushFragmentInterface pushFragmentInterface) {
         super(DIFF_CALLBACK);
         mPushFragmentInterface = pushFragmentInterface;
@@ -36,7 +35,6 @@ public class UserPageAdapter extends PagedListAdapter<User, UserViewHolder> {
         User user = getItem(position);
 
         if(user != null){
-
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

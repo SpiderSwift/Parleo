@@ -75,7 +75,11 @@ public class ProfileFragment extends BaseFragment {
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if (response.isSuccessful()) {
                                 mUser.setFriend(false);
-                                mBtnAddFriend.setText(mUser.isFriend() ? "Remove friend" : "Add friend");
+                                mBtnAddFriend.setText(mUser.isFriend() ?
+                                        getResources().getString(R.string.users_profile_friend_remove)
+                                        :
+                                        getResources().getString(R.string.users_profile_friend_add)
+                                );
                             }
                         }
 
@@ -91,7 +95,11 @@ public class ProfileFragment extends BaseFragment {
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if (response.isSuccessful()) {
                                 mUser.setFriend(true);
-                                mBtnAddFriend.setText(mUser.isFriend() ? "Remove friend" : "Add friend");
+                                mBtnAddFriend.setText(mUser.isFriend() ?
+                                                getResources().getString(R.string.users_profile_friend_remove)
+                                                :
+                                                getResources().getString(R.string.users_profile_friend_add)
+                                );
                             }
                         }
 
@@ -113,7 +121,11 @@ public class ProfileFragment extends BaseFragment {
         mUserName.setText(mUser.getName());
         mUserDescription.setText(mUser.getAbout());
 
-        mBtnAddFriend.setText(mUser.isFriend() ? "Remove friend" : "Add friend");
+        mBtnAddFriend.setText(mUser.isFriend() ?
+                getResources().getString(R.string.users_profile_friend_remove)
+                :
+                getResources().getString(R.string.users_profile_friend_add)
+        );
 
         StringBuilder desc = new StringBuilder("Hobbies : ");
         for (Hobby hobby : mUser.getHobbies()) {

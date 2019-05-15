@@ -4,9 +4,13 @@
     <style name="CustomAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
 
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/montserrat</item> <!-- target android sdk versions < 26 and > 14 if theme other than AppCompat -->
+
         <!--<item name="android:actionBarStyle">@style/AppTheme.ActionBarStyle</item>-->
         <!--<item name="actionBarStyle">@style/AppTheme.ActionBarStyle</item>-->
     </style>
+
 
     <!-- the theme applied to the application or activity -->
 
@@ -22,13 +26,13 @@
         <!--<item name="colorControlNormal">@color/blue</item>-->
         <!--&lt;!&ndash; Applies to views in their activated state (i.e checked or switches) &ndash;&gt;-->
         <!--<item name="colorControlActivated">@color/blue</item>-->
-        <!--&lt;!&ndash; Applied to framework control highlights (i.e ripples or list selectors) &ndash;&gt;-->
-        <!--<item name="colorControlHighlight">@color/blue</item>-->
+        <!-- Applied to framework control highlights (i.e ripples or list selectors) -->
+        <item name="colorControlHighlight">@color/colorAccent</item>
 
         <!--&lt;!&ndash; Enable these below if you want clicking icons to trigger a ripple effect &ndash;&gt;-->
 
-        <!--<item name="selectableItemBackground">?android:selectableItemBackground</item>-->
-        <!--<item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>-->
+        <item name="selectableItemBackground">?android:selectableItemBackground</item>
+        <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
 
     </style>
 

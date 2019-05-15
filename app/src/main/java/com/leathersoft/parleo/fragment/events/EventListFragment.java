@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.BaseFragment;
+import com.leathersoft.parleo.fragment.PushFragmentInterface;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.EventPageAdapter;
 import com.leathersoft.parleo.network.model.EventViewModel;
@@ -19,10 +20,16 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class EventListFragment extends BaseFragment {
+
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mRefreshLayout;
+
     @BindView(R.id.recycler_view_events) RecyclerView mRecyclerView;
     @Nullable
     @Override
@@ -49,6 +56,13 @@ public class EventListFragment extends BaseFragment {
         });
 
         mRecyclerView.setAdapter(eventPageAdapter);
+
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPushFragmentInterface.replace(EventScreenFragment.newInstance());
+            }
+        });
 
         return v;
     }

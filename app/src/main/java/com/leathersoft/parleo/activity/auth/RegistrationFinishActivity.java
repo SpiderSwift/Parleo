@@ -75,7 +75,9 @@ public class RegistrationFinishActivity extends AppCompatActivity {
             Log.d("TAG", mImageUri.toString());
             File file = new File(UriUtil.getPath(this, mImageUri));
             if(!file.exists()){
-                startActivity(new Intent(getApplicationContext(), TabsActivity.class));
+                Intent intent = new Intent(getApplicationContext(), TabsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
 
             //TODO remove dublicate code MULTIPART DATA
@@ -98,7 +100,9 @@ public class RegistrationFinishActivity extends AppCompatActivity {
                     });
         }
 
-        startActivity(new Intent(getApplicationContext(), TabsActivity.class));
+        Intent intent = new Intent(getApplicationContext(), TabsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
 
         //finish();
     }

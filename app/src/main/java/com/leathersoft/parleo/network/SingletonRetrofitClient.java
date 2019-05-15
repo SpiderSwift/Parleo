@@ -57,5 +57,4 @@ public class SingletonRetrofitClient {
         return retrofit.create(Api.class);
     }
 
-
 }

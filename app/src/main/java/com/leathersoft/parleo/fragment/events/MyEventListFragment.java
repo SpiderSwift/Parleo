@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.fragment.BaseFragment;
@@ -31,6 +32,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyEventListFragment extends BaseFragment {
+
+
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mRefreshLayout;
 
     @BindView(R.id.recycler_view_events)
     RecyclerView mRecyclerView;
@@ -60,6 +65,13 @@ public class MyEventListFragment extends BaseFragment {
         });
 
         mRecyclerView.setAdapter(eventPageAdapter);
+
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPushFragmentInterface.replace(EventScreenFragment.newInstance());
+            }
+        });
 
         return v;
     }

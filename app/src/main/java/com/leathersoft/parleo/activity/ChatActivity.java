@@ -2,6 +2,7 @@ package com.leathersoft.parleo.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.leathersoft.parleo.R;
@@ -12,6 +13,7 @@ import com.leathersoft.parleo.network.model.ChatListModel;
 import com.leathersoft.parleo.network.model.ChatModel;
 import com.leathersoft.parleo.network.model.MessageListModel;
 import com.leathersoft.parleo.network.model.MessageViewModel;
+import com.leathersoft.parleo.util.ActionBarUtil;
 import com.leathersoft.parleo.util.ChatUtil;
 import com.leathersoft.parleo.util.ImageUtil;
 import com.microsoft.signalr.HubConnection;
@@ -25,6 +27,7 @@ import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.Collections;
 import java.util.Date;
@@ -138,6 +141,11 @@ public class ChatActivity extends AppCompatActivity {
         }, MessageViewModel.class);
 
 
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        ActionBarUtil.setFragmentTitle(this,R.string.chat);
+        ActionBarUtil.setDisplayHomeAsUpState(this,true);
+
 
         messageInput.setInputListener(input -> {
             MessageViewModel messageViewModel = new MessageViewModel();
@@ -151,6 +159,16 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return(super.onOptionsItemSelected(item));
+    }
 
     @Override
     protected void onDestroy() {

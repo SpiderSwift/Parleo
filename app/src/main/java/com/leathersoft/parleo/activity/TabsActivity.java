@@ -1,8 +1,11 @@
 package com.leathersoft.parleo.activity;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -44,6 +47,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Completable;
@@ -61,6 +65,7 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
     private static final int INDEX_CHATS = FragNavController.TAB3;
     private static final int INDEX_NOTIFICATIONS = FragNavController.TAB4;
     private static final int INDEX_MY_PROFILE = FragNavController.TAB5;
+    private int mCurrentSelectedIndex = INDEX_EVENTS;
 
     Fragment mEventScreenFragment;
     Fragment mUserFragment;
@@ -90,7 +95,7 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             SingletonSignalrClient.setCurrentId(response.body() != null ? response.body().getId() : null);
                         }
                     }
@@ -102,24 +107,40 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
                 });
 
 
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                // TODO: Consider calling
+//                //    Activity#requestPermissions
+//                // here to request the missing permissions, and then overriding
+//                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                //                                          int[] grantResults)
+//                // to handle the case where the user grants the permission. See the documentation
+//                // for Activity#requestPermissions for more details.
+//                return;
+//            }
+//        }
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
-        LocationModel model = new LocationModel(latitude, longitude);
+        if (location != null) {
 
-        SingletonRetrofitClient.getInsance().getApi().putLocation(model)
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            LocationModel model = new LocationModel(latitude, longitude);
 
-                    }
+            SingletonRetrofitClient.getInsance().getApi().putLocation(model)
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        }
+                    });
+        }
+
 
 
         SingletonRetrofitClient.getInsance().getApi().getHobbies()
@@ -148,7 +169,7 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
 
                             Locale locale = new Locale(language.getId());
 
-                            //todo спасибо беку и ребятам на пк версии за охуенный костыль
+                            //todo спасибо беку и ребятам на пк версии за костыль
                             if (language.getId().equals("gb")) {
                                 languageModels.add(new LanguageModel(language.getId(),"English", 0, 0));
                             } else if (language.getId().equals("bh")) {
@@ -218,6 +239,7 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
                 return fragment;
             }
         });
+
         mFragNavController.initialize(INDEX_EVENTS,savedInstanceState);
 
 
@@ -237,27 +259,37 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.bottom_nav_events:
-                mFragNavController.switchTab(INDEX_EVENTS);
+                processNavItemClick(INDEX_EVENTS);
                 return true;
             case R.id.bottom_nav_users:
-                mFragNavController.switchTab(INDEX_USERS);
+                processNavItemClick(INDEX_USERS);
                 return true;
             case R.id.bottom_nav_chats:
-                mFragNavController.switchTab(INDEX_CHATS);
-                return true;
-            case R.id.bottom_nav_notifications:
-                mFragNavController.switchTab(INDEX_NOTIFICATIONS);
+                processNavItemClick(INDEX_CHATS);
                 return true;
             case R.id.bottom_nav_profile:
-                mFragNavController.switchTab(INDEX_MY_PROFILE);
+                processNavItemClick(INDEX_MY_PROFILE);
                 return true;
         }
         return false;
     }
 
+    private void processNavItemClick(int index){
+        if(mFragNavController.getCurrentStackIndex() == index){
+            mFragNavController.clearStack();
+        }
+        mFragNavController.switchTab(index);
+    }
+
     @Override
     public void push(Fragment fragment) {
         mFragNavController.pushFragment(fragment);
+    }
+
+    @Override
+    public void replace(Fragment fragment) {
+
+        mFragNavController.replaceFragment(fragment);
     }
 
     @Override

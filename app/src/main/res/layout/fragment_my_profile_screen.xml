@@ -30,7 +30,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+
             android:background="@drawable/transparent_bg_bordered_button"
+
             android:fontFamily="@font/montserrat"
             android:text="@string/profile_edit_profile"
             android:textAllCaps="false"
@@ -38,26 +40,37 @@
             app:layout_constraintStart_toStartOf="@+id/include_profile_header"
             app:layout_constraintTop_toBottomOf="@+id/include_profile_header"/>
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/edit_profile_btn"
-            app:layout_constraintTop_toBottomOf="@+id/edit_profile_btn"
-            app:srcCompat="@drawable/ic_invite_friends" />
-
-        <TextView
-            android:id="@+id/tv_friends"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_friends"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/profile_friends"
-            android:textAppearance="@style/create_event_button_text_style"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/edit_profile_btn"
+            app:layout_constraintStart_toStartOf="@+id/edit_profile_btn"
+            app:layout_constraintTop_toBottomOf="@+id/edit_profile_btn">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                app:layout_constraintStart_toStartOf="@+id/edit_profile_btn"
+                app:layout_constraintTop_toBottomOf="@+id/edit_profile_btn"
+                app:srcCompat="@drawable/ic_invite_friends" />
+
+            <TextView
+                android:id="@+id/tv_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/profile_friends"
+                android:textAppearance="@style/create_event_button_text_style"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        </LinearLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

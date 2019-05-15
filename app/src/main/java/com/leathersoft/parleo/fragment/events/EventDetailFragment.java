@@ -1,5 +1,6 @@
 package com.leathersoft.parleo.fragment.events;
 
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,12 +24,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.leathersoft.parleo.R;
 import com.leathersoft.parleo.ScrollableMapView;
+import com.leathersoft.parleo.adapter.MemberIconsAdapter;
 import com.leathersoft.parleo.fragment.BaseFragment;
 import com.leathersoft.parleo.network.SingletonRetrofitClient;
 import com.leathersoft.parleo.network.model.Event;
 import com.leathersoft.parleo.network.model.User;
 import com.leathersoft.parleo.util.ActionBarUtil;
 import com.leathersoft.parleo.util.ImageUtil;
+import com.leathersoft.parleo.util.LanguageHolderUtil;
 import com.leathersoft.parleo.util.LocaleUtil;
 
 import java.io.IOException;
@@ -60,6 +65,12 @@ public class EventDetailFragment extends BaseFragment {
     TextView mEventPlaceDescription;
     @BindView(R.id.iv_language_icon)
     ImageView mLanguageIcon;
+
+    @BindView(R.id.rv_members)
+    RecyclerView mRvMembers;
+
+    @BindView(R.id.iv_language)
+    ImageView mLanguage;
 
     @BindView(R.id.tv_date_and_time)
     TextView mTvEventDateTime;
@@ -124,11 +135,30 @@ public class EventDetailFragment extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_event_details,container,false);
         ButterKnife.bind(this,v);
 
+
+
+        mRvMembers.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        mRvMembers.setAdapter(new MemberIconsAdapter(mEvent.getParticipants()));
+
+
+
         initGoogleMap(savedInstanceState);
 
         ImageUtil.setImage(mEvent.getImage(),mEventImage,R.drawable.cafe_placeholder);
         mEventPlaceTitle.setText(mEvent.getName());
         mEventPlaceDescription.setText(mEvent.getDescription());
+
+        Event.Lang language = mEvent.getLanguage();
+        if(language == null){
+            mLanguage.setVisibility(View.INVISIBLE);
+        }else{
+
+            mLanguage.setVisibility(View.VISIBLE);
+            Drawable icon = LanguageHolderUtil.getInstance()
+                    .findById(language.getId());
+
+            mLanguage.setImageDrawable(icon);
+        }
 
         SimpleDateFormat mDateFormat = new SimpleDateFormat(START_DATE_FORMAT, LocaleUtil.getCurrentLocale(getContext()));
         mTvEventDateTime.setText(

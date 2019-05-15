@@ -26,7 +26,7 @@
 
     <string name="event_headline_members">Members</string>
     <string name="event_headline_date_time">Date and Time:</string>
-    <string name="event_headline_languages">Languages:</string>
+    <string name="event_headline_language">Language:</string>
     <string name="event_headline_place">Place:</string>
 
     <string name="event_button_join">Join</string>
@@ -39,6 +39,9 @@
     <string name="user_card_placeholder">
         I like PHP, hate React, drink sugarless tea, do nothing, watch anime, play tanks and whatnot. 😊😊
     </string>
+    <string name="users_profile_friend_add">Add friend</string>
+    <string name="users_profile_friend_remove">Remove friend</string>
+
 
     <!--Profile fragment-->
     <string name="profile">Profile</string>
@@ -57,6 +60,7 @@
     <string name="profile_edit_description_hint">Input description</string>
     <string name="profile_edit_your_languages">Your languages</string>
     <string name="profile_edit_your_interests">Your interests</string>
+    <string name="profile_edit_gender">Female/Male</string>
 
 
     <!--Event filter-->
@@ -73,6 +77,7 @@
 
     <!--Chats-->
     <string name="chats">Chats</string>
+    <string name="chat">Chat</string>
 
     <!--Notifications-->
     <string name="notifiactions">Notifications</string>
