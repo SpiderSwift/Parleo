@@ -50,7 +50,9 @@ public class LoginActivity extends AppCompatActivity {
                             SingletonRetrofitClient.setToken(response.body().getToken());
                             StorageUtil.save(LoginActivity.this, "email", editEmail.getText().toString());
                             StorageUtil.save(LoginActivity.this, "password", editPassword.getText().toString());
-                            startActivity(new Intent(getApplicationContext(), TabsActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), TabsActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
 
                         } else {
                             try {

@@ -15,21 +15,6 @@ public class UserViewModel extends ViewModel {
     private LiveData<PagedList<User>> mUserPagedList;
     private LiveData<PageKeyedDataSource<Integer,User>> mLiveDataSource;
 
-
-
-//    public UserViewModel() {
-//        UserDataSourceFactory userDataSourceFactory = new UserDataSourceFactory();
-//        mLiveDataSource = userDataSourceFactory.getUserLiveDataSource();
-//        PagedList.Config config =
-//                (new PagedList.Config.Builder())
-//                .setEnablePlaceholders(false)
-//                .setPageSize(UserDataSource.PAGE_SIZE)
-//                .build();
-//
-//        mUserPagedList = (new LivePagedListBuilder(userDataSourceFactory,config)).build();
-//    }
-
-
     private void initData(Class classId){
         UserDataSourceFactory userDataSourceFactory = new UserDataSourceFactory(classId);
         mLiveDataSource = userDataSourceFactory.getUserLiveDataSource();

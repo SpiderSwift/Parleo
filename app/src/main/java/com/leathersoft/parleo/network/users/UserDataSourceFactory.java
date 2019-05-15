@@ -8,8 +8,6 @@ import com.leathersoft.parleo.fragment.users.UserFragment;
 import com.leathersoft.parleo.network.model.User;
 
 public class UserDataSourceFactory extends DataSource.Factory {
-
-
     private MutableLiveData<PageKeyedDataSource<Integer, User>> mUserLiveDataSource = new MutableLiveData<>();
 
     private Class mClass;

@@ -169,7 +169,7 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
 
                             Locale locale = new Locale(language.getId());
 
-                            //todo спасибо беку и ребятам на пк версии за охуенный костыль
+                            //todo спасибо беку и ребятам на пк версии за костыль
                             if (language.getId().equals("gb")) {
                                 languageModels.add(new LanguageModel(language.getId(),"English", 0, 0));
                             } else if (language.getId().equals("bh")) {
@@ -267,9 +267,6 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
             case R.id.bottom_nav_chats:
                 processNavItemClick(INDEX_CHATS);
                 return true;
-//            case R.id.bottom_nav_notifications:
-//                mFragNavController.switchTab(INDEX_NOTIFICATIONS);
-//                return true;
             case R.id.bottom_nav_profile:
                 processNavItemClick(INDEX_MY_PROFILE);
                 return true;
@@ -278,10 +275,9 @@ public class TabsActivity extends AppCompatActivity implements PushFragmentInter
     }
 
     private void processNavItemClick(int index){
-        if(mCurrentSelectedIndex == index){
+        if(mFragNavController.getCurrentStackIndex() == index){
             mFragNavController.clearStack();
         }
-        mCurrentSelectedIndex = index;
         mFragNavController.switchTab(index);
     }
 

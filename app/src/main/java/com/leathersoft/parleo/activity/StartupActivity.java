@@ -43,10 +43,6 @@ public class StartupActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
@@ -68,9 +64,9 @@ public class StartupActivity extends AppCompatActivity {
                                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                                     if (response.isSuccessful()) {
                                         SingletonRetrofitClient.setToken(response.body().getToken());
-                                        startActivity(new Intent(getApplicationContext(), TabsActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                        startActivity(new Intent(getApplicationContext(), TabsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                                     } else {
-                                        startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                                     }
 
                                 }

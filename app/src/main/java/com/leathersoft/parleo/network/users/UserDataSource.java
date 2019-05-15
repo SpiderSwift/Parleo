@@ -17,7 +17,6 @@ import retrofit2.Response;
 
 public class UserDataSource extends PageKeyedDataSource<Integer, User> {
 
-
     private int minAge;
     private int maxAge;
     private int maxDistance;
