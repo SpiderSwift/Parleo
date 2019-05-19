@@ -113,7 +113,7 @@ public class FilterEventFragment extends BaseFragment {
         maxDistance = StorageUtil.loadInt(getContext(), "maxDistanceEvent");
         languageList = StorageUtil.loadList(getContext(), "langListEvent");
 
-        tvMaxDistance.setText(String.valueOf(maxDistance));
+        tvMaxDistance.setText(String.valueOf(200));
         tvMaxMember.setText(String.valueOf(maxMember));
 
         barDistance.setProgress(maxDistance);

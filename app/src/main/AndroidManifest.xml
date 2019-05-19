@@ -67,7 +67,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".activity.TabsActivity">
+        <activity android:name=".activity.TabsActivity"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity android:name=".activity.ChatActivity"/>

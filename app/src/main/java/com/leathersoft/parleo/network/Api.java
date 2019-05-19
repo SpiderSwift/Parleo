@@ -102,6 +102,9 @@ public interface Api {
     @GET("Users/current")
     Call<User> getMe();
 
+    @GET("Users/{userId}")
+    Call<User> getUserById(@Path("userId") String id);
+
 
 
     @GET("Users/current/attending-events")

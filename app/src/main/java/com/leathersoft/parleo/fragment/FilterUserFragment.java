@@ -127,7 +127,7 @@ public class FilterUserFragment extends BaseFragment {
         barLevel.setProgress(languageLevel);
         barDistance.setProgress(maxDistance);
 
-        tvMaxDistance.setText(String.valueOf(maxDistance));
+        tvMaxDistance.setText(String.valueOf(200));
 
         tvMinLevel.setText(LanguageModel.langLevelMap.get(languageLevel));
 

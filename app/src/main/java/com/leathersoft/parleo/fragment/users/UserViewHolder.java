@@ -38,6 +38,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         ImageUtil.setImage(user.getAccountImage(),mUserAvatar,R.color.placeholderGray);
         mUserName.setText(user.getName());
         mUserDescription.setText(user.getAbout());
-        mUserDistance.setText(""+ user.getDistanceFromCurrentUser());
+        //TODO HARDCODED STRING
+        mUserDistance.setText(""+ user.getDistanceFromCurrentUser() + " km away");
     }
 }

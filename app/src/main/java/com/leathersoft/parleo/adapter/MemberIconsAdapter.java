@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.leathersoft.parleo.R;
+import com.leathersoft.parleo.fragment.ProfileFragment;
+import com.leathersoft.parleo.fragment.PushFragmentInterface;
 import com.leathersoft.parleo.network.model.Event;
 
 import java.util.List;
